@@ -1,8 +1,13 @@
 #!/bin/bash
 
+cd ..
+pxt staticpkg
+cd tools
 mkdir -p ../deploy
 cp -r ../built/packaged ../deploy/microbit
+./jx/run.sh
 cp jx/microbit.exe ../deploy/microbit
+cp jx/microbit.bat ../deploy
 mkdir -p ../deploy/microbit/api/compile
 cp ../built/hexcache/0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71.hex ../deploy/microbit/api/compile/0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71.json
 cd ../deploy/microbit/api/compile
