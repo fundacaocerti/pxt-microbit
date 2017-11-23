@@ -1,0 +1,22 @@
+{
+  "bluetooth.advertiseUid|block": "anunciar UID|nome (bytes 6-9)%ns|instância (bytes 2-6)%instance|com potência %power|conectável %connectable via bluetooth",
+  "bluetooth.advertiseUrl|block": "anunciar url %url|com potência %power|conectável %connectable via bluetooth",
+  "bluetooth.onBluetoothConnected|block": "ao conectar o bluetooth",
+  "bluetooth.onBluetoothDisconnected|block": "ao desconectar o bluetooth",
+  "bluetooth.onUartDataReceived|block": "bluetooth|ao receber dados %delimiters=serial_delimiter_conv",
+  "bluetooth.setTransmitPower|block": "definir potência de transmissão %power via bluetooth",
+  "bluetooth.startAccelerometerService|block": "serviço do acelerômetro via bluetooth",
+  "bluetooth.startButtonService|block": "serviço de botão via bluetooth",
+  "bluetooth.startIOPinService|block": "serviço de pino entrada/saída via bluetooth",
+  "bluetooth.startLEDService|block": "serviço de led via bluetooth",
+  "bluetooth.startMagnetometerService|block": "serviço do magnetômetro via bluetooth",
+  "bluetooth.startTemperatureService|block": "serviço de temperatura via bluetooth",
+  "bluetooth.startUartService|block": "serviço uart via bluetooth",
+  "bluetooth.stopAdvertising|block": "interromper anúncio via bluetooth",
+  "bluetooth.uartReadUntil|block": "uart|ler até %del=serial_delimiter_conv via bluetooth",
+  "bluetooth.uartWriteNumber|block": "uart|registrar número %value via bluetooth",
+  "bluetooth.uartWriteString|block": "uart|registrar string %data via bluetooth",
+  "bluetooth.uartWriteValue|block": "uart|registrar valor %name|= %value via bluetooth",
+  "bluetooth|block": "bluetooth",
+  "{id:category}Bluetooth": "Bluetooth"
+}

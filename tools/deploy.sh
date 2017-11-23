@@ -23,6 +23,11 @@ cp ../translations/pt-BR/*-strings.json ../deploy/microbit/api/translations/pt-B
 cp ../translations/pt-BR/strings.json ../deploy/microbit/api/translations/pt-BR/
 cp ../translations/pt-BR/website.json ../deploy/microbit/api/translations/pt-BR/
 
+mkdir -p ../deploy/microbit/api/translations/es-ES/microbit
+cp ../translations/es-ES/*-strings.json ../deploy/microbit/api/translations/es-ES/microbit
+cp ../translations/es-ES/strings.json ../deploy/microbit/api/translations/es-ES/
+cp ../translations/es-ES/website.json ../deploy/microbit/api/translations/es-ES/
+
 
 #copy targetconfig to deploy folder
 
