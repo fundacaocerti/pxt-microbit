@@ -5,7 +5,9 @@ pxt staticpkg
 cd tools
 mkdir -p ../deploy
 cp -r ../built/packaged ../deploy/microbit
-./jx/run.sh
+cd jx
+./run.sh
+cd ..
 cp jx/microbit.exe ../deploy/microbit
 cp jx/microbit.bat ../deploy
 mkdir -p ../deploy/microbit/api/compile
