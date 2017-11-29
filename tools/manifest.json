@@ -5,7 +5,7 @@
   "version": "1.0",
   "manifest_version": 2,
   "description": "micro:bit is a tiny programmable computer, designed to make learning and teaching easy and fun!",
-    "content_security_policy": "script-src https://az416426.vo.msecnd.net/scripts/a/ai.0.js 'unsafe-eval' 'unsafe-inline' 'sha256-SFjacE6E3fs3Wc8tDDCr5o2zlK2KY7esosvGYikXbZ8=' 'sha256-HNk9CwOuMqEjJ1aJX/Iy8Z4GBPDs0Se6Sw4xy16zcQQ=' 'sha256-4i/UgFRq5GV5/zCG+l3zFewouX2lYeboafDGhFLhxvs=' 'sha256-ElK29RD3NLaU5hBAN/K5uzZjOlErtdlryb+CNRZVIPU=' 'sha256-nlgcUCW0rIRjtuXZFGGInrGlPVpBSYGEkDZrGd/eGkk='",
+    "content_security_policy": "script-src https://az416426.vo.msecnd.net/scripts/a/ai.0.js 'unsafe-eval' 'unsafe-inline' 'sha256-SFjacE6E3fs3Wc8tDDCr5o2zlK2KY7esosvGYikXbZ8=' 'sha256-HNk9CwOuMqEjJ1aJX/Iy8Z4GBPDs0Se6Sw4xy16zcQQ=' 'sha256-4i/UgFRq5GV5/zCG+l3zFewouX2lYeboafDGhFLhxvs=' 'sha256-ElK29RD3NLaU5hBAN/K5uzZjOlErtdlryb+CNRZVIPU=' 'sha256-nlgcUCW0rIRjtuXZFGGInrGlPVpBSYGEkDZrGd/eGkk=' 'sha256-uFje8naeqHR1qaT3x01Um8lHkMKzrnczcfxYIAt+Gl8='",
   "app": {
   "launch": {
 		"local_path": "index.html"
@@ -18,9 +18,7 @@
     "nativeMessaging"
 				],
   "web_accessible_resources": [
-	"api/config/microbit/targetconfig.json",
-	"api/translations/pt-BR/*.json",
-	"api/translations/pt-BR/microbit/*.json",
+	"*"
   ]
   
 }
