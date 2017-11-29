@@ -1,5 +1,6 @@
 #!/bin/bash
 
+rm -rf ../deploy
 cd ..
 pxt staticpkg
 cd tools
@@ -8,6 +9,8 @@ cp -r ../built/packaged ../deploy/microbit
 cd jx
 ./run.sh
 cd ..
+cp manifest.json ../deploy/microbit
+cp icon-microbit-128.png ../deploy/microbit
 cp jx/microbit.exe ../deploy/microbit
 cp jx/microbit.bat ../deploy
 mkdir -p ../deploy/microbit/api/compile
