@@ -1,6 +1,6 @@
 {
-  // Extension ID: knldjmfmopnpolahpmmgbagdohdnhkik
-  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDcBHwzDvyBQ6bDppkIs9MP4ksKqCMyXQ/A52JivHZKh4YO/9vJsT3oaYhSpDCE9RPocOEQvwsHsFReW2nUEc6OLLyoCFFxIb7KkLGsmfakkut/fFdNJYh0xOTbSN8YvLWcqph09XAY2Y/f0AL7vfO1cuCqtkMt8hFrBGWxDdf9CQIDAQAB",
+  // Extension ID: ngbgjifibhpeaiomjmfhnegegokbmlgj
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmAVG6ZKBN79gYDUYhfpDjuziMRlRuc8WaEcvssY6lzpypSK4yABOAQPl+6lNH5OscWs8CmxLdPzbgwbBfNpohaREVEObnuzZrdRHsq4EJ9yiSf+vJ19p2gQ7zu1KTKvM1+fvDur2a1H4fYS7aWckrYgmkrZvRKbNYyhvy8MtnLVmg0r+hPUzX7mJYfWTu/6kfZdSq/2SGHjJnrRIZwch/7StjcRnWKPUzYtlOrSHAN86oqmBDnQ0/WanzXZHD2MOYNtJV0FVkFI+T2Qx/KCe2CyFVO+C1yuT/pwM4mXp/GPwz8fimMfHSIe0rW8zzRUj9P/AkCuozmAnGjpPuJJ6WwIDAQAB",
   "name": "micro:bit",
   "version": "1.0",
   "manifest_version": 2,
