@@ -1,5 +1,12 @@
 #!/bin/bash
 
+cd ..
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" #absolute root dir
+
+PACKAGED=$DIR"/deploy/microbit"      #static html packaged abs path
+PEMFILE=$DIR"/tools/microbit.pem"    #pem file abs path
+
+cd tools
 rm -rf ../deploy
 cd ..
 pxt staticpkg
@@ -43,5 +50,5 @@ cp ../translations/targetconfig.json ../deploy/microbit/api/config/microbit/
 cp ../deploy/microbit/api/config/microbit/targetconfig.json ../deploy/microbit/api/config/microbit/targetconfig
 cp ../deploy/microbit/api/compile/0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71.json ../deploy/microbit/api/compile/0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71
 
-
-
+#pack deploy folder into .crx file
+chrome.exe --pack-extension=$PACKAGED --pack-extension-key=$PEMFILE
