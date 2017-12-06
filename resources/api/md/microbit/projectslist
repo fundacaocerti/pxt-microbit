@@ -1,0 +1,108 @@
+# Projects
+
+Here are some cool projects that you can build with your @boardname@!
+
+## Games
+
+Fun games to build with your @boardname@.
+
+```codecard
+[{
+  "name": "Flashing Heart",
+  "url":"/projects/flashing-heart",
+  "imageUrl": "https://pxt.azureedge.net/blob/bd3236c80ed86cbf0b99ff39f26469683c512ebc/static/mb/projects/a1-display.png"
+},{
+  "name": "Smiley Buttons",
+  "url":"/projects/smiley-buttons",
+  "imageUrl": "https://pxt.azureedge.net/blob/668a5a469bae3627ba78dab1f69b1a7e87972f28/static/mb/projects/a2-buttons.png"
+},{
+  "name": "Love Meter",
+  "url":"/projects/love-meter",
+  "imageUrl":"https://pxt.azureedge.net/blob/5e81154127a6378383b7cab124bbb41ea9409a63/static/mb/projects/a3-pins.png"
+},{
+  "name": "Rock Paper Scissors",
+  "url":"/projects/rock-paper-scissors",
+  "imageUrl":"https://pxt.azureedge.net/blob/49b5a6cb22d424ca0ecc4a9be40e3131555f36cd/static/mb/projects/a4-motion.png"
+},{
+  "name": "Magic Button Trick",
+  "url":"/projects/magic-button-trick",
+  "imageUrl":"https://pxt.azureedge.net/blob/6e19d321a2f74b2350b066eb6975e9daf7a9de55/static/mb/projects/magic-button-trick.png"
+}, {
+  "name": "Coin Flipper",
+  "url":"/projects/coin-flipper",
+  "imageUrl": "https://pxt.azureedge.net/blob/53bf6ef82031d61f77ea870ac7a09ec81ab827d9/static/mb/projects/coin-flipper.png"
+}]
+```
+
+## Music
+
+```codecard
+[{
+  "name": "Hack your headphones",
+  "url":"/projects/hack-your-headphones",
+  "imageUrl":"https://pxt.azureedge.net/blob/6a1e39f158250b5aa6d577e4bb8058e3be3107c5/static/mb/projects/a6-music.png"
+}, {
+  "name": "Banana keyboard",
+  "url":"/projects/banana-keyboard",
+  "imageUrl":"https://pxt.azureedge.net/blob/1c3ab640d9959394a118f71113526a2171ebe337/static/mb/projects/a7-conductive.png"
+}, {
+  "name": "Guitar",
+  "url":"/projects/guitar",
+  "imageUrl":"https://pxt.azureedge.net/blob/6866549bb7da7e384020892e45764f82b47d86cc/static/mb/projects/guitar.png"
+}]
+```
+
+## Fashion
+
+```codecard
+[{
+  "name": "Duct Tape Wallet",
+  "url":"/projects/wallet",
+  "imageUrl":"https://pxt.azureedge.net/blob/02f34ed7967954ad03ead799a02ff685a9a7b1be/static/mb/projects/wallet.png"
+}, {
+  "name": "Watch",
+  "url":"/projects/watch",
+  "imageUrl":"https://pxt.azureedge.net/blob/9781b7592b0254a749058161321d10a303cbb8c3/static/mb/projects/a10-watch.png"
+}]
+```
+
+## Toys
+
+```codecard
+[{
+  "name": "Inchworm",
+  "url":"/projects/inchworm",
+  "imageUrl":"https://pxt.azureedge.net/blob/d984848ed5cfd4bb3d1f74d3b2c34983ab0bb755/static/mb/projects/inchworm.jpg"
+}, {
+  "name": "Milk Carton Robot",
+  "url":"/projects/milk-carton-robot",
+  "imageUrl":"https://pxt.azureedge.net/blob/b2e3dfcb937263c780aebfa1ffff5d9852819f76/static/mb/projects/milk-carton-robot.jpg"
+}, {
+  "name": "Milky Monster",
+  "url":"/projects/milky-monster",
+  "imageUrl":"https://pxt.azureedge.net/blob/42026d8cb788c73cc2ab41a8ad20c4775c6b6210/static/mb/projects/milky-monster.jpg"
+}]
+```
+
+## More
+
+```codecard
+[{
+  "name": "Timing gates",
+  "url":"/projects/timing-gates",
+  "imageUrl":"https://pxt.azureedge.net/blob/a299040b8e031b130edcffc8317ac9e890276aa1/static/mb/projects/timing-gates.jpg"
+}, {
+  "name": "Compass",
+  "url":"/projects/compass",
+  "imageUrl":"https://pxt.azureedge.net/blob/d3e34ce80d0f558d6dda199a5c33f9770ab93d2f/static/mb/projects/a5-compass.png"
+},{
+  "name": "Telegraph",
+  "url":"/projects/telegraph",
+  "imageUrl":"https://pxt.azureedge.net/blob/de76df325b1fd9913bd9bf8751783dfdc9969f61/static/mb/projects/a8-network.png"
+}]
+```
+
+### See Also
+
+[Flashing Heart](/projects/flashing-heart), [Smiley Buttons](/projects/smiley-buttons), [Love Meter](/projects/love-meter), [Rock Paper Scissors](/projects/rock-paper-scissors), [Compass](/projects/compass), [Hack your headphones](/projects/hack-your-headphones), [Banana keyboard](/projects/banana-keyboard), [Telegraph](/projects/telegraph), [Guitar](/projects/guitar), [Wallet](/projects/wallet), [Watch](/projects/watch),
+[Milk Monster](/projects/milky-monster)
