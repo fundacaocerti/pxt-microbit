@@ -65,7 +65,10 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 	if(details.url.indexOf("https://pxt.azureedge.net/compile/0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71.hex") > -1 ) {
 		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/compile/"  + "0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71.hex";
 	}
-		
+	
+	if(details.url.indexOf("https://www.pxt.io/api/md/microbit/tutorials/getting-started?targetVersion=0.0.0") > -1 ) {
+		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/tutorials/getting-startedtargetVersion=0.0.0";
+	}	
 	return {
 		redirectUrl: redirect_url /*Redirection URL*/
 	};
