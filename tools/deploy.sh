@@ -41,7 +41,9 @@ cp $RESOURCES/api/config/microbit/* ../deploy/microbit/api/config/microbit/
 cp ../deploy/microbit/api/compile/0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71.json ../deploy/microbit/api/compile/0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71
 
 #copy chrome extension required files
-cp $RESOURCES/chrome/* ../deploy/microbit/
+cp $RESOURCES/chrome/background.js ../deploy/microbit/
+cp $RESOURCES/chrome/icon-microbit-128.png ../deploy/microbit/
+cp $RESOURCES/chrome/manifest.json ../deploy/microbit/
 
 #copy aditional resources for offline compatibility
 cp -r $RESOURCES/api/md  		 ../deploy/microbit/api/
