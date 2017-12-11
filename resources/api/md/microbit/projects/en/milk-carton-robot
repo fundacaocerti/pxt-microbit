@@ -1,98 +1,54 @@
-# Flashing Heart
 
-## Step 1
+# Milk Carton Robot
 
-Place the ``||basic:show leds||`` block in the ``||basic:on start||`` block 
-and draw a heart.
+### @description A half gallon milk carton robot
 
-```blocks
-basic.showLeds(`
-    . # . # .
-    # # # # #
-    # # # # #
-    . # # # .
-    . . # . .`
-    );
-```
+### ~avatar avatar
 
-## Step 2
+Make a funny Milk Carton robot!
 
-Click ``|Download|`` to transfer your code in your @boardname@!
+### ~
 
-## Step 3
+https://youtu.be/Ah4fEbJtklU
 
-Place another ``||basic:show leds||`` block under the heart to make it blink.
+## Duration
 
-```blocks
-basic.showLeds(`
-    . # . # .
-    # # # # #
-    # # # # #
-    . # # # .
-    . . # . .`);
-basic.showLeds(`
-    . # . # .
-    # . # . #
-    # . . . #
-    . # . # .
-    . . # . .`);
-```
+3 Activities, approx 30-45 min each based on familiarity with the coding concepts
 
-## Step 4
+## Materials
 
-Move the blocks inside the ``||basic:forever||``
-to repeat the animation.
+### Recycled
 
-```block
-basic.forever(() => {
-    basic.showLeds(`
-        . # . # .
-        # # # # #
-        # # # # #
-        . # # # .
-        . . # . .`
-        );
-    basic.showLeds(`
-        . # . # .
-        # . # . #
-        # . . . #
-        . # . # .
-        . . # . .`);
-})
-```
+* 1 Milk Carton **without a screwable cap**
+* 2 Coffee stiring wood sticks
+* 2 Straws
+* 2 clothespin (optional, can be replaced by glue)
 
-## Step 5
+### Electronics
 
-Click ``|Download|`` to transfer your code in your @boardname@!
+* 1 @boardname@, battery holder and 2 AAA batteries
+* 3 Crocodile clips to pigtail cables
+* 1 micro servo 9g SG90
 
-## Step 6
+### Tools
+* Scissors that can cut cardboard
+* Hole puncher (scissors will work too)
+* Glue gun
 
-Place more ``||basic:show leds||`` blocks to create your own animation.
+![Materials](https://pxt.azureedge.net/blob/139d8961fb327260cb4a026fa55543fd9dcde631/static/mb/projects/milk-carton-robot/materials.jpg)
 
-```blocks
-basic.forever(() => {
-    basic.showLeds(`
-        . # . # .
-        # # # # #
-        # # # # #
-        . # # # .
-        . . # . .`
-        );
-    basic.showLeds(`
-        . # . # .
-        # . # . #
-        # . . . #
-        . # . # .
-        . . # . .`);
-    basic.showLeds(`
-        . . . . .
-        . # . # .
-        . # # # .
-        . . # . .
-        . . . . .`);
-})
-```
+## Preparation
 
-## Step 7
+* [Equip the microservo with crocodile clips](/device/servo)
 
-Click ``|Download|`` to transfer your code in your @boardname@!
+## Activities
+
+* [Make](/projects/milk-carton-robot/make)  
+* [Code](/projects/milk-carton-robot/code)  
+* [Connect](/projects/milk-carton-robot/connect)  
+
+### ~button /projects/milk-carton-robot/make
+
+Let's get started!
+
+### ~

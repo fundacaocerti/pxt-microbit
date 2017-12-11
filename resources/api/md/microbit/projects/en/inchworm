@@ -1,98 +1,44 @@
-# Flashing Heart
 
-## Step 1
+# Inchworm
 
-Place the ``||basic:show leds||`` block in the ``||basic:on start||`` block 
-and draw a heart.
+### @description A inchworm like robot built with the @boardname@
 
-```blocks
-basic.showLeds(`
-    . # . # .
-    # # # # #
-    # # # # #
-    . # # # .
-    . . # . .`
-    );
-```
+### ~avatar avatar
 
-## Step 2
+Make a funny inchworm robot!
 
-Click ``|Download|`` to transfer your code in your @boardname@!
+### ~
 
-## Step 3
+https://youtu.be/BiZLjugXMbM
 
-Place another ``||basic:show leds||`` block under the heart to make it blink.
+## Duration
 
-```blocks
-basic.showLeds(`
-    . # . # .
-    # # # # #
-    # # # # #
-    . # # # .
-    . . # . .`);
-basic.showLeds(`
-    . # . # .
-    # . # . #
-    # . . . #
-    . # . # .
-    . . # . .`);
-```
+3 Activities, approx 30-45 min each based on familiarity with the coding concepts
 
-## Step 4
+## Materials
 
-Move the blocks inside the ``||basic:forever||``
-to repeat the animation.
+* Cardboard pieces (recycle!)
+* Glue gun or Tape (masking, duct tape, and/or packing tape)
+* Scissors that can cut cardboard
+* 1 @boardname@, battery holder and 2 AAA batteries
+* 3 Crocodile clips
+* 1 micro servo 9g SG90
+* 1 paper clip
 
-```block
-basic.forever(() => {
-    basic.showLeds(`
-        . # . # .
-        # # # # #
-        # # # # #
-        . # # # .
-        . . # . .`
-        );
-    basic.showLeds(`
-        . # . # .
-        # . # . #
-        # . . . #
-        . # . # .
-        . . # . .`);
-})
-```
+![Materials](https://pxt.azureedge.net/blob/1675c27b11cbf5cbba949d52e88bf3ed08838cdc/static/mb/projects/inchworm/materials.jpg)
 
-## Step 5
+## Preparation
 
-Click ``|Download|`` to transfer your code in your @boardname@!
+* [Equip the microservo with crocodile clips](/device/servo)
 
-## Step 6
+## Activities
 
-Place more ``||basic:show leds||`` blocks to create your own animation.
+* [Make](/projects/inchworm/make)  
+* [Code](/projects/inchworm/code)  
+* [Connect](/projects/inchworm/connect)  
 
-```blocks
-basic.forever(() => {
-    basic.showLeds(`
-        . # . # .
-        # # # # #
-        # # # # #
-        . # # # .
-        . . # . .`
-        );
-    basic.showLeds(`
-        . # . # .
-        # . # . #
-        # . . . #
-        . # . # .
-        . . # . .`);
-    basic.showLeds(`
-        . . . . .
-        . # . # .
-        . # # # .
-        . . # . .
-        . . . . .`);
-})
-```
+### ~button /projects/inchworm/make
 
-## Step 7
+Let's get started!
 
-Click ``|Download|`` to transfer your code in your @boardname@!
+### ~

@@ -1,98 +1,29 @@
-# Flashing Heart
+# banana keyboard
 
-## Step 1
+### @description A beginner maker activity, building a piano from bananas.
 
-Place the ``||basic:show leds||`` block in the ``||basic:on start||`` block 
-and draw a heart.
+### ~avatar
 
-```blocks
-basic.showLeds(`
-    . # . # .
-    # # # # #
-    # # # # #
-    . # # # .
-    . . # . .`
-    );
-```
+Build your own @boardname@ piano using bananas!
 
-## Step 2
+### ~
 
-Click ``|Download|`` to transfer your code in your @boardname@!
+![](https://pxt.azureedge.net/blob/a9b218ee4e041ba10cca8c493fb91024821f6ec1/static/mb/lessons/banana-keyboard-0.png)
 
-## Step 3
+## Duration: ~20 minutes.
 
-Place another ``||basic:show leds||`` block under the heart to make it blink.
+## Materials
 
-```blocks
-basic.showLeds(`
-    . # . # .
-    # # # # #
-    # # # # #
-    . # # # .
-    . . # . .`);
-basic.showLeds(`
-    . # . # .
-    # . # . #
-    # . . . #
-    . # . # .
-    . . # . .`);
-```
+* @boardname@, battery holder and 2 AAA batteries
+* Bananas
+* Orange
+* Crocodile clips
 
-## Step 4
+## Activities
 
-Move the blocks inside the ``||basic:forever||``
-to repeat the animation.
+* [Make](/projects/banana-keyboard/make)  
+* [Code](/projects/banana-keyboard/code)
 
-```block
-basic.forever(() => {
-    basic.showLeds(`
-        . # . # .
-        # # # # #
-        # # # # #
-        . # # # .
-        . . # . .`
-        );
-    basic.showLeds(`
-        . # . # .
-        # . # . #
-        # . . . #
-        . # . # .
-        . . # . .`);
-})
-```
-
-## Step 5
-
-Click ``|Download|`` to transfer your code in your @boardname@!
-
-## Step 6
-
-Place more ``||basic:show leds||`` blocks to create your own animation.
-
-```blocks
-basic.forever(() => {
-    basic.showLeds(`
-        . # . # .
-        # # # # #
-        # # # # #
-        . # # # .
-        . . # . .`
-        );
-    basic.showLeds(`
-        . # . # .
-        # . # . #
-        # . . . #
-        . # . # .
-        . . # . .`);
-    basic.showLeds(`
-        . . . . .
-        . # . # .
-        . # # # .
-        . . # . .
-        . . . . .`);
-})
-```
-
-## Step 7
-
-Click ``|Download|`` to transfer your code in your @boardname@!
+### ~button /projects/banana-keyboard/make
+Let's get started!
+### ~

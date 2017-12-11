@@ -1,98 +1,56 @@
-# Flashing Heart
 
-## Step 1
+# Milk monster
 
-Place the ``||basic:show leds||`` block in the ``||basic:on start||`` block 
-and draw a heart.
+### @description A milky-monster like robot built with the @boardname@
 
-```blocks
-basic.showLeds(`
-    . # . # .
-    # # # # #
-    # # # # #
-    . # # # .
-    . . # . .`
-    );
-```
+### ~avatar avatar
 
-## Step 2
+Make a funny milky-monster robot!
 
-Click ``|Download|`` to transfer your code in your @boardname@!
+### ~
 
-## Step 3
+https://youtu.be/egl3fNAYylk
 
-Place another ``||basic:show leds||`` block under the heart to make it blink.
+## Duration
 
-```blocks
-basic.showLeds(`
-    . # . # .
-    # # # # #
-    # # # # #
-    . # # # .
-    . . # . .`);
-basic.showLeds(`
-    . # . # .
-    # . # . #
-    # . . . #
-    . # . # .
-    . . # . .`);
-```
+3 Activities, approx 30-45 min each based on familiarity with the coding concepts
 
-## Step 4
+## Materials
 
-Move the blocks inside the ``||basic:forever||``
-to repeat the animation.
+Recycled
+* 1 Milk Carton (with a screwable top cap)
+* 1 Small cord - recylce string from a used tea bag 
+* 1 Paper clip
 
-```block
-basic.forever(() => {
-    basic.showLeds(`
-        . # . # .
-        # # # # #
-        # # # # #
-        . # # # .
-        . . # . .`
-        );
-    basic.showLeds(`
-        . # . # .
-        # . # . #
-        # . . . #
-        . # . # .
-        . . # . .`);
-})
-```
+Electronics
+* 1 @boardname@, battery holder and 2 AAA batteries
+* 3 Crocodile clips
+* 1 micro servo 9g SG90
+* 1 servo clip designed for Milky Monster [download on thingiverse](http://www.thingiverse.com/thing:2185971) (optional). Teachers may prefer to download the classroom pack (16 servo clips).
 
-## Step 5
+Tools
+* Small knive and  Scissors that can cut cardboard
+* Tape (masking, duct tape, and/or packing tape)
+* Glue gun
 
-Click ``|Download|`` to transfer your code in your @boardname@!
+![Materials](https://pxt.azureedge.net/blob/69248bac56e0c5227348ac576d4535b5661ef8c6/static/mb/projects/milky-monster/materials.jpg)
 
-## Step 6
+## Preparation
 
-Place more ``||basic:show leds||`` blocks to create your own animation.
+* [Equip the microservo with crocodile clips](/device/servo)
+* [Download and 3D-print servo clip designed for MIlky Monster from thingiverse](http://www.thingiverse.com/thing:2185971) (this is optional). Teachers may prefer to download the classroom pack (16 servo clips).
 
-```blocks
-basic.forever(() => {
-    basic.showLeds(`
-        . # . # .
-        # # # # #
-        # # # # #
-        . # # # .
-        . . # . .`
-        );
-    basic.showLeds(`
-        . # . # .
-        # . # . #
-        # . . . #
-        . # . # .
-        . . # . .`);
-    basic.showLeds(`
-        . . . . .
-        . # . # .
-        . # # # .
-        . . # . .
-        . . . . .`);
-})
-```
+## Activities
 
-## Step 7
+* [Make](/projects/milky-monster/make)  
+* [Code](/projects/milky-monster/code)  
+* [Connect](/projects/milky-monster/connect)  
 
-Click ``|Download|`` to transfer your code in your @boardname@!
+### ~button /projects/milky-monster/make
+
+Let's get started!
+
+### ~
+
+## about the author
+This project was contributed by Peter Heldens [@peterheldens](https://twitter.com/peterheldens). You can checkout his [@boardname@ makershow channel on youtube](http://aka.ms/microbit-makershow) for more projects.

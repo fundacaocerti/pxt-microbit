@@ -1,98 +1,37 @@
-# Flashing Heart
+# hack your headphones 
 
-## Step 1
+### @description A beginner maker activity, building a piano from bananas.
 
-Place the ``||basic:show leds||`` block in the ``||basic:on start||`` block 
-and draw a heart.
+### ~avatar
 
-```blocks
-basic.showLeds(`
-    . # . # .
-    # # # # #
-    # # # # #
-    . # # # .
-    . . # . .`
-    );
-```
+Build your own music player @boardname@ from headphones.
 
-## Step 2
+### ~
 
-Click ``|Download|`` to transfer your code in your @boardname@!
+![](https://pxt.azureedge.net/blob/ba58df5adce256ea344bd9c683803a7712f93bd2/static/mb/lessons/hack-your-headphones-0.png)
 
-## Step 3
 
-Place another ``||basic:show leds||`` block under the heart to make it blink.
+## Duration: ~15 minutes.
 
-```blocks
-basic.showLeds(`
-    . # . # .
-    # # # # #
-    # # # # #
-    . # # # .
-    . . # . .`);
-basic.showLeds(`
-    . # . # .
-    # . # . #
-    # . . . #
-    . # . # .
-    . . # . .`);
-```
+## Materials
 
-## Step 4
+* @boardname@, battery holder and 2 AAA batteries
+* Headphones
+* Crocodile clips
 
-Move the blocks inside the ``||basic:forever||``
-to repeat the animation.
+# ~hint
 
-```block
-basic.forever(() => {
-    basic.showLeds(`
-        . # . # .
-        # # # # #
-        # # # # #
-        . # # # .
-        . . # . .`
-        );
-    basic.showLeds(`
-        . # . # .
-        # . # . #
-        # . . . #
-        . # . # .
-        . . # . .`);
-})
-```
+**No crocodile clips!?!?!** Use wires or Aluminium foil! [Read more...](/device/foil-circuits)
 
-## Step 5
+# ~
 
-Click ``|Download|`` to transfer your code in your @boardname@!
+## Activities
 
-## Step 6
+* [Make](/projects/hack-your-headphones/make)
+* [Code](/projects/hack-your-headphones/code)
 
-Place more ``||basic:show leds||`` blocks to create your own animation.
+### ~button /projects/hack-your-headphones/make
 
-```blocks
-basic.forever(() => {
-    basic.showLeds(`
-        . # . # .
-        # # # # #
-        # # # # #
-        . # # # .
-        . . # . .`
-        );
-    basic.showLeds(`
-        . # . # .
-        # . # . #
-        # . . . #
-        . # . # .
-        . . # . .`);
-    basic.showLeds(`
-        . . . . .
-        . # . # .
-        . # # # .
-        . . # . .
-        . . . . .`);
-})
-```
+Let's get started!
 
-## Step 7
-
-Click ``|Download|`` to transfer your code in your @boardname@!
+### ~

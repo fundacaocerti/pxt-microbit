@@ -1,98 +1,40 @@
-# Flashing Heart
+# Guitar
 
-## Step 1
+### @description A beginner-intermediate maker activity, building a guitar with the @boardname@  
 
-Place the ``||basic:show leds||`` block in the ``||basic:on start||`` block 
-and draw a heart.
+### ~avatar avatar
 
-```blocks
-basic.showLeds(`
-    . # . # .
-    # # # # #
-    # # # # #
-    . # # # .
-    . . # . .`
-    );
-```
+Make a @boardname@ guitar with this guided tutorial!
 
-## Step 2
+### ~
 
-Click ``|Download|`` to transfer your code in your @boardname@!
+https://youtu.be/GYmdTFvxz80
 
-## Step 3
+## Duration
 
-Place another ``||basic:show leds||`` block under the heart to make it blink.
+5 Activities, approx 30-45 min each based on familiarity with the coding concepts
 
-```blocks
-basic.showLeds(`
-    . # . # .
-    # # # # #
-    # # # # #
-    . # # # .
-    . . # . .`);
-basic.showLeds(`
-    . # . # .
-    # . # . #
-    # . . . #
-    . # . # .
-    . . # . .`);
-```
+## Materials
 
-## Step 4
+* Cardboard large pieces (recycle!)
+* Tape (masking, duct tape, and/or packing tape)
+* Markers and/or paint
+* Aluminum Foil
+* Scissors that can cut cardboard
+* 1 @boardname@, battery holder and 2 AAA batteries
+* 4-5 Crocodile clips
+* Headphones
 
-Move the blocks inside the ``||basic:forever||``
-to repeat the animation.
+## Activities
 
-```block
-basic.forever(() => {
-    basic.showLeds(`
-        . # . # .
-        # # # # #
-        # # # # #
-        . # # # .
-        . . # . .`
-        );
-    basic.showLeds(`
-        . # . # .
-        # . # . #
-        # . . . #
-        . # . # .
-        . . # . .`);
-})
-```
+* [Making the Guitar Body](/projects/guitar/make)  
+* [Buttons, Display & Sound](/projects/guitar/displaybuttons)  
+* [Light Sensor Tone control](/projects/guitar/lightsensor)  
+* [Accelerometer Beat control](/projects/guitar/accelerometer)  
+* [Pin Press Switch](/projects/guitar/pinpress)  
 
-## Step 5
+### ~button /projects/guitar/make
 
-Click ``|Download|`` to transfer your code in your @boardname@!
+Let's get started!
 
-## Step 6
-
-Place more ``||basic:show leds||`` blocks to create your own animation.
-
-```blocks
-basic.forever(() => {
-    basic.showLeds(`
-        . # . # .
-        # # # # #
-        # # # # #
-        . # # # .
-        . . # . .`
-        );
-    basic.showLeds(`
-        . # . # .
-        # . # . #
-        # . . . #
-        . # . # .
-        . . # . .`);
-    basic.showLeds(`
-        . . . . .
-        . # . # .
-        . # # # .
-        . . # . .
-        . . . . .`);
-})
-```
-
-## Step 7
-
-Click ``|Download|`` to transfer your code in your @boardname@!
+### ~

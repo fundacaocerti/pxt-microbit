@@ -1,98 +1,52 @@
-# Flashing Heart
+# love meter
+
+### ~avatar avatar
+
+Use pins and your body to change the display!
+
+### ~
 
 ## Step 1
 
-Place the ``||basic:show leds||`` block in the ``||basic:on start||`` block 
-and draw a heart.
+Use [on pin pressed](/reference/input/on-pin-pressed) to show a random number
+when pin P0 is pressed (hold the GND pin with other hand):
 
 ```blocks
-basic.showLeds(`
-    . # . # .
-    # # # # #
-    # # # # #
-    . # # # .
-    . . # . .`
-    );
+input.onPinPressed(TouchPin.P0, () => {
+    basic.showNumber(Math.random(11));
+});
 ```
-
 ## Step 2
 
-Click ``|Download|`` to transfer your code in your @boardname@!
+Show a string when pin P1 is pressed:
+
+```blocks
+input.onPinPressed(TouchPin.P0, () => {
+    basic.showNumber(Math.random(11));
+});
+input.onPinPressed(TouchPin.P1, () => {
+    basic.showString("LOVE?");
+});
+```
 
 ## Step 3
 
-Place another ``||basic:show leds||`` block under the heart to make it blink.
+Show a heart when pin P2 is pressed:
 
 ```blocks
-basic.showLeds(`
-    . # . # .
-    # # # # #
-    # # # # #
-    . # # # .
-    . . # . .`);
-basic.showLeds(`
-    . # . # .
-    # . # . #
-    # . . . #
-    . # . # .
-    . . # . .`);
-```
-
-## Step 4
-
-Move the blocks inside the ``||basic:forever||``
-to repeat the animation.
-
-```block
-basic.forever(() => {
+input.onPinPressed(TouchPin.P0, () => {
+    basic.showNumber(Math.random(11));
+});
+input.onPinPressed(TouchPin.P1, () => {
+    basic.showString("LOVE?");
+});
+input.onPinPressed(TouchPin.P2, () => {
     basic.showLeds(`
-        . # . # .
-        # # # # #
-        # # # # #
         . # # # .
-        . . # . .`
-        );
-    basic.showLeds(`
-        . # . # .
-        # . # . #
-        # . . . #
-        . # . # .
-        . . # . .`);
-})
-```
-
-## Step 5
-
-Click ``|Download|`` to transfer your code in your @boardname@!
-
-## Step 6
-
-Place more ``||basic:show leds||`` blocks to create your own animation.
-
-```blocks
-basic.forever(() => {
-    basic.showLeds(`
-        . # . # .
         # # # # #
         # # # # #
-        . # # # .
-        . . # . .`
-        );
-    basic.showLeds(`
-        . # . # .
-        # . # . #
-        # . . . #
-        . # . # .
-        . . # . .`);
-    basic.showLeds(`
-        . . . . .
-        . # . # .
         . # # # .
         . . # . .
-        . . . . .`);
-})
+        `);
+});
 ```
-
-## Step 7
-
-Click ``|Download|`` to transfer your code in your @boardname@!

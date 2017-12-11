@@ -1,98 +1,25 @@
-# Flashing Heart
+# telegraph activity 
 
-## Step 1
+![](https://pxt.azureedge.net/blob/d5ebfdc5d9a904eee2d164ea053929f8ba2079a0/static/mb/lessons/telegraph-0.png)
 
-Place the ``||basic:show leds||`` block in the ``||basic:on start||`` block 
-and draw a heart.
+### ~avatar
 
-```blocks
-basic.showLeds(`
-    . # . # .
-    # # # # #
-    # # # # #
-    . # # # .
-    . . # . .`
-    );
-```
+Build a telegraph between two @boardname@s to communicate with your friends!
 
-## Step 2
+### ~
 
-Click ``|Download|`` to transfer your code in your @boardname@!
+## Duration: ~30 minutes
 
-## Step 3
+## Materials
 
-Place another ``||basic:show leds||`` block under the heart to make it blink.
+* @boardname@, battery holder and 2 AAA batteries
+* Crocodile clips
 
-```blocks
-basic.showLeds(`
-    . # . # .
-    # # # # #
-    # # # # #
-    . # # # .
-    . . # . .`);
-basic.showLeds(`
-    . # . # .
-    # . # . #
-    # . . . #
-    . # . # .
-    . . # . .`);
-```
+## Activities
 
-## Step 4
+* [Make](/projects/telegraph/make)  
+* [Code](/projects/telegraph/code)
 
-Move the blocks inside the ``||basic:forever||``
-to repeat the animation.
-
-```block
-basic.forever(() => {
-    basic.showLeds(`
-        . # . # .
-        # # # # #
-        # # # # #
-        . # # # .
-        . . # . .`
-        );
-    basic.showLeds(`
-        . # . # .
-        # . # . #
-        # . . . #
-        . # . # .
-        . . # . .`);
-})
-```
-
-## Step 5
-
-Click ``|Download|`` to transfer your code in your @boardname@!
-
-## Step 6
-
-Place more ``||basic:show leds||`` blocks to create your own animation.
-
-```blocks
-basic.forever(() => {
-    basic.showLeds(`
-        . # . # .
-        # # # # #
-        # # # # #
-        . # # # .
-        . . # . .`
-        );
-    basic.showLeds(`
-        . # . # .
-        # . # . #
-        # . . . #
-        . # . # .
-        . . # . .`);
-    basic.showLeds(`
-        . . . . .
-        . # . # .
-        . # # # .
-        . . # . .
-        . . . . .`);
-})
-```
-
-## Step 7
-
-Click ``|Download|`` to transfer your code in your @boardname@!
+### ~button /projects/telegraph/make
+Let's get started!
+### ~
