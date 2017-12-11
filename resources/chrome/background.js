@@ -13,7 +13,6 @@ var serverReachable = function() { //check if we have internet connection
 }
 
 chrome.webRequest.onBeforeRequest.addListener(function (details) {   
-	var online = serverReachable();
 	var lang = "en"; //default language
 	var file = " ";
 	var redirect_url = details.url;
@@ -48,9 +47,6 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 	}
 	
 	if(details.url.indexOf("https://www.pxt.io") > -1) { 
-			if(!online) {
-				redirect_url = requested_url.replace("https://www.pxt.io","chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj");//browser is offline, load resources from local server	
-			}
 			if(details.url.indexOf("www.pxt.io/api/md/microbit/projects?targetVersion=0.0.0&lang=pt-BR&live=1") > -1) {
 				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/projectslist";
 			}
@@ -80,6 +76,12 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 	if(details.url.indexOf("https://www.pxt.io/api/md/microbit/tutorials/getting-started?targetVersion=0.0.0") > -1 ) {
 		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/tutorials/getting-startedtargetVersion=0.0.0";
 	}	
+	if(redirect_url.indexOf("https://www.pxt.io") > -1) { 
+		if(!serverReachable()) {
+			redirect_url = requested_url.replace("https://www.pxt.io","chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj");//browser is offline, load resources from local server	
+		}
+	}
+	
 	return {
 		redirectUrl: redirect_url /*Redirection URL*/
 	};
