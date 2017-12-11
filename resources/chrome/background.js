@@ -1,8 +1,19 @@
+var serverReachable = function() { //check if we have internet connection
+	var x = new XMLHttpRequest();
+	x.open("HEAD","https://www.pxt.io",false);
+	try {
+		x.send();
+		s = x.status;
+		// Make sure the server is reachable
+		return (s >= 200 && s < 300 || s === 304);
+		// catch network & other problems
+	} catch (e) {
+		return false;
+	}
+}
 
-// Register an event listener which 
-//traces all requests before being fired
 chrome.webRequest.onBeforeRequest.addListener(function (details) {   
-	var online = navigator.onLine;
+	var online = serverReachable();
 	var lang = "en"; //default language
 	var file = " ";
 	var redirect_url = details.url;
