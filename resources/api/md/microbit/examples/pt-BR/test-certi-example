@@ -1,0 +1,15 @@
+# Test CERTI
+
+```blocks
+basic.forever(() => {
+    basic.showString("CERTI")
+    basic.showIcon(IconNames.Heart)
+    basic.showLeds(`
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        `)
+})
+```

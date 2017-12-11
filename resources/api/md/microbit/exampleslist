@@ -74,3 +74,14 @@ Here are some fun programs for your @boardname@!
   "cardType": "example"
 }]
 ```
+
+## Test CERTI
+
+```codecard
+[{
+  "name": "Test CERTI",
+  "description": "Example for a test",
+  "url": "/examples/test-certi-example",
+  "cardType": "example"
+}]
+```
