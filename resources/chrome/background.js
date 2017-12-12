@@ -87,9 +87,8 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 	};
 	
 }, 
-{urls: [ "<all_urls>" ]}, 
+{urls: [ "*://www.pxt.io/*"]}, 
 ["blocking"]); // Block intercepted requests until this handler has finished
-
 
 
 
