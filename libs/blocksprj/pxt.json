@@ -2,7 +2,11 @@
     "name": "{0} block",
     "dependencies": {
         "core": "file:../core",
-        "radio": "file:../radio"
+        "radio": "file:../radio",
+		"weatherbit": "file:../weatherbit",
+		"neopixel": "file:../neopixel",
+		"Grove": "file:../grove"
+		
     },
     "description": "",
     "files": [

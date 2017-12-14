@@ -6,7 +6,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" #absolute root dir
 PACKAGED=$DIR"/deploy/microbit"      #static html packaged abs path
 RESOURCES=$DIR"/resources"
 PEMFILE=$RESOURCES"/chrome/microbit.pem"    #pem file abs path
-
+SHA=$( sed -n 's/.*"sha": "\(.*\)",/\1/p' libs/blocksprj/built/yt/buildcache.json )
 
 cd tools
 rm -rf ../deploy
@@ -21,13 +21,14 @@ cd ..
 cp jx/microbit.exe ../deploy/microbit
 cp jx/microbit.bat ../deploy
 mkdir -p ../deploy/microbit/api/compile
-cp ../built/hexcache/0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71.hex ../deploy/microbit/api/compile/
-cp ../built/hexcache/0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71.hex ../deploy/microbit/api/compile/0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71.json
+
+cp ../built/hexcache/$SHA.hex ../deploy/microbit/api/compile/
+cp ../built/hexcache/$SHA.hex ../deploy/microbit/api/compile/$SHA.json
 cd ../deploy/microbit/api/compile
 #converts .hex into json file
-sed -i '1s;^;{"enums":[],"functions":[],"hex":";' 0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71.json
-sed -i '$s/$/\\r\\n"}/' 0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71.json
-sed -i ':a;N;$!ba;s/\n/\\r\\n/g' 0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71.json
+sed -i '1s;^;{"enums":[],"functions":[],"hex":";' $SHA.json
+sed -i '$s/$/\\r\\n"}/' $SHA.json
+sed -i ':a;N;$!ba;s/\n/\\r\\n/g' $SHA.json
 cd $DIR/tools
 
 #copy translations to deploy folder
@@ -38,7 +39,7 @@ mkdir -p ../deploy/microbit/api/config/microbit
 cp $RESOURCES/api/config/microbit/* ../deploy/microbit/api/config/microbit/
 
 #copy some files to ensure compatibility with chrome extension
-cp ../deploy/microbit/api/compile/0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71.json ../deploy/microbit/api/compile/0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71
+cp ../deploy/microbit/api/compile/$SHA.json ../deploy/microbit/api/compile/$SHA
 
 #copy chrome extension required files
 cp $RESOURCES/chrome/background.js ../deploy/microbit/

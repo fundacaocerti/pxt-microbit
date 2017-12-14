@@ -9,7 +9,10 @@
         "libs/core",
         "libs/radio",
         "libs/devices",
-        "libs/bluetooth"
+        "libs/bluetooth",
+		"libs/weatherbit",
+		"libs/Grove",
+		"libs/neopixel"
     ],
     "cloud": {
         "workspace": false,

@@ -69,8 +69,10 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/translations/" + lang + "/" + file;
 	}
 	
-	if(details.url.indexOf("https://pxt.azureedge.net/compile/0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71.hex") > -1 ) {
-		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/compile/"  + "0662709fa031556725d5759589cee8061b26701a654d387f175c459b186d0d71.hex";
+	if(details.url.indexOf("https://pxt.azureedge.net/compile/") > -1 ) {
+		if(!serverReachable()) {
+			redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/compile/"  + "38f5fd82cd5a4097203a4c897b61293e32aa715945713902f50c7ef8a0884d1c.hex";
+		}
 	}
 	
 	if(details.url.indexOf("https://www.pxt.io/api/md/microbit/tutorials/getting-started?targetVersion=0.0.0") > -1 ) {
@@ -87,7 +89,7 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 	};
 	
 }, 
-{urls: [ "*://www.pxt.io/*"]}, 
+{urls: [ "*://www.pxt.io/*","*://pxt.azureedge.net/compile/*"]}, 
 ["blocking"]); // Block intercepted requests until this handler has finished
 
 
