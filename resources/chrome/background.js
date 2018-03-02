@@ -34,7 +34,6 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 				regex = /projects\s*(.*?)\s*\?/g;
 				result = regex.exec(requested_url);
 				file = result[1];
-				console.log(file);
 		}
 		if(requested_url.indexOf("api/md/microbit/examples/") > -1) {    //extract language and file name from url
 				var regex = /lang=\s*(.*?)\s*&live/g;
@@ -49,6 +48,22 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 				var result = regex.exec(requested_url);
 				lang = result[1];
 				regex = /docs\s*(.*?)\s*\?/g;
+				result = regex.exec(requested_url);
+				file = result[1];
+		}
+		if(requested_url.indexOf("api/md/microbit/reference/") > -1) {    //extract language and file name from url
+				var regex = /lang=\s*(.*?)\s*&live/g;
+				var result = regex.exec(requested_url);
+				lang = result[1];
+				regex = /reference\s*(.*?)\s*\?/g;
+				result = regex.exec(requested_url);
+				file = result[1];
+		}
+		if(requested_url.indexOf("api/md/microbit/blocks/") > -1) {    //extract language and file name from url
+				var regex = /lang=\s*(.*?)\s*&live/g;
+				var result = regex.exec(requested_url);
+				lang = result[1];
+				regex = /blocks\s*(.*?)\s*\?/g;
 				result = regex.exec(requested_url);
 				file = result[1];
 		}
@@ -72,6 +87,12 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 			}
 			if(details.url.indexOf("https://www.pxt.io/api/md/microbit/docs/projects.html") > -1) {
 				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/projectslist";
+			}
+			if(requested_url.indexOf("www.pxt.io/api/md/microbit/reference/") > -1) { 
+				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/reference/" + lang + file;
+			}
+			if(requested_url.indexOf("www.pxt.io/api/md/microbit/blocks/") > -1) { 
+				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/blocks/" + lang + file;
 			}
 	}
 	
