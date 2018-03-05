@@ -7,7 +7,7 @@
   "radio.sendNumber|block": "enviar número %value via rádio",
   "radio.sendString|block": "enviar string %msg via rário",
   "radio.sendValue|block": "enviar|valor %name|= %value via rádio",
-  "radio.setGroup|block": "radio set group %ID",
+  "radio.setGroup|block": "rádio configurado no grupo %ID",
   "radio.setTransmitPower|block": "definir potência de transferência %power via rádio",
   "radio.setTransmitSerialNumber|block": "definir número serial de transferência %transmit via rádio",
   "radio.writeReceivedPacketToSerial|block": "registrar via rádio pacote recebido para serial",
