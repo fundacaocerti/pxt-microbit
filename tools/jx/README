@@ -1,6 +1,0 @@
-#generate a binary file from node
-#required node modules should be installed locally under node_modules folder
-
-
-#the command bellow compiles the app.js node application and generates an output binary named out.exe
-jx.exe package apps.js out -native
