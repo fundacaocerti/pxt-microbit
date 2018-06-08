@@ -1,54 +1,49 @@
 #!/bin/bash
 
-cd ..
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" #absolute root dir
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )" #absolute root dir
 
-PACKAGED=$DIR"/deploy/microbit"      #static html packaged abs path
+DEPLOY=$DIR"/deploy"
+PACKAGED=$DEPLOY"/microbit"      #static html packaged abs path
+PACKAGED_COMPILE=$PACKAGED"/api/compile"
+BUILT=$DIR"/built"
 RESOURCES=$DIR"/resources"
 PEMFILE=$RESOURCES"/chrome/microbit.pem"    #pem file abs path
 SHA=$( sed -n 's/.*"sha": "\(.*\)",/\1/p' libs/blocksprj/built/yt/buildcache.json )
 
-cd tools
-rm -rf ../deploy
-cd ..
+rm -rf $DEPLOY
+rm -rf $BUILT
 pxt staticpkg
-cd tools
-mkdir -p ../deploy
-cp -r ../built/packaged ../deploy/microbit
-cd jx
-./run.sh
-cd ..
-cp jx/microbit.exe ../deploy/microbit
-cp jx/microbit.bat ../deploy
-mkdir -p ../deploy/microbit/api/compile
+mkdir -p $DEPLOY
+cp -r $BUILT/packaged $PACKAGED
+cp $DIR/microbit.exe $PACKAGED
+mkdir -p $PACKAGED_COMPILE
 
-cp ../built/hexcache/$SHA.hex ../deploy/microbit/api/compile/
-cp ../built/hexcache/$SHA.hex ../deploy/microbit/api/compile/$SHA.json
-cd ../deploy/microbit/api/compile
-#converts .hex into json file
-sed -i '1s;^;{"enums":[],"functions":[],"hex":";' $SHA.json
-sed -i '$s/$/\\r\\n"}/' $SHA.json
-sed -i ':a;N;$!ba;s/\n/\\r\\n/g' $SHA.json
-cd $DIR/tools
+cp $BUILT/hexcache/$SHA.hex $PACKAGED_COMPILE
+cp $BUILT/hexcache/$SHA.hex $PACKAGED_COMPILE/$SHA.json
+
+#converts .hex into .json file
+sed -i '1s;^;{"enums":[],"functions":[],"hex":";' $PACKAGED_COMPILE/$SHA.json
+sed -i '$s/$/\\r\\n"}/' $PACKAGED_COMPILE/$SHA.json
+sed -i ':a;N;$!ba;s/\n/\\r\\n/g' $PACKAGED_COMPILE/$SHA.json
 
 #copy translations to deploy folder
-cp -r $RESOURCES/api/translations ../deploy/microbit/api/
+cp -r $RESOURCES/api/translations $PACKAGED/api/
 
 #copy targetconfig to deploy folder
-mkdir -p ../deploy/microbit/api/config/microbit
-cp $RESOURCES/api/config/microbit/* ../deploy/microbit/api/config/microbit/
+mkdir -p $PACKAGED/api/config/microbit
+cp $RESOURCES/api/config/microbit/* $PACKAGED/api/config/microbit/
 
 #copy some files to ensure compatibility with chrome extension
-cp ../deploy/microbit/api/compile/$SHA.json ../deploy/microbit/api/compile/$SHA
+cp $PACKAGED_COMPILE/$SHA.json $PACKAGED_COMPILE/$SHA
 
 #copy chrome extension required files
-cp $RESOURCES/chrome/background.js ../deploy/microbit/
-cp $RESOURCES/chrome/icon-microbit-128.png ../deploy/microbit/
-cp $RESOURCES/chrome/manifest.json ../deploy/microbit/
+cp $RESOURCES/chrome/background.js $PACKAGED
+cp $RESOURCES/chrome/icon-microbit-128.png $PACKAGED
+cp $RESOURCES/chrome/manifest.json $PACKAGED
 
 #copy aditional resources for offline compatibility
-cp -r $RESOURCES/api/md  		 ../deploy/microbit/api/
-cp $RESOURCES/api/clientconfig ../deploy/microbit/api
+cp -r $RESOURCES/api/md $PACKAGED/api/
+cp $RESOURCES/api/clientconfig $PACKAGED/api/
 
 #pack deploy folder into .crx file
 chrome.exe --pack-extension=$PACKAGED --pack-extension-key=$PEMFILE
