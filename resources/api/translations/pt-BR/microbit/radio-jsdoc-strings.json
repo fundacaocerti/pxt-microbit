@@ -28,6 +28,6 @@
   "radio.setTransmitPower|param|power": "um valor no intervalo de 0 a 7, em que 0 é a potência mais baixa e 7 a mais alta. Por exemplo: 7",
   "radio.setTransmitSerialNumber": "Configura o rádio para transmitir o número de série em cada mensagem.",
   "radio.setTransmitSerialNumber|param|transmit": "valor que indica se o número de série deverá ser transmitido, por exemplo: verdadeiro",
-  "radio.writeReceivedPacketToSerial": "Envia o último pacote recebido pela serial em formato JSON. Deve ser chamado de dentro de uma função de callback ``onDataPacketReceived`` (quando receber pelo rádio).",
+  "radio.writeReceivedPacketToSerial": "Envia o último pacote recebido pela serial em formato JSON. Deve ser chamado de dentro de uma função de retorno ``onDataPacketReceived`` (quando receber pelo rádio).",
   "radio.writeValueToSerial": "Lê o próximo pacote da fila do rádio e o envia pela serial como em formato JSON."
 }
