@@ -43,7 +43,7 @@ cp $RESOURCES/chrome/manifest.json $PACKAGED
 
 #copy aditional resources for offline compatibility
 cp -r $RESOURCES/api/md $PACKAGED/api/
-cp $RESOURCES/api/clientconfig $PACKAGED/api/
+cp $RESOURCES/api/clientconfig $PACKAGED/
 
 #pack deploy folder into .crx file
 chrome.exe --pack-extension=$PACKAGED --pack-extension-key=$PEMFILE

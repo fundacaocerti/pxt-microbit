@@ -17,6 +17,7 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 	var file = " ";
 	var redirect_url = details.url;
 	var requested_url = details.url;
+
 	if(details.url.indexOf("https://www.pxt.io") > -1) {
 		if(requested_url.indexOf("api/translations") > -1) {    //extract language and file name from url
 				var regex = /lang=\s*(.*?)\s*&filename/g;
@@ -96,17 +97,13 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 			}
 	}
 	
-	if(details.url.indexOf("https://www.pxt.io/api/config/microbit/targetconfig") > -1) {
-		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/config/microbit/targetconfig";
-	}
-	
 	if((details.url.indexOf("https://www.pxt.io/api/translations") > -1) && (lang == "pt-BR" || lang == "es-ES")) {    //custom languages. not available online
 		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/translations/" + lang + "/" + file;
 	}
 	
 	if(details.url.indexOf("https://pxt.azureedge.net/compile/") > -1 ) {
 		if(!serverReachable()) {
-			redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/compile/"  + "38f5fd82cd5a4097203a4c897b61293e32aa715945713902f50c7ef8a0884d1c.hex";
+			redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/compile/"  + "95007735e7d19a32b8634ec3ded0acf4329382362e8d02c7bbb8fb1f5b6ad94f.hex";
 		}
 	}
 	
