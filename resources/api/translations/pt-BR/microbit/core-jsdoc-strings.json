@@ -117,7 +117,7 @@
   "Math.pow|param|x": "O valor base da expressão.",
   "Math.pow|param|y": "O expoente da expressão.",
   "Math.random": "O resultado é um número aleatório entre 0 e `limite`.",
-  "Math.randomBoolean": "Gera um valor `true` ou `false` aleatoriamente, como jogar uma moeda.",
+  "Math.randomBoolean": "Gera um valor `verdadeiro` ou `falso` aleatoriamente, como jogar uma moeda.",
   "Math.random|param|limit": "o limite superior do número gerado, por exemplo: 4",
   "Math.round": "Retorna o resultado da expressão numérica fornecida, arredondada para o número mais próximo.",
   "Math.round|param|x": "O valor a ser arredondado para o número mais próximo.",
