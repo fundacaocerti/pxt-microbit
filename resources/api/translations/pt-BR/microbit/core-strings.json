@@ -136,7 +136,7 @@
   "IconNames.Triangle|block": "triângulo",
   "IconNames.Umbrella|block": "guarda-chuva",
   "IconNames.Yes|block": "sim",
-  "Image.scrollImage|block": "mova imagem %sprite|com passo %frameoffset|a cada (ms) %delay",
+  "Image.scrollImage|block": "mova imagem %sprite|com deslocamento %frameoffset|a cada (ms) %delay",
   "Image.showImage|block": "mostre imagem %sprite|com deslocamento %offset",
   "LedSpriteProperty.Blink|block": "piscar",
   "LedSpriteProperty.Brightness|block": "brilho",
