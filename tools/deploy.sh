@@ -15,7 +15,6 @@ rm -rf $BUILT
 pxt staticpkg
 mkdir -p $DEPLOY
 cp -r $BUILT/packaged $PACKAGED
-cp $DIR/microbit.exe $PACKAGED
 mkdir -p $PACKAGED_COMPILE
 
 cp $BUILT/hexcache/$SHA.hex $PACKAGED_COMPILE
