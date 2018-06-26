@@ -41,5 +41,8 @@ cp $RESOURCES/chrome/manifest.json $PACKAGED
 cp -r $RESOURCES/api/md $PACKAGED/api/
 cp $RESOURCES/api/clientconfig $PACKAGED/
 
+#change availableLocales in target.js to just use 3 languages: en, es-ES, pt-BR
+sed -i 's/\(\"availableLocales\": \[\)/"availableLocales": [\n\t\t\t"en",\n\t\t\t"es-ES",\n\t\t\t"pt-BR"\n\t\t],\n\t\t"allAvailableLocales": [/g' $PACKAGED/target.js
+
 #pack deploy folder into .crx file
 chrome.exe --pack-extension=$PACKAGED --pack-extension-key=$PEMFILE
