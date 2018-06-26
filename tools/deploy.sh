@@ -29,10 +29,6 @@ sed -i ':a;N;$!ba;s/\n/\\r\\n/g' $PACKAGED_COMPILE/$SHA.json
 #copy translations to deploy folder
 cp -r $RESOURCES/api/translations $PACKAGED/api/
 
-#copy targetconfig to deploy folder
-mkdir -p $PACKAGED/api/config/microbit
-cp $RESOURCES/api/config/microbit/* $PACKAGED/api/config/microbit/
-
 #copy some files to ensure compatibility with chrome extension
 cp $PACKAGED_COMPILE/$SHA.json $PACKAGED_COMPILE/$SHA
 
