@@ -39,7 +39,7 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 		if(requested_url.indexOf("api/md/microbit/examples") > -1) {    //extract language and file name from url
 				var regex = /lang=\s*(.*?)\s*&live/g;
 				var result = regex.exec(requested_url);
-				if (result != null) {
+				if(result != null) {
 					lang = result[1];
 				}
 				regex = /examples\s*(.*?)\s*\?/g;
@@ -76,8 +76,8 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 			if(details.url.indexOf("www.pxt.io/api/md/microbit/projects?targetVersion=0.0.0&lang=pt-BR&live=1") > -1) {
 				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/projectslist";
 			}
-			if(details.url.indexOf("www.pxt.io/api/md/microbit/examples?targetVersion=0.0.0") > -1) {
-				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/examples/" + lang + "/exampleslist";
+			if(details.url.indexOf("www.pxt.io/api/md/microbit/examples?targetVersion=0.0.0&lang=pt-BR&live=1") > -1) {
+				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/examples/" + lang + "/examples.md";
 			}
 			if(requested_url.indexOf("www.pxt.io/api/md/microbit/projects/") > -1) { 
 				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/projects/" + lang + file;
@@ -97,6 +97,10 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 			if(requested_url.indexOf("www.pxt.io/api/md/microbit/blocks/") > -1) { 
 				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/blocks/" + lang + file;
 			}
+	}
+	
+	if(details.url.indexOf("https://www.pxt.io/api/targetconfig") > -1) {
+		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/targetconfig.json";
 	}
 	
 	if((details.url.indexOf("https://www.pxt.io/api/translations") > -1) && (lang == "pt-BR" || lang == "es-ES")) {    //custom languages. not available online
