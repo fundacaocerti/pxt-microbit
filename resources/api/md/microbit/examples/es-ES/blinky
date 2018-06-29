@@ -1,6 +1,4 @@
-# Pisca-pisca
-
-Pisca um desenho nos LEDs.
+# Blinky
 
 ```blocks
 basic.forever(() => {
@@ -20,4 +18,3 @@ basic.forever(() => {
         );
 })
 ```
-

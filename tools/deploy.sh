@@ -43,5 +43,8 @@ cp $RESOURCES/api/clientconfig $PACKAGED/
 #change availableLocales in target.js to just use 3 languages: en, es-ES, pt-BR
 sed -i 's/\(\"availableLocales\": \[\)/"availableLocales": [\n\t\t\t"en",\n\t\t\t"es-ES",\n\t\t\t"pt-BR"\n\t\t],\n\t\t"allAvailableLocales": [/g' $PACKAGED/target.js
 
+#change isStatic to false to redirect the urls to the correct file according to the translation
+sed -i 's/\(\"isStatic\": true\)/"isStatic": false/g' $PACKAGED/index.html
+
 #pack deploy folder into .crx file
 chrome.exe --pack-extension=$PACKAGED --pack-extension-key=$PEMFILE

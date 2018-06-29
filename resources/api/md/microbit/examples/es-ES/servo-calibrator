@@ -1,8 +1,11 @@
-# Servo-calibrador
+# Servo calibrator
 
-Use este programa para calibrar os ângulos de um servomotor. Pressione `A` para reduzir o ângulo em 5 graus e `B` para aumentá-lo em 5.
+Use this program to calibrate the angles of a servo.
+Press ``A`` to reduce the angle by 5 and ``B`` to
+increase it by 5.
 
-O ângulo atual é apresentado no display continuamente em um loop.
+The current angle is displayed on the screen
+in a loop.
 
 ```blocks
 let angle = 90
@@ -21,4 +24,3 @@ basic.forever(() => {
 })
 pins.servoWritePin(AnalogPin.P0, angle)
 ```
-

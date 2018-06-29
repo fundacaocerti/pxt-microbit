@@ -1,6 +1,4 @@
-# Gráfico Aceleração
-
-Trace o gráfico da aceleração sobre o eixo `x` nos LEDs.
+# Plot Acceleration
 
 ```blocks
 basic.forever(() => {
@@ -10,4 +8,3 @@ basic.forever(() => {
     )
 })
 ```
-

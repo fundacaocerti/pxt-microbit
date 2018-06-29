@@ -36,10 +36,12 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 				result = regex.exec(requested_url);
 				file = result[1];
 		}
-		if(requested_url.indexOf("api/md/microbit/examples/") > -1) {    //extract language and file name from url
+		if(requested_url.indexOf("api/md/microbit/examples") > -1) {    //extract language and file name from url
 				var regex = /lang=\s*(.*?)\s*&live/g;
 				var result = regex.exec(requested_url);
-				lang = result[1];
+				if (result != null) {
+					lang = result[1];
+				}
 				regex = /examples\s*(.*?)\s*\?/g;
 				result = regex.exec(requested_url);
 				file = result[1];
@@ -74,15 +76,15 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 			if(details.url.indexOf("www.pxt.io/api/md/microbit/projects?targetVersion=0.0.0&lang=pt-BR&live=1") > -1) {
 				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/projectslist";
 			}
-			if(details.url.indexOf("www.pxt.io/api/md/microbit/examples?targetVersion=0.0.0&lang=pt-BR&live=1") > -1) {
-				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/exampleslist";
+			if(details.url.indexOf("www.pxt.io/api/md/microbit/examples?targetVersion=0.0.0") > -1) {
+				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/examples/" + lang + "/exampleslist";
 			}
 			if(requested_url.indexOf("www.pxt.io/api/md/microbit/projects/") > -1) { 
 				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/projects/" + lang + file;
 			}
-			if(requested_url.indexOf("www.pxt.io/api/md/microbit/examples/") > -1) { 
-				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/examples/" + lang + file;
-			}
+			if(requested_url.indexOf("www.pxt.io/api/md/microbit/examples/") > -1) {  
+				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/examples/" + lang + file; 
+			} 
 			if(requested_url.indexOf("www.pxt.io/api/md/microbit/docs/") > -1) { 
 				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/docs/" + lang + file;
 			}

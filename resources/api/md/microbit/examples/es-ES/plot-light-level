@@ -1,6 +1,4 @@
-# Gráfico Intensidade da luz
-
-Mostre a intensidade da luz atual como um gráfico de barras.
+# Plot Light level
 
 ```blocks
 basic.forever(() => {
@@ -10,4 +8,3 @@ basic.forever(() => {
     )
 })
 ```
-

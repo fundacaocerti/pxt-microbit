@@ -1,7 +1,10 @@
-# Name Tag
+# Crachá
+
+Role seu nome pela tela.
 
 ```blocks
 basic.forever(() => {
-    basic.showString("JAMES")
+    basic.showString("PEDRO")
 })
 ```
+

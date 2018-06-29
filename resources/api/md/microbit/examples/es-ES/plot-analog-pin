@@ -1,6 +1,7 @@
-# Gráfico Pino analógico
+# Plot Analog Pin
 
-Use este programa para traçar um gráfico do valor analógico do pino `P0`, `P1` ou `P2`. Pressione `A` para rolar o valor no display.
+Use this program to graph the analog value on pin ``P0``, ``P1`` or ``P2``.
+Press ``A`` to scroll the value on the screen.
 
 ```blocks
 let reading = 0
@@ -15,4 +16,3 @@ basic.forever(() => {
     }
 })
 ```
-
