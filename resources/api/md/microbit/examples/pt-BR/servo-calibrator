@@ -17,8 +17,7 @@ input.onButtonPressed(Button.B, () => {
     led.stopAnimation()
 })
 basic.forever(() => {
-    basic.showNumber(angle)    
+    basic.showNumber(angle)
 })
 pins.servoWritePin(AnalogPin.P0, angle)
 ```
-

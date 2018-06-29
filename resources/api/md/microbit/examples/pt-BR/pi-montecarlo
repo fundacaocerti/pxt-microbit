@@ -46,15 +46,15 @@ Este método de preencher com pontos, contá-los e usar a diferença ou razão d
 ## Estimativa de *pi* de Monte Carlo
 
 ```blocks
-let pir = 0 
-let pid = 0 
-let y = 0 
-let pin = 0 
-let x = 0 
-let r2 = 0 
-let r = 0 
-let inside = 0 
-let n = 0 
+let pir = 0
+let pid = 0
+let y = 0
+let pin = 0
+let x = 0
+let r2 = 0
+let r = 0
+let inside = 0
+let n = 0
 
 // Uma simulação de Monte Carlo simples para estimativa de Pi.
 //
@@ -95,7 +95,6 @@ basic.forever(() => {
         . # . # .
         . # . . #
         `)
-    basic.showString(" " + pid + "." + pir) 
+    basic.showString(" " + pid + "." + pir)
 })
 ```
-

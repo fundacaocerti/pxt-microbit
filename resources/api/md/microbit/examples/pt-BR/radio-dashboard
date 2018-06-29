@@ -3,16 +3,16 @@
 ```typescript
 /**
  * Painel de controle do rádio
- * 
- * Cada um dos rádios-cliente é representado por um ponto no display. 
+ *
+ * Cada um dos rádios-cliente é representado por um ponto no display.
  * Quando um cliente se registra, ficará no mesmo pixel
  * sempre.
- * 
+ *
  * Os rádios-cliente só podem enviar um número (entre 0 e 255) no grupo 4.
  * Devem transmitir seu número de série usando ``radio.setTransmitSerialNumber(true)``
- * 
+ *
  * O número recebido é usado para definir o brilho do LED daquele cliente.
- * 
+ *
  * Se o pacote de um rádio não for recebido a cada 10 seg, seu LED começará a piscar.
  */
 const deadPing = 20000;
@@ -40,7 +40,7 @@ function getClient(id: number): Client {
         if (client.id == id)
             return client;
     const n = clients.length;
-    if (n == 24) // sem espaço no display 
+    if (n == 24) // sem espaço no display
         return undefined;
     for (const client of clients)
         id: id,
@@ -80,11 +80,10 @@ basic.forever(() => {
 })
 
 // configura o rádio e inicia!
-radio.setGroup(4) 
+radio.setGroup(4)
 game.addScore(1)
 ```
 
 ```package
 rádio
 ```
-

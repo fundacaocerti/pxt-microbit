@@ -122,7 +122,7 @@ function gameOfLife() {
             // Alterna as células vivas/mortas, de acordo com a contagem.
             // Qualquer célula viva com menos de duas vizinhas vivas morre, por conta da subpopulação.
             // Qualquer célula com duas ou três vizinhas vivas vive até a próxima geração.
-            // Qualquer célula morta com exatamente três vizinhas vivas torna-se uma célula viva, como se fosse por reprodução            
+            // Qualquer célula morta com exatamente três vizinhas vivas torna-se uma célula viva, como se fosse por reprodução
             // Qualquer célula viva com mais de três vizinhas vivas morre, por conta da superpopulação.
             switch (count) {
                 case 0: setState(result, x, y, false); break;
@@ -140,4 +140,3 @@ function gameOfLife() {
 reset();
 show();
 ```
-
