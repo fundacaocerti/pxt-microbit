@@ -1,0 +1,90 @@
+# Painel de controle do rádio
+
+```typescript
+/**
+ * Painel de controle do rádio
+ * 
+ * Cada um dos rádios-cliente é representado por um ponto no display. 
+ * Quando um cliente se registra, ficará no mesmo pixel
+ * sempre.
+ * 
+ * Os rádios-cliente só podem enviar um número (entre 0 e 255) no grupo 4.
+ * Devem transmitir seu número de série usando ``radio.setTransmitSerialNumber(true)``
+ * 
+ * O número recebido é usado para definir o brilho do LED daquele cliente.
+ * 
+ * Se o pacote de um rádio não for recebido a cada 10 seg, seu LED começará a piscar.
+ */
+const deadPing = 20000;
+const lostPing = 10000;
+
+interface Client {
+    // número de série do cliente
+    id: number;
+    // sprite na tela
+    sprite: game.LedSprite;
+    // último ping recebido
+    ping: number;
+}
+
+const clients: Client[] = [];
+
+/* alocação tardia de sprite */
+function getClient(id: number): Client {
+    // é necessário um número para rastrear a identidade do rádio-cliente
+    if (!id)
+        return undefined;
+
+    // procura clientes registrados
+    for (const client of clients)
+        if (client.id == id)
+            return client;
+    const n = clients.length;
+    if (n == 24) // sem espaço no display 
+        return undefined;
+    for (const client of clients)
+        id: id,
+        sprite: game.createSprite(n % 5, n / 5),
+        ping: input.runningTime()
+    }
+    clients.push(client);
+    return client;
+}
+
+// armazena dados recebidos de cada cliente
+radio.onDataPacketReceived(packet => {
+    const client = getClient(packet.serial);
+    if (!client)
+        return;
+
+    client.ping = input.runningTime()
+    client.sprite.setBrightness(Math.max(1, packet.receivedNumber & 0xff));
+})
+
+// monitora os sprites e começa a piscar quando não recebe pacote
+basic.forever(() => {
+    const now = input.runningTime()
+    for (const client of clients) {
+        // começa a piscar quando perde o sinal
+        const lastPing = now - client.ping;
+        if (lastPing > deadPing) {
+            client.sprite.setBlink(0)
+            client.sprite.setBrightness(0)
+        }
+        else if (lastPing > lostPing)
+            client.sprite.setBlink(0)
+        else
+            client.sprite.setBlink(0)
+    }
+    basic.pause(500)
+})
+
+// configura o rádio e inicia!
+radio.setGroup(4) 
+game.addScore(1)
+```
+
+```package
+rádio
+```
+

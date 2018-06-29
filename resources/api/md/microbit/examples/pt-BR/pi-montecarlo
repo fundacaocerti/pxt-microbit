@@ -1,0 +1,101 @@
+# Pi Monte Carlo
+
+Estime o valor de **pi** usando seu @boardname@!
+
+## Reflexões...
+
+Vamos imaginar um círculo inscrito em um quadrado, ou seja, cujo contorno toca os lados internos do quadrado. Se dissermos que o raio, chamado de `r`, do círculo é `1`, então o comprimento de cada lado do quadrado é `2`, ou `2r`. A área do círculo é `pi * (r ** 2)` e a área do quadrado é `(r * 2) ** 2`. Não sabemos o valor de `pi`, então podemos estabelecer uma relação entre a área do círculo e a área do quadrado para encontrar o valor de `pi`.
+
+### Círculo e quadrado
+
+Há uma relação interessante entre o círculo e o quadrado, em que a área do círculo dividida pela área do quadrado é:
+
+`razão das áreas = (pi * (r ** 2)) / ((r * 2) ** 2) = pi / 4
+
+Bem, se soubermos tanto a área do círculo quanto a do quadrado poderemos descobrir o valor de `pi`! É simplesmente:
+
+    pi = (área do círculo) / (área do quadrado) * 4
+
+de forma que...
+
+    razão das áreas = (área do círculo) / (área do quadrado)
+    pi = (razão da área) * 4
+
+Entretanto, há um problema. Sabemos a área do quadrado, que com certeza é `4`, mas, qual é a área do círculo?
+
+Este é o dilema! Precisamos saber a área do círculo para encontrar o valor de `pi` e precisamos do valor de `pi` para saber a área do círculo!
+
+### Pontos, montes de pontos
+
+E se tivéssemos um monte de pontos minúsculos com que pudéssemos preencher o interior do círculo e das partes do quadrado não cobertas pelo círculo? Vamos tentar cobrir a área de ambas as formas geométricas com tantos pontos quanto possível.
+
+Se contarmos o número de pontos colocados no círculo e no quadrado, poderemos encontrar a `razão das áreas` entre as duas formas. E, se tivermos esta razão, poderemos descobrir `pi` na equação mostrada acima. A `razão das áreas` é:
+
+`razão das áreas = (pontos no círculo) / ((pontos no círculo) + (pontos somente no quadrado))
+
+Claro que não podemos preencher completamente a área de ambas as formas com pontos, mas poderíamos colocar nelas pontos suficientes para termos uma boa ideia da razão entre a área do círculo e a do quadrado.
+
+### Criação e contagem de pontos
+
+Para criar os "pontos", podemos gerar aleatoriamente um valor e verificar se ele se encaixa como uma coordenada dentro da forma que estamos tentando preencher. Se encaixar, conte mais um ponto e tente criar mais pontos por algum tempo. Quantos mais pontos criados, mais preciso será o valor da `razão das áreas`.
+
+### Método de Monte Carlo
+
+Este método de preencher com pontos, contá-los e usar a diferença ou razão das contagens é chamado de Método ou Estimativa de *Monte Carlo*.
+
+## Estimativa de *pi* de Monte Carlo
+
+```blocks
+let pir = 0 
+let pid = 0 
+let y = 0 
+let pin = 0 
+let x = 0 
+let r2 = 0 
+let r = 0 
+let inside = 0 
+let n = 0 
+
+// Uma simulação de Monte Carlo simples para estimativa de Pi.
+//
+// número de pontos
+n = 1000000
+//
+// raio do círculo
+r = 4000
+//
+// raio ao quadrado
+r2 = r * r
+//
+basic.forever(() => {
+    inside = 0
+    for (let i = 0; i < n; i++) {
+        // gera um ponto dentro do quadrado
+        x = Math.random(r + 1)
+        y = Math.random(r + 1)
+        // testa se o ponto está dentro do círculo
+        // sqrt(x**2 + y**2) < r ==> x**2 + y**2 < r**2
+        if (x * x + y * y < r2) {
+            inside += 1
+        }
+    }
+    // superfície de um quadrado: 4 * r * r superfície de um círculo:
+    // r * r * pi => inside / n ~= (r*r*pi) / (4*r*r) ~=
+    // pi / 4 pi = inside / n * 4
+    //
+    pin = inside * 4
+    // só aritmética inteira aqui...
+    pid = pin / n
+    pir = pin % n
+    // mostra resultados
+    basic.showLeds(`
+        # # # # #
+        . # . # .
+        . # . # .
+        . # . # .
+        . # . . #
+        `)
+    basic.showString(" " + pid + "." + pir) 
+})
+```
+
