@@ -53,7 +53,7 @@ let pin = 0
 let x = 0
 let r2 = 0
 let r = 0
-let inside = 0
+let dentro = 0
 let n = 0
 
 // Uma simulação de Monte Carlo simples para estimativa de Pi.
@@ -68,7 +68,7 @@ r = 4000
 r2 = r * r
 //
 basic.forever(() => {
-    inside = 0
+    dentro = 0
     for (let i = 0; i < n; i++) {
         // gera um ponto dentro do quadrado
         x = Math.random(r + 1)
@@ -76,14 +76,14 @@ basic.forever(() => {
         // testa se o ponto está dentro do círculo
         // sqrt(x**2 + y**2) < r ==> x**2 + y**2 < r**2
         if (x * x + y * y < r2) {
-            inside += 1
+            dentro += 1
         }
     }
     // superfície de um quadrado: 4 * r * r superfície de um círculo:
-    // r * r * pi => inside / n ~= (r*r*pi) / (4*r*r) ~=
-    // pi / 4 pi = inside / n * 4
+    // r * r * pi => dentro / n ~= (r*r*pi) / (4*r*r) ~=
+    // pi / 4 pi = dentro / n * 4
     //
-    pin = inside * 4
+    pin = dentro * 4
     // só aritmética inteira aqui...
     pid = pin / n
     pir = pin % n

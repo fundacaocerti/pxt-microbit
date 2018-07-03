@@ -15,10 +15,10 @@
  *
  * Se o pacote de um rádio não for recebido a cada 10 seg, seu LED começará a piscar.
  */
-const deadPing = 20000;
-const lostPing = 10000;
+const tempoLimitePing = 20000;
+const pingPerdido = 10000;
 
-interface Client {
+interface Cliente {
     // número de série do cliente
     id: number;
     // sprite na tela
@@ -27,54 +27,54 @@ interface Client {
     ping: number;
 }
 
-const clients: Client[] = [];
+const clientes: Cliente[] = [];
 
 /* alocação tardia de sprite */
-function getClient(id: number): Client {
+function getCliente(id: number): Cliente {
     // é necessário um número para rastrear a identidade do rádio-cliente
     if (!id)
         return undefined;
 
     // procura clientes registrados
-    for (const client of clients)
-        if (client.id == id)
-            return client;
-    const n = clients.length;
-    if (n == 24) // sem espaço no display
+    for (const cliente of clientes)
+        if (cliente.id == id)
+            return cliente;
+    const n = clientes.length;
+    if (n == 24) // sem espaço no display 
         return undefined;
-    for (const client of clients)
+    const cliente: Cliente = {    
         id: id,
         sprite: game.createSprite(n % 5, n / 5),
         ping: input.runningTime()
     }
-    clients.push(client);
-    return client;
+    clientes.push(cliente);
+    return cliente;
 }
 
 // armazena dados recebidos de cada cliente
 radio.onDataPacketReceived(packet => {
-    const client = getClient(packet.serial);
-    if (!client)
+    const cliente = getCliente(packet.serial);
+    if (!cliente)
         return;
 
-    client.ping = input.runningTime()
-    client.sprite.setBrightness(Math.max(1, packet.receivedNumber & 0xff));
+    cliente.ping = input.runningTime()
+    cliente.sprite.setBrightness(Math.max(1, packet.receivedNumber & 0xff));
 })
 
 // monitora os sprites e começa a piscar quando não recebe pacote
 basic.forever(() => {
-    const now = input.runningTime()
-    for (const client of clients) {
+    const agora = input.runningTime()
+    for (const cliente of clientes) {
         // começa a piscar quando perde o sinal
-        const lastPing = now - client.ping;
-        if (lastPing > deadPing) {
-            client.sprite.setBlink(0)
-            client.sprite.setBrightness(0)
+        const ultimoPing = agora - cliente.ping;
+        if (ultimoPing > tempoLimitePing) {
+            cliente.sprite.setBlink(0)
+            cliente.sprite.setBrightness(0)
         }
-        else if (lastPing > lostPing)
-            client.sprite.setBlink(0)
+        else if (ultimoPing > pingPerdido)
+            cliente.sprite.setBlink(500)
         else
-            client.sprite.setBlink(0)
+            cliente.sprite.setBlink(0)
     }
     basic.pause(500)
 })
@@ -85,5 +85,5 @@ game.addScore(1)
 ```
 
 ```package
-rádio
+radio
 ```

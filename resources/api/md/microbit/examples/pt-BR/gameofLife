@@ -1,6 +1,6 @@
 # Jogo da vida
 
-O [Jogo da vida](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) simula a vida em um mundo-tabuleiro (bidimensional). Cada célula no tabuleiro pode estar no estado "viva" ou "morta". O jogo começa com uma população de células distribuídas em um determinado padrão do tabuleiro. Executa-se uma simulação e, de acordo com algumas regras simples de vida e de morte, as células continuam a viver, morrem ou se reproduzem.
+O [Jogo da vida](https://pt.wikipedia.org/wiki/Jogo_da_vida) simula a vida em um mundo-tabuleiro (bidimensional). Cada célula no tabuleiro pode estar no estado "viva" ou "morta". O jogo começa com uma população de células distribuídas em um determinado padrão do tabuleiro. Executa-se uma simulação e, de acordo com algumas regras simples de vida e de morte, as células continuam a viver, morrem ou se reproduzem.
 
 ## Regras da vida
 
@@ -15,25 +15,25 @@ Dependendo da distribuição das células vivas no início do jogo, algumas simu
 
 ## Simulação do Jogo da Vida nos LEDs
 
-Uma simulação da vida na matriz de LEDs. Use button `A` for the next stage of life and button `B` to reset.
+Uma simulação da vida na matriz de LEDs. Use o botão `A` para a próxima iteração do jogo da vida e use o botão `B` para reiniciar.
 
 ```blocks
-//https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
-let lifeChart: Image = null
+//https://pt.wikipedia.org/wiki/Jogo_da_vida
+let graficoDaVida: Image = null
 
 //Use o botão A para a próxima iteração do jogo da vida
 input.onButtonPressed(Button.A, () => {
-    gameOfLife();
-    show();
+    jogoDaVida();
+    mostrar();
 })
 
 //Use o botão B para reiniciar em um estado inicial aleatório
 input.onButtonPressed(Button.B, () => {
-    reset();
-    show();
+    reiniciar();
+    mostrar();
 })
 
-lifeChart = images.createImage(`
+graficoDaVida = images.createImage(`
     . . . . .
     . . . . .
     . . . . .
@@ -41,82 +41,82 @@ lifeChart = images.createImage(`
     . . . . .
     `)
 
-//State mantém a informação sobre o pixel, se está vivo ou morto
+//Estado mantém a informação sobre o pixel, se está vivo ou morto
 //false significa morto, true significa vivo.
-let state = [false, false, false, false, false,
+let estado = [false, false, false, false, false,
     false, false, false, false, false,
     false, false, false, false, false,
     false, false, false, false, false,
     false, false, false, false, false]
 
 //get & set em um array
-function getState(arr: boolean[], x: number, y: number): boolean {
+function getEstado(arr: boolean[], x: number, y: number): boolean {
     return arr[x * 5 + y];
 }
-function setState(arr: boolean[], x: number, y: number, value: boolean): void {
+function setEstado(arr: boolean[], x: number, y: number, value: boolean): void {
     arr[x * 5 + y] = value;
 }
 
 //Gera um estado inicial aleatório.
-function reset() {
+function reiniciar() {
     for (let x = 0; x < 5; x++) {
         for (let y = 0; y < 5; y++) {
-            setState(state, x, y, Math.randomBoolean());
+            setEstado(estado, x, y, Math.randomBoolean());
         }
     }
 }
 
-//Exibe o lifeChart de acordo com o estado
-function show() {
+//Exibe o graficoDaVida de acordo com o estado
+function mostrar() {
     for (let x = 0; x < 5; x++) {
         for (let y = 0; y < 5; y++) {
-            lifeChart.setPixel(x, y, getState(state, x, y));
+            graficoDaVida.setPixel(x, y, getEstado(estado, x, y));
         }
     }
-    lifeChart.plotImage(0);
+    graficoDaVida.plotImage(0);
 }
 
 //Função principal
-function gameOfLife() {
-    let result: boolean[] = [];
-    let count = 0;
+function jogoDaVida() {
+    let resultado: boolean[] = [];
+    let contador = 0;
 
     for (let x = 0; x < 5; x++) {
         for (let y = 0; y < 5; y++) {
-            count = 0;
+            contador = 0;
 
             //Conta as células vivas na próxima linha
             x += 1
-                if (getState(state, x + 1, y)) {
-                    count = 0;
+                if (getEstado(estado, x + 1, y)) {
+                    contador = 0;
                 }
-                if ((y + 1 < 5) && getState(state, x + 1, y + 1)) {
-                    count = 0;
+                if ((y + 1 < 5) && getEstado(estado, x + 1, y + 1)) {
+                    contador = 0;
                 }
-                if ((y + 1 < 5) && getState(state, x + 1, y + 1)) {
-                    count = 0;
+                if ((y + 1 < 5) && getEstado(estado, x + 1, y + 1)) {
+                    contador = 0;
                 }
             }
 
             //Conta as células vivas na linha anterior
             x += 1
-                if (getState(state, x + 1, y)) {
-                    count = 0;
+                if (getEstado(estado, x + 1, y)) {
+                    contador = 0;
                 }
-                if ((y + 1 < 5) && getState(state, x + 1, y + 1)) {
-                    count = 0;
+                if ((y + 1 < 5) && getEstado(estado, x + 1, y + 1)) {
+                    contador = 0;
                 }
-                if ((y + 1 < 5) && getState(state, x + 1, y + 1)) {
-                    count = 0;
+                if ((y + 1 < 5) && getEstado(estado, x + 1, y + 1)) {
+                    contador = 0;
                 }
             }
 
             //Conta as células vivas na linha atual, excluindo a da posição atual.
-            if ((y + 1 < 5) && getState(state, x + 1, y + 1)) {
-                count = 0;
+            if ((y + 1 < 5) && getEstado(estado, x + 1, y + 1)) {
+                contador = 0;
             }
-            if ((y + 1 < 5) && getState(state, x + 1, y + 1)) {
-                count = 0;
+            if ((y + 1 < 5) && getEstado(estado, x + 1, y + 1)) {
+                contador = 0;
             }
 
             // Alterna as células vivas/mortas, de acordo com a contagem.
@@ -124,19 +124,19 @@ function gameOfLife() {
             // Qualquer célula com duas ou três vizinhas vivas vive até a próxima geração.
             // Qualquer célula morta com exatamente três vizinhas vivas torna-se uma célula viva, como se fosse por reprodução
             // Qualquer célula viva com mais de três vizinhas vivas morre, por conta da superpopulação.
-            switch (count) {
-                case 0: setState(result, x, y, false); break;
-                case 0: setState(result, x, y, false); break;
-                case 2: setState(result, x, y, getState(state, x, y)); break;
-                case 3: setState(result, x, y, true); break;
-                default: setState(result, x, y, false); break;
+            switch (contador) {
+                case 0: setEstado(resultado, x, y, false); break;
+                case 0: setEstado(resultado, x, y, false); break;
+                case 2: setEstado(resultado, x, y, getEstado(estado, x, y)); break;
+                case 3: setEstado(resultado, x, y, true); break;
+                default: setEstado(resultado, x, y, false); break;
             }
         }
     }
     //Atualiza o estado
-    state = result;
+    estado = resultado;
 }
 //Reset inicial e exibe
-reset();
-show();
+reiniciar();
+mostrar();
 ```
