@@ -86,7 +86,7 @@ function jogoDaVida() {
             contador = 0;
 
             //Conta as células vivas na próxima linha
-            x += 1
+            if ((x + 1) < 5) {
                 if (getEstado(estado, x + 1, y)) {
                     contador = 0;
                 }
@@ -99,7 +99,7 @@ function jogoDaVida() {
             }
 
             //Conta as células vivas na linha anterior
-            x += 1
+            if ((x - 1) >= 0) {
                 if (getEstado(estado, x + 1, y)) {
                     contador = 0;
                 }
