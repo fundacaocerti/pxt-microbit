@@ -46,5 +46,11 @@ sed -i 's/\(\"availableLocales\": \[\)/"availableLocales": [\n\t\t\t"en",\n\t\t\
 #change isStatic to false to redirect the urls to the correct file according to the translation
 sed -i 's/\(\"isStatic\": true\)/"isStatic": false/g' $PACKAGED/index.html
 
+#change isStatic to false to redirect the help urls correctly
+sed -i 's/\(\"isStatic\": true\)/"isStatic": false/g' $PACKAGED/embed.js
+
+#change popout to redirect to the correct url
+sed -i 's/window.open(url, \"_blank\");/url = url.includes(".\/docs") ? "https:\/\/makecode.microbit.org" + url.replace(".\/docs\/", "").replace(".html", "") : "https:\/\/makecode.microbit.org\/" + url;\n\t\t\t\t\t\twindow.open(url, "_blank");/g' $PACKAGED/pxtrunner.js
+
 #pack deploy folder into .crx file
 chrome.exe --pack-extension=$PACKAGED --pack-extension-key=$PEMFILE

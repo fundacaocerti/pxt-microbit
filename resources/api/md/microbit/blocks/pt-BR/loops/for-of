@@ -1,9 +1,0 @@
-# For Of 
-
-Run part of the program for each element in a list.
-
-```
-for(let value of [""]) {
-
-}
-```
