@@ -70,10 +70,14 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/translations/" + lang + "/" + file;
 	}
 
+	if(details.url.indexOf("https://www.pxt.io/api/md/microbit/tutorials/getting-started?targetVersion=0.0.0") > -1 ) {
+		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/tutorials/getting-startedtargetVersion=0.0.0";
+	}
+
 	return {
 		redirectUrl: redirect_url /*Redirection URL*/
 	};
 
 },
-{urls: ["*://www.pxt.io/api/translations*", "*://www.pxt.io/api/config/microbit/targetconfig*", "*://www.pxt.io/api/md/microbit/docs*", "*://www.pxt.io/api/md/microbit/examples*", "*://www.pxt.io/api/md/microbit/projects*", "*://www.pxt.io/api/clientconfig*"]},
+{urls: ["*://www.pxt.io/api/translations*", "*://www.pxt.io/api/config/microbit/targetconfig*", "*://www.pxt.io/api/md/microbit/docs*", "*://www.pxt.io/api/md/microbit/examples*", "*://www.pxt.io/api/md/microbit/projects*", "*://www.pxt.io/api/clientconfig*", "*://www.pxt.io/api/md/microbit/tutorials/getting-started?*"]},
 ["blocking"]); // Block intercepted requests until this handler has finished
