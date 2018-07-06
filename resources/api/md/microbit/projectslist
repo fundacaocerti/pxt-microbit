@@ -9,14 +9,17 @@ Fun games to build with your @boardname@.
 ```codecard
 [{
   "name": "Flashing Heart",
+  "cardType": "tutorial",
   "url":"/projects/flashing-heart",
   "imageUrl": "https://pxt.azureedge.net/blob/bd3236c80ed86cbf0b99ff39f26469683c512ebc/static/mb/projects/a1-display.png"
 },{
   "name": "Smiley Buttons",
+  "cardType": "tutorial",
   "url":"/projects/smiley-buttons",
   "imageUrl": "https://pxt.azureedge.net/blob/668a5a469bae3627ba78dab1f69b1a7e87972f28/static/mb/projects/a2-buttons.png"
 },{
   "name": "Love Meter",
+  "cardType": "tutorial",
   "url":"/projects/love-meter",
   "imageUrl":"https://pxt.azureedge.net/blob/5e81154127a6378383b7cab124bbb41ea9409a63/static/mb/projects/a3-pins.png"
 },{
@@ -29,6 +32,7 @@ Fun games to build with your @boardname@.
   "imageUrl":"https://pxt.azureedge.net/blob/6e19d321a2f74b2350b066eb6975e9daf7a9de55/static/mb/projects/magic-button-trick.png"
 }, {
   "name": "Coin Flipper",
+  "cardType": "tutorial",
   "url":"/projects/coin-flipper",
   "imageUrl": "https://pxt.azureedge.net/blob/53bf6ef82031d61f77ea870ac7a09ec81ab827d9/static/mb/projects/coin-flipper.png"
 }]
