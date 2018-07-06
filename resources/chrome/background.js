@@ -39,10 +39,10 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 	}
 
 	if(details.url.indexOf("https://www.pxt.io") > -1) {
-			if(details.url.indexOf("www.pxt.io/api/md/microbit/projects?targetVersion=0.0.0&lang=pt-BR&live=1") > -1) {
+			if(details.url.indexOf("www.pxt.io/api/md/microbit/projects") > -1) {
 				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/projectslist";
 			}
-			if(details.url.indexOf("www.pxt.io/api/md/microbit/examples?targetVersion=0.0.0&lang=pt-BR&live=1") > -1) {
+			if(details.url.indexOf("www.pxt.io/api/md/microbit/examples") > -1) {
 				redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/examples/" + lang + "/examples.md";
 			}
 			if(requested_url.indexOf("www.pxt.io/api/md/microbit/projects/") > -1) {
