@@ -24,13 +24,13 @@ let graficoDaVida: Image = null
 //Use o botão A para a próxima iteração do jogo da vida
 input.onButtonPressed(Button.A, () => {
     jogoDaVida();
-    mostrar();
+    exibir();
 })
 
 //Use o botão B para reiniciar em um estado inicial aleatório
 input.onButtonPressed(Button.B, () => {
     reiniciar();
-    mostrar();
+    exibir();
 })
 
 graficoDaVida = images.createImage(`
@@ -67,7 +67,7 @@ function reiniciar() {
 }
 
 //Exibe o graficoDaVida de acordo com o estado
-function mostrar() {
+function exibir() {
     for (let x = 0; x < 5; x++) {
         for (let y = 0; y < 5; y++) {
             graficoDaVida.setPixel(x, y, getEstado(estado, x, y));
@@ -136,7 +136,7 @@ function jogoDaVida() {
     //Atualiza o estado
     estado = resultado;
 }
-//Reset inicial e exibe
+//Reinicia e exibe
 reiniciar();
-mostrar();
+exibir();
 ```
