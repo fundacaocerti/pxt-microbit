@@ -106,16 +106,6 @@ Fun games to build with your @boardname@.
 }]
 ```
 
-## Test CERTI
-
-```codecard
-[{
-  "name": "Test CERTI",
-  "url":"/projects/test-certi-project",
-  "imageUrl":"http://www.certi.org.br/pt/comunicacao-arquivos/Logo-Horizontal-certi-jpg.jpg"
-}]
-```
-
 ### See Also
 
 [Flashing Heart](/projects/flashing-heart), [Smiley Buttons](/projects/smiley-buttons), [Love Meter](/projects/love-meter), [Rock Paper Scissors](/projects/rock-paper-scissors), [Compass](/projects/compass), [Hack your headphones](/projects/hack-your-headphones), [Banana keyboard](/projects/banana-keyboard), [Telegraph](/projects/telegraph), [Guitar](/projects/guitar), [Wallet](/projects/wallet), [Watch](/projects/watch),
