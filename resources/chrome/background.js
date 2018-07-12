@@ -94,10 +94,17 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/projects/" + image;
 	}
 
+	if(details.url.indexOf("az416426.vo.msecnd.net/scripts/a/ai.0.js") > -1 ) {
+		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/ai.0.js";
+	}
+
+	if(details.url.indexOf("az742082.vo.msecnd.net/pub/psopafpj") > -1 ) {
+		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/psopafpj.png";
+	}
+
 	return {
 		redirectUrl: redirect_url /*Redirection URL*/
 	};
-
 },
 {urls: [
 	"*://www.pxt.io/api/translations*",
@@ -110,7 +117,9 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 	"*://pxt.azureedge.net/compile/*",
 	"*://makecode.com/compile/*",
 	"*://www.pxt.io/api/compile/extension",
-	"*://pxt.azureedge.net/blob/*/static/mb/projects/*"
+	"*://pxt.azureedge.net/blob/*/static/mb/projects/*",
+	"*://az416426.vo.msecnd.net/scripts/a/ai.0.js",
+	"*://az742082.vo.msecnd.net/pub/psopafpj"
 	]
 },
 ["blocking"]); // Block intercepted requests until this handler has finished
