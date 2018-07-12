@@ -4,11 +4,16 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )" #absolute root 
 
 DEPLOY=$DIR"/deploy"
 PACKAGED=$DEPLOY"/microbit"      #static html packaged abs path
+PACKAGED_API=$PACKAGED"/api"
 PACKAGED_COMPILE=$PACKAGED"/api/compile"
 BUILT=$DIR"/built"
+BUILT_HEX_CACHE=$BUILT/hexcache
 RESOURCES=$DIR"/resources"
-PEMFILE=$RESOURCES"/chrome/microbit.pem"    #pem file abs path
-SHA=$( sed -n 's/.*"sha": "\(.*\)",/\1/p' libs/blocksprj/built/yt/buildcache.json )
+RESOURCES_API=$DIR"/resources/api"
+RESOURCES_EXTENSION=$DIR"/resources/chrome"
+PEMFILE=$RESOURCES_EXTENSION"/microbit.pem"    #pem file abs path
+SHA_BLOCKSPRJ=$( sed -n 's/.*"sha": "\(.*\)",/\1/p' libs/blocksprj/built/yt/buildcache.json )
+SHA_TSPRJ=$( sed -n 's/.*"sha": "\(.*\)",/\1/p' libs/tsprj/built/yt/buildcache.json )
 
 rm -rf $DEPLOY
 rm -rf $BUILT
@@ -17,28 +22,27 @@ mkdir -p $DEPLOY
 cp -r $BUILT/packaged $PACKAGED
 mkdir -p $PACKAGED_COMPILE
 
-cp $BUILT/hexcache/$SHA.hex $PACKAGED_COMPILE
-cp $BUILT/hexcache/$SHA.hex $PACKAGED_COMPILE/$SHA.json
+#iterate over the sha's and save it in deploy
+declare -a arr=($SHA_BLOCKSPRJ $SHA_TSPRJ)
+for sha in "${arr[@]}"
+do
+    cp $BUILT_HEX_CACHE/$sha.hex $PACKAGED_COMPILE
+    cp $BUILT_HEX_CACHE/$sha.hex $PACKAGED_COMPILE/$sha.json
 
-#converts .hex into .json file
-sed -i '1s;^;{"enums":[],"functions":[],"hex":";' $PACKAGED_COMPILE/$SHA.json
-sed -i '$s/$/\\r\\n"}/' $PACKAGED_COMPILE/$SHA.json
-sed -i ':a;N;$!ba;s/\n/\\r\\n/g' $PACKAGED_COMPILE/$SHA.json
+    #converts .hex into .json file
+    sed -i '1s;^;{"enums":[],"functions":[],"hex":";' $PACKAGED_COMPILE/$sha.json
+    sed -i '$s/$/\\r\\n"}/' $PACKAGED_COMPILE/$sha.json
+    sed -i ':a;N;$!ba;s/\n/\\r\\n/g' $PACKAGED_COMPILE/$sha.json
+done
 
-#copy translations to deploy folder
-cp -r $RESOURCES/api/translations $PACKAGED/api/
-
-#copy some files to ensure compatibility with chrome extension
-cp $PACKAGED_COMPILE/$SHA.json $PACKAGED_COMPILE/$SHA
-
-#copy chrome extension required files
-cp $RESOURCES/chrome/background.js $PACKAGED
-cp $RESOURCES/chrome/icon-microbit-128.png $PACKAGED
-cp $RESOURCES/chrome/manifest.json $PACKAGED
+#copy resources api folder to deploy
+cp -r $RESOURCES_API $PACKAGED
 
 #copy aditional resources for offline compatibility
-cp -r $RESOURCES/api/md $PACKAGED/api/
-cp $RESOURCES/api/clientconfig $PACKAGED/
+cp $PACKAGED_API/clientconfig $PACKAGED/clientconfig.json
+
+#copy extension required files
+cp -r $RESOURCES_EXTENSION/* $PACKAGED
 
 #change availableLocales in target.js to just use 3 languages: en, es-ES, pt-BR
 sed -i 's/\(\"availableLocales\": \[\)/"availableLocales": [\n\t\t\t"en",\n\t\t\t"es-ES",\n\t\t\t"pt-BR"\n\t\t],\n\t\t"allAvailableLocales": [/g' $PACKAGED/target.js

@@ -63,7 +63,7 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 	}
 
 	if(details.url.indexOf("https://www.pxt.io/api/clientconfig") > -1) {
-		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/clientconfig";
+		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/clientconfig.json";
 	}
 
 	if((details.url.indexOf("https://www.pxt.io/api/translations") > -1) && (lang == "pt-BR" || lang == "es-ES")) {    //custom languages. not available online
@@ -74,10 +74,43 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/tutorials/getting-startedtargetVersion=0.0.0";
 	}
 
+	if(details.url.indexOf("https://pxt.azureedge.net/compile/") > -1 ) {
+		var sha = details.url.split("compile/")[1];
+		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/compile/"  + sha;
+	}
+
+	if(details.url.indexOf("https://makecode.com/compile/") > -1 ) {
+		var sha = details.url.split("compile/")[1];
+		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/compile/" + sha;
+	}
+
+	if(details.url.indexOf("https://www.pxt.io/api/compile/extension") > -1 ) {
+		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/compile/extension.json";
+	}
+
+	//Redirect projects list images
+	if(details.url.indexOf("static/mb/projects/") > -1 ) {
+		var image = details.url.split("static/mb/projects/")[1];
+		redirect_url = "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/projects/" + image;
+	}
+
 	return {
 		redirectUrl: redirect_url /*Redirection URL*/
 	};
 
 },
-{urls: ["*://www.pxt.io/api/translations*", "*://www.pxt.io/api/config/microbit/targetconfig*", "*://www.pxt.io/api/md/microbit/docs*", "*://www.pxt.io/api/md/microbit/examples*", "*://www.pxt.io/api/md/microbit/projects*", "*://www.pxt.io/api/clientconfig*", "*://www.pxt.io/api/md/microbit/tutorials/getting-started?*"]},
+{urls: [
+	"*://www.pxt.io/api/translations*",
+	"*://www.pxt.io/api/config/microbit/targetconfig*",
+	"*://www.pxt.io/api/md/microbit/docs*",
+	"*://www.pxt.io/api/md/microbit/examples*",
+	"*://www.pxt.io/api/md/microbit/projects*",
+	"*://www.pxt.io/api/clientconfig*",
+	"*://www.pxt.io/api/md/microbit/tutorials/getting-started?*",
+	"*://pxt.azureedge.net/compile/*",
+	"*://makecode.com/compile/*",
+	"*://www.pxt.io/api/compile/extension",
+	"*://pxt.azureedge.net/blob/*/static/mb/projects/*"
+	]
+},
 ["blocking"]); // Block intercepted requests until this handler has finished
