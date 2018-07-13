@@ -56,5 +56,8 @@ sed -i 's/\(\"isStatic\": true\)/"isStatic": false/g' $PACKAGED/embed.js
 #change popout to redirect to the correct url
 sed -i 's/window.open(url, \"_blank\");/url = url.includes(".\/docs") ? "https:\/\/makecode.microbit.org" + url.replace(".\/docs\/", "").replace(".html", "") : "https:\/\/makecode.microbit.org\/" + url;\n\t\t\t\t\t\twindow.open(url, "_blank");/g' $PACKAGED/pxtrunner.js
 
+#change Download/help to redirect to the correct url
+sed -i 's/\"usbDocs\": \"\/device\/usb\"/\"usbDocs\": \"https:\/\/makecode.microbit.org\/device\/usb\"/g' $PACKAGED/target.js
+
 #pack deploy folder into .crx file
 chrome.exe --pack-extension=$PACKAGED --pack-extension-key=$PEMFILE
