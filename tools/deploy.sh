@@ -62,5 +62,8 @@ sed -i 's/\"usbDocs\": \"\/device\/usb\"/\"usbDocs\": \"https:\/\/makecode.micro
 #change Logo micro:bit to redirect to the correct url
 sed -i 's/\"logoUrl\": \"\/.\/\"/\"logoUrl\": \"https:\/\/microbit.org\/code\/\"/g' $PACKAGED/target.js
 
+#do not set _isOnline false and Cloud.onOffline(), with that it will always try to open a request instead of just fail with the offline message
+sed -i 's/if (e.statusCode == 0) {/return Promise.reject(e);\n\t\t\t\tif (e.statusCode == 0) {/g' $PACKAGED/pxtlib.js
+
 #pack deploy folder into .crx file
 chrome.exe --pack-extension=$PACKAGED --pack-extension-key=$PEMFILE
