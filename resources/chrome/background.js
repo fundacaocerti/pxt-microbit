@@ -35,22 +35,6 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 		}
 	}
 
-	if(requestedUrl.indexOf("www.pxt.io/api/md/microbit/projects/") > -1) {
-		var regex = /lang=\s*(.*?)\s*&live/g;
-		var result = regex.exec(requestedUrl);
-		if(result != null) {
-			lang = result[1];
-		}
-		regex = /projects\s*(.*?)\s*\?/g;
-		result = regex.exec(requestedUrl);
-		var file = result[1];
-		return { redirectUrl: "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/projects/" + lang + file};
-	}
-
-	if(requestedUrl.indexOf("www.pxt.io/api/md/microbit/projects") > -1) {
-		return { redirectUrl: "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/projectslist"};
-	}
-
 	if(requestedUrl.indexOf("www.pxt.io/api/md/microbit/docs/") > -1) {
 		if(requestedUrl.includes(".html")){
 			return { redirectUrl: requestedUrl.replace("docs/", "").replace(".html", "")};
@@ -78,12 +62,6 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 		return { redirectUrl: "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/compile/"  + sha};
 	}
 
-	//Redirect projects list images
-	if(requestedUrl.indexOf("static/mb/projects/") > -1 ) {
-		var image = requestedUrl.split("static/mb/projects/")[1];
-		return { redirectUrl: "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/projects/" + image};
-	}
-
 	if(requestedUrl.indexOf("az416426.vo.msecnd.net/scripts/a/ai.0.js") > -1 ) {
 		return { redirectUrl: "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/ai.0.js"};
 	}
@@ -99,13 +77,11 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 	"*://www.pxt.io/api/config/microbit/targetconfig*",
 	"*://www.pxt.io/api/md/microbit/docs*",
 	"*://www.pxt.io/api/md/microbit/examples*",
-	"*://www.pxt.io/api/md/microbit/projects*",
 	"*://www.pxt.io/api/clientconfig*",
 	"*://www.pxt.io/api/md/microbit/tutorials/getting-started?*",
 	"*://pxt.azureedge.net/compile/*",
 	"*://makecode.com/compile/*",
 	"*://www.pxt.io/api/compile/extension",
-	"*://pxt.azureedge.net/blob/*/static/mb/projects/*",
 	"*://az416426.vo.msecnd.net/scripts/a/ai.0.js",
 	"*://az742082.vo.msecnd.net/pub/psopafpj"
 	]
