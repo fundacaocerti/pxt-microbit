@@ -59,5 +59,8 @@ sed -i 's/window.open(url, \"_blank\");/url = url.includes(".\/docs") ? "https:\
 #change Download/help to redirect to the correct url
 sed -i 's/\"usbDocs\": \"\/device\/usb\"/\"usbDocs\": \"https:\/\/makecode.microbit.org\/device\/usb\"/g' $PACKAGED/target.js
 
+#change Logo micro:bit to redirect to the correct url
+sed -i 's/\"logoUrl\": \"\/.\/\"/\"logoUrl\": \"https:\/\/microbit.org\/code\/\"/g' $PACKAGED/target.js
+
 #pack deploy folder into .crx file
 chrome.exe --pack-extension=$PACKAGED --pack-extension-key=$PEMFILE
