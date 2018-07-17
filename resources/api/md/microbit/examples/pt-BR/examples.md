@@ -1,19 +1,19 @@
 # Exemplos
 
-Aqui estão alguns programas legais para seu @boardname@!
+Aqui estão alguns programas legais para sua @boardname@!
 
 ## Coisas legais
 
 ```codecard
 [{
   "name": "Pisca pisca",
-  "description": "LEDs piscam em um padrão",
+  "description": "Um desenho piscando nos LEDs",
   "url":"/examples/blinky",
   "cardType": "example"
 },
 {
   "name": "Crachá",
-  "description": "Role seu nome pela tela",
+  "description": "Seu nome correndo pelo display",
   "url":"/examples/name-tag",
   "cardType": "example"
 },
@@ -25,13 +25,13 @@ Aqui estão alguns programas legais para seu @boardname@!
 },
 {
   "name": "Jogo da Vida",
-  "description": "Um jogo da vida simulado em LEDs",
+  "description": "Simulação do jogo da vida nos LEDs",
   "url":"/examples/gameofLife",
   "cardType": "example"
 },
 {
   "name": "Pi Monte Carlo",
-  "description": "Aproxime o número Pi",
+  "description": "Cálculo aproximado do número Pi",
   "url": "/examples/pi-montecarlo",
   "cardType": "example"
 }
@@ -68,7 +68,7 @@ Aqui estão alguns programas legais para seu @boardname@!
   "cardType": "example"
 }, {
   "name": "Painel de controle do rádio",
-  "description": "Um painel de controle para clientes de rádio",
+  "description": "Monitore o grupo de rádio",
   "url":"/examples/radio-dashboard",
   "cardType": "example"
 }]
@@ -79,7 +79,7 @@ Aqui estão alguns programas legais para seu @boardname@!
 ```codecard
 [{
   "name": "Servo-calibrador",
-  "description": "Calibre um servo motor",
+  "description": "Calibre um servomotor",
   "url":"/examples/servo-calibrator",
   "cardType": "example"
 }]
@@ -90,12 +90,12 @@ Aqui estão alguns programas legais para seu @boardname@!
 ```codecard
 [{		
   "name": "Tartaruga: quadrado",
-  "description": "Mova-se em um quadrado",
+  "description": "O caminho forma um quadrado",
   "url":"/examples/turtle-square",
   "cardType": "example"
 }, {
   "name": "Tartaruga: espiral",
-  "description": "Mova-se em espiral",
+  "description": "O caminho é em espiral",
   "url":"/examples/turtle-spiral",
   "cardType": "example"
 }, {

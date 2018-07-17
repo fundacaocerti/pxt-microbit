@@ -2,7 +2,7 @@
 
 A corrida do [Ovo na colher](https://en.wikipedia.org/wiki/Egg-and-spoon_race) é uma brincadeira em que o jogador carrega um objeto (como um ovo) ao longo de determinada distância, sem deixá-lo cair do recipiente em que está. No caso do Ovo na colher, o jogador deve andar cuidadosamente com um ovo em uma colher. O ovo deve permanecer na colher até o jogador cruzar a linha de chegada. O ovo pode facilmente rolar para fora da colher, portanto, o jogador precisa de habilidade e paciência para equilibrar o ovo até o fim da corrida.
 
-É possível programar seu @boardname@ para ser o ovo e a sua mão a colher. Se andar muito rápido ou cambaleante enquanto segura o @boardname@, você pode "derrubar o ovo!". Tente manter o ponto de equilíbrio no centro do display.
+É possível programar sua @boardname@ para ser o ovo e a sua mão a colher. Se andar muito rápido ou cambaleante enquanto segura a @boardname@, você pode "derrubar o ovo!". Tente manter o ponto de equilíbrio no centro do display.
 
 ```blocks
 let accY = 0
@@ -29,3 +29,4 @@ basic.forever(() => {
 x = 2
 y = 2
 ```
+

@@ -1,8 +1,8 @@
-# Getting started
+# Primeiros passos
 
 ## Step 1
 
-Welcome! Place the ``||show string||`` block in the ``||on start||`` slot to scroll your name.
+Bem-vindos! Encaixe o bloco ``||basic:show string||`` (com seu nome) no espaço ``||basic:on start||`` para ver seu nome correndo no display. Substitua o texto ``"Oi!"`` pelo seu nome. Você vê ele correndo?
 
 ```blocks
 basic.showString("Micro!")
@@ -10,12 +10,11 @@ basic.showString("Micro!")
 
 ## Step 2
 
-Click ``|Download|`` to transfer your code in your @boardname@!
+Conect um cabo USB à @boardname@ e clique em ``|Download|``. Salve o programa na sua unidade **@drivename@**. Assim, você transferirá seu código para a @boardname@!
 
 ## Step 3
 
-The text stopped. Place the ``||show string||`` block in the ``||on button pressed||``
-slot to scroll your name when button **A** is pressed.
+Seu texto parou de correr no display. Encaixe o bloco ``||basic:show string||`` no espaço ``||input:on button pressed||`` para mostrar seu nome quando o botão **A** for pressionado.
 
 ```block
 input.onButtonPressed(Button.A, () => {
@@ -25,16 +24,15 @@ input.onButtonPressed(Button.A, () => {
 
 ## Step 4
 
-Click ``|Download|`` to transfer your code
-then press button **A** to scroll your text.
+Clique em ``|Download|`` para salvar e transferir seu código de novo e, depois, pressione o botão **A** para ver seu texto correr no display.
 
 ## Step 5
 
-Place blocks to display a smiley when button **B** is pressed.
+Arrume os blocos para exibir um sorriso quando o botão **B** for pressionado.
 
 ###   
 
-Use the dropdown to find ``B``!
+Use o menu no espaço ``||quando o botão for pressionado||`` para encontrar o ``B``!
 
 ```block
 input.onButtonPressed(Button.B, () => {
@@ -50,13 +48,13 @@ input.onButtonPressed(Button.B, () => {
 
 ## Step 6
 
-Place the ``||show number||`` and ``||pick random||`` blocks
-in the ``||on shake||`` slot to build a dice.
+Encaixe os blocos ``||basic:show number||`` e ``||Math:pick random||`` 
+no espaço ``||input:on shake||`` para criar um dado.
 
 ###   
 
-When the @boardname@ is shaken, the random number between ``0`` and ``6`` will be displayed
-on the scren.
+Quando a @boardname@ for agitada, um número aleatório entre ``0`` and ``6`` aparecerá
+no display.
 
 ```block
 input.onGesture(Gesture.Shake, () => {
@@ -66,4 +64,5 @@ input.onGesture(Gesture.Shake, () => {
 
 ## Step 7
 
-Well done! You have complete this activity.
+Muito bem! Você completou sua primeira atividade no Microsoft MakeCode.
+
