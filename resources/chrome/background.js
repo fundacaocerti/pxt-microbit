@@ -35,6 +35,15 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 		}
 	}
 
+	if(requestedUrl.indexOf("www.pxt.io/api/md/microbit/tutorials/getting-started?targetVersion=0.0.0") > -1 ) {
+		var regex = /lang=\s*(.*?)\s*&live/g;
+		var result = regex.exec(requestedUrl);
+		if(result != null) {
+			lang = result[1];
+		}
+		return { redirectUrl: "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/tutorials/" + lang + "/getting-started.md"};
+	}
+
 	if(requestedUrl.indexOf("www.pxt.io/api/md/microbit/docs/") > -1) {
 		if(requestedUrl.includes(".html")){
 			return { redirectUrl: requestedUrl.replace("docs/", "").replace(".html", "")};
@@ -47,10 +56,6 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 
 	if(requestedUrl.indexOf("www.pxt.io/api/clientconfig") > -1) {
 		return { redirectUrl: "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/clientconfig.json"};
-	}
-
-	if(requestedUrl.indexOf("www.pxt.io/api/md/microbit/tutorials/getting-started?targetVersion=0.0.0") > -1 ) {
-		return { redirectUrl: "chrome-extension://ngbgjifibhpeaiomjmfhnegegokbmlgj/api/md/microbit/tutorials/getting-started.md"};
 	}
 
 	if(requestedUrl.indexOf("www.pxt.io/api/compile/extension") > -1 ) {
@@ -78,7 +83,7 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 	"*://www.pxt.io/api/md/microbit/docs*",
 	"*://www.pxt.io/api/md/microbit/examples*",
 	"*://www.pxt.io/api/clientconfig*",
-	"*://www.pxt.io/api/md/microbit/tutorials/getting-started?*",
+	"*://www.pxt.io/api/md/microbit/tutorials/getting-started?targetVersion=0.0.0*",
 	"*://pxt.azureedge.net/compile/*",
 	"*://makecode.com/compile/*",
 	"*://www.pxt.io/api/compile/extension",

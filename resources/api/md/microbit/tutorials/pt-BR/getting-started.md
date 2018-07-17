@@ -2,7 +2,7 @@
 
 ## Step 1
 
-Bem-vindos! Encaixe o bloco ``||basic:show string||`` (com seu nome) no espaço ``||basic:on start||`` para ver seu nome correndo no display. Substitua o texto ``"Oi!"`` pelo seu nome. Você vê ele correndo?
+Bem-vindos! Encaixe o bloco ``||basic:mostre string||`` (com seu nome) no espaço ``||basic:ao iniciar||`` para ver seu nome correndo no display. Substitua o texto ``"Hello!"`` pelo seu nome. Você vê ele correndo?
 
 ```blocks
 basic.showString("Micro!")
@@ -10,11 +10,11 @@ basic.showString("Micro!")
 
 ## Step 2
 
-Conect um cabo USB à @boardname@ e clique em ``|Download|``. Salve o programa na sua unidade **@drivename@**. Assim, você transferirá seu código para a @boardname@!
+Conecte um cabo USB à @boardname@ e clique em ``|Download|``. Salve o programa na sua unidade **@drivename@**. Assim, você transferirá seu código para a @boardname@!
 
 ## Step 3
 
-Seu texto parou de correr no display. Encaixe o bloco ``||basic:show string||`` no espaço ``||input:on button pressed||`` para mostrar seu nome quando o botão **A** for pressionado.
+Seu texto parou de correr no display. Encaixe o bloco ``||basic:mostre string||`` no espaço ``||basic:quando o botão for pressionado||`` para mostrar seu nome quando o botão **A** for pressionado.
 
 ```block
 input.onButtonPressed(Button.A, () => {
@@ -48,8 +48,8 @@ input.onButtonPressed(Button.B, () => {
 
 ## Step 6
 
-Encaixe os blocos ``||basic:show number||`` e ``||Math:pick random||`` 
-no espaço ``||input:on shake||`` para criar um dado.
+Encaixe os blocos ``||basic:mostre número||`` e ``||Math:número aleatório||`` 
+no espaço ``||input:quando agitar||`` para criar um dado.
 
 ###   
 
