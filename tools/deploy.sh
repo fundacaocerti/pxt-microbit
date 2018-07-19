@@ -65,5 +65,14 @@ sed -i 's/\"logoUrl\": \"\/.\/\"/\"logoUrl\": \"https:\/\/microbit.org\/code\/\"
 #do not set _isOnline false and Cloud.onOffline(), with that it will always try to open a request instead of just fail with the offline message
 sed -i 's/if (e.statusCode == 0) {/return Promise.reject(e);\n\t\t\t\tif (e.statusCode == 0) {/g' $PACKAGED/pxtlib.js
 
+#set weatherbit version
+sed -i 's/\"weatherbit\": \"\*\"/\"weatherbit\": \"github:sparkfun\/pxt-weather-bit#v0.0.10\"/g' $PACKAGED/target.js
+
+#set neopixel version
+sed -i 's/\"neopixel\": \"\*\"/\"neopixel\": \"github:microsoft\/pxt-neopixel#v0.6.7\"/g' $PACKAGED/target.js
+
+#set grove version
+sed -i 's/\"Grove\": \"\*\"/\"Grove\": \"github:seeed-studio\/pxt-grove#v0.1.0\"/g' $PACKAGED/target.js
+
 #pack deploy folder into .crx file
 chrome.exe --pack-extension=$PACKAGED --pack-extension-key=$PEMFILE
