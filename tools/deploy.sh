@@ -63,7 +63,7 @@ sed -i 's/\"usbDocs\": \"\/device\/usb\"/\"usbDocs\": \"https:\/\/makecode.micro
 sed -i 's/\"logoUrl\": \"\/.\/\"/\"logoUrl\": \"https:\/\/microbit.org\/code\/\"/g' $PACKAGED/target.js
 
 #do not set _isOnline false and Cloud.onOffline(), with that it will always try to open a request instead of just fail with the offline message
-sed -i 's/if (e.statusCode == 0) {/return Promise.reject(e);\n\t\t\t\tif (e.statusCode == 0) {/g' $PACKAGED/pxtlib.js
+sed -i 's/if (e.statusCode == 0) {/if(options.url == \"https:\/\/www.pxt.io\/api\/scripts\") {\n\t\t\t\t\te.message = (Util.lf(\"Cannot access {0} while offline\", options.url))\;\n\t\t\t\t}\n\t\t\t\treturn Promise.reject(e);\n\t\t\t\tif (e.statusCode == 0) {/g' $PACKAGED/pxtlib.js
 
 #set weatherbit version
 sed -i 's/\"weatherbit\": \"\*\"/\"weatherbit\": \"github:sparkfun\/pxt-weather-bit#v0.0.10\"/g' $PACKAGED/target.js
