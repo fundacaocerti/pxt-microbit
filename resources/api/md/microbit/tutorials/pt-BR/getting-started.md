@@ -1,6 +1,6 @@
-# Primeiros passos
+# Introdução
 
-## Step 1
+## Passo 1
 
 Bem-vindos! Encaixe o bloco ``||basic:mostre string||`` (com seu nome) no espaço ``||basic:ao iniciar||`` para ver seu nome correndo no display. Substitua o texto ``"Hello!"`` pelo seu nome. Você vê ele correndo?
 
@@ -8,11 +8,11 @@ Bem-vindos! Encaixe o bloco ``||basic:mostre string||`` (com seu nome) no espaç
 basic.showString("Micro!")
 ```
 
-## Step 2
+## Passo 2
 
 Conecte um cabo USB à @boardname@ e clique em ``|Download|``. Salve o programa na sua unidade **@drivename@**. Assim, você transferirá seu código para a @boardname@!
 
-## Step 3
+## Passo 3
 
 Seu texto parou de correr no display. Encaixe o bloco ``||basic:mostre string||`` no espaço ``||basic:quando o botão for pressionado||`` para mostrar seu nome quando o botão **A** for pressionado.
 
@@ -22,11 +22,11 @@ input.onButtonPressed(Button.A, () => {
 });
 ```
 
-## Step 4
+## Passo 4
 
 Clique em ``|Download|`` para salvar e transferir seu código de novo e, depois, pressione o botão **A** para ver seu texto correr no display.
 
-## Step 5
+## Passo 5
 
 Arrume os blocos para exibir um sorriso quando o botão **B** for pressionado.
 
@@ -46,7 +46,7 @@ input.onButtonPressed(Button.B, () => {
 })
 ```
 
-## Step 6
+## Passo 6
 
 Encaixe os blocos ``||basic:mostre número||`` e ``||Math:número aleatório||`` 
 no espaço ``||input:quando agitar||`` para criar um dado.
@@ -62,7 +62,7 @@ input.onGesture(Gesture.Shake, () => {
 })
 ```
 
-## Step 7
+## Passo 7
 
 Muito bem! Você completou sua primeira atividade no Microsoft MakeCode.
 
