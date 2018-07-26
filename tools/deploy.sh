@@ -47,9 +47,6 @@ cp -r $RESOURCES_EXTENSION/* $PACKAGED
 #change availableLocales in target.js to just use 3 languages: en, es-ES, pt-BR
 sed -i 's/\(\"availableLocales\": \[\)/"availableLocales": [\n\t\t\t"en",\n\t\t\t"es-ES",\n\t\t\t"pt-BR"\n\t\t],\n\t\t"allAvailableLocales": [/g' $PACKAGED/target.js
 
-#change isStatic to false to redirect the urls to the correct file according to the translation
-sed -i 's/\(\"isStatic\": true\)/"isStatic": false/g' $PACKAGED/index.html
-
 #change isStatic to false to redirect the help urls correctly
 sed -i 's/\(\"isStatic\": true\)/"isStatic": false/g' $PACKAGED/embed.js
 
@@ -63,7 +60,7 @@ sed -i 's/\"usbDocs\": \"\/device\/usb\"/\"usbDocs\": \"https:\/\/makecode.micro
 sed -i 's/\"logoUrl\": \"\/.\/\"/\"logoUrl\": \"https:\/\/microbit.org\/code\/\"/g' $PACKAGED/target.js
 
 #do not set _isOnline false and Cloud.onOffline(), with that it will always try to open a request instead of just fail with the offline message
-sed -i 's/if (e.statusCode == 0) {/if(options.url == \"https:\/\/www.pxt.io\/api\/scripts\") {\n\t\t\t\t\te.message = (Util.lf(\"Cannot access {0} while offline\", options.url))\;\n\t\t\t\t}\n\t\t\t\treturn Promise.reject(e);\n\t\t\t\tif (e.statusCode == 0) {/g' $PACKAGED/pxtlib.js
+sed -i 's/if (e.statusCode == 0) {/if(options.url.indexOf(\"\/api\/scripts\") > -1) {\n\t\t\t\t\te.message = (Util.lf(\"Cannot access {0} while offline\", options.url))\;\n\t\t\t\t}\n\t\t\t\treturn Promise.reject(e);\n\t\t\t\tif (e.statusCode == 0) {/g' $PACKAGED/pxtlib.js
 
 #set weatherbit version
 sed -i 's/\"weatherbit\": \"\*\"/\"weatherbit\": \"github:sparkfun\/pxt-weather-bit#v0.0.10\"/g' $PACKAGED/target.js
@@ -79,6 +76,12 @@ sed -i 's/helpUrl: \"\/packages\"/helpUrl: \"https:\/\/makecode.microbit.org\/pa
 
 #change neopixel, grove and weatherbit versions when they are added by 'Add package' button
 sed -i -e '/addDepIfNoConflict(scr, "\*")/r./resources\/replacements\/change-external-packages-versions.js' -e 's/addDepIfNoConflict(scr, "\*")//' $PACKAGED/main.js
+
+#add code to change the urls to redirect to local files or to the correct external file
+sed -i '/var headers = pxtc.Util.clone(options.headers) || {};/r./resources\/replacements\/change-url-pxtlib.js' $PACKAGED/pxtlib.js
+
+#add code to change url to the correct external files path
+sed -i -e "/window.open(url, 'docs');/r./resources\/replacements\/change-url-main.js" -e "s/window.open(url, 'docs');//" $PACKAGED/main.js
 
 #pack deploy folder into .crx file
 chrome.exe --pack-extension=$PACKAGED --pack-extension-key=$PEMFILE
