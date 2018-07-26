@@ -78,7 +78,7 @@ sed -i 's/\"Grove\": \"\*\"/\"Grove\": \"github:seeed-studio\/pxt-grove#v0.1.0\"
 sed -i 's/helpUrl: \"\/packages\"/helpUrl: \"https:\/\/makecode.microbit.org\/packages\"/g' $PACKAGED/main.js
 
 #change neopixel, grove and weatherbit versions when they are added by 'Add package' button
-sed -i -e '/addDepIfNoConflict(scr, "\*")/r./resources\/replacements\/change-external-packages-version.js' -e 's/addDepIfNoConflict(scr, "\*")//' $PACKAGED/main.js
+sed -i -e '/addDepIfNoConflict(scr, "\*")/r./resources\/replacements\/change-external-packages-versions.js' -e 's/addDepIfNoConflict(scr, "\*")//' $PACKAGED/main.js
 
 #pack deploy folder into .crx file
 chrome.exe --pack-extension=$PACKAGED --pack-extension-key=$PEMFILE
