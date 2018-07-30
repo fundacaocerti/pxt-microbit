@@ -12,7 +12,8 @@
         "libs/bluetooth",
 		"libs/weatherbit",
 		"libs/Grove",
-		"libs/neopixel"
+		"libs/neopixel",
+        "libs/sensors"
     ],
     "cloud": {
         "workspace": false,

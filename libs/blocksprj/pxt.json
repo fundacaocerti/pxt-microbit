@@ -5,8 +5,9 @@
         "radio": "file:../radio",
 		"weatherbit": "file:../weatherbit",
 		"neopixel": "file:../neopixel",
-		"Grove": "file:../grove"
-		
+        "Grove": "file:../grove",
+        "sensors": "file:../sensors"
+
     },
     "description": "",
     "files": [
