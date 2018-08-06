@@ -51,7 +51,7 @@ sed -i 's/\(\"availableLocales\": \[\)/"availableLocales": [\n\t\t\t"en",\n\t\t\
 sed -i 's/\(\"isStatic\": true\)/"isStatic": false/g' $PACKAGED/embed.js
 
 #change popout to redirect to the correct url
-sed -i 's/window.open(url, \"_blank\");/url = url.includes(".\/docs") ? "https:\/\/makecode.microbit.org" + url.replace(".\/docs\/", "").replace(".html", "") : "https:\/\/makecode.microbit.org\/" + url;\n\t\t\t\t\t\twindow.open(url, "_blank");/g' $PACKAGED/pxtrunner.js
+sed -i -e "/window.open(url, \"_blank\");/r./resources\/replacements\/change-docs-url-pxtrunner.js" -e "s/window.open(url, \"_blank\");//" $PACKAGED/pxtrunner.js
 
 #change Download/help to redirect to the correct url
 sed -i 's/\"usbDocs\": \"\/device\/usb\"/\"usbDocs\": \"https:\/\/makecode.microbit.org\/device\/usb\"/g' $PACKAGED/target.js
@@ -82,6 +82,9 @@ sed -i '/var headers = pxtc.Util.clone(options.headers) || {};/r./resources\/rep
 
 #add code to change url to the correct external files path
 sed -i -e "/window.open(url, 'docs');/r./resources\/replacements\/change-url-main.js" -e "s/window.open(url, 'docs');//" $PACKAGED/main.js
+
+#add code to change url to the correct help files path on external packages
+sed -i "/+ m\[2\];/r./resources\/replacements\/change-help-url-main.js" $PACKAGED/main.js
 
 #pack deploy folder into .crx file
 chrome.exe --pack-extension=$PACKAGED --pack-extension-key=$PEMFILE
