@@ -83,7 +83,7 @@ sed -i 's/if (e.statusCode == 0) {/if(options.url.indexOf(\"\/api\/scripts\") > 
 sed -i 's/\"weatherbit\": \"\*\"/\"weatherbit\": \"github:sparkfun\/pxt-weather-bit#v0.0.10\"/g' $PACKAGED/target.js
 
 #set neopixel version
-sed -i 's/\"neopixel\": \"\*\"/\"neopixel\": \"github:microsoft\/pxt-neopixel#v0.6.7\"/g' $PACKAGED/target.js
+sed -i 's/\\"neopixel\\": \\"\*\\"/\\"neopixel\\": \\"github:microsoft\/pxt-neopixel#v0.4.1\\"/g' $PACKAGED/target.js
 
 #set grove version
 sed -i 's/\"Grove\": \"\*\"/\"Grove\": \"github:seeed-studio\/pxt-grove#v0.1.0\"/g' $PACKAGED/target.js
