@@ -10,7 +10,6 @@ namespace sensors {
     //% blockId="set_neopixel_brightness" block="%x=variables_get|set brightness %brightness" blockGap=8
     //% brightness.max=50, brightness.min=0
     //% weight=59
-    //% advanced=true
     export function setBrightness(strip: neopixel.Strip, brightness: number): void {
         strip.setBrightness(brightness);
     }
@@ -21,7 +20,6 @@ namespace sensors {
      */
     //% blockId="get_neopixel_brightness" block="%x=variables_get|get brightness" blockGap=8
     //% weight=59
-    //% advanced=true
     export function getBrightness(strip: neopixel.Strip): number {
         return strip.brightness;
     }
