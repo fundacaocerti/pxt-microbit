@@ -1,4 +1,6 @@
 {
+  "sensors.getBrightness": "Obtém o brilho de uma fita NeoPixel de 0 (desligado) até 50 (brilho total).",
+  "sensors.getBrightness|param|strip": "Uma fita NeoPixel.",
   "sensors.setBrightness": "Define o brilho de uma fita NeoPixel de 0 (desligado) até 50 (brilho total).",
   "sensors.setBrightness|param|brightness": "Uma medida do brilho de um LED de 0 (desligado) até 50 (brilho total). eg: 50",
   "sensors.setBrightness|param|strip": "Uma fita NeoPixel."

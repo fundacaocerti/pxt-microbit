@@ -1,4 +1,5 @@
 {
+  "sensors.getBrightness|block": "%x=variables_get|brilho",
   "sensors.setBrightness|block": "%x=variables_get|defina brilho %brightness",
   "sensors|block": "sensores",
   "{id:category}Sensors": "Sensores"

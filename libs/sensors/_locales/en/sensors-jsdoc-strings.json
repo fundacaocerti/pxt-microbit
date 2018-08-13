@@ -1,4 +1,6 @@
 {
+  "sensors.getBrightness": "Get the brightness of a NeoPixel strip from 0 (off) to 50 (full bright).",
+  "sensors.getBrightness|param|strip": "A NeoPixel strip.",
   "sensors.setBrightness": "Set the brightness of a NeoPixel strip from 0 (off) to 50 (full bright).",
   "sensors.setBrightness|param|brightness": "A measure of LED brightness in 0-50. eg: 50",
   "sensors.setBrightness|param|strip": "A NeoPixel strip."
