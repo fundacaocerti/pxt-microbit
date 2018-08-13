@@ -5,7 +5,4 @@
             else if (scr.name == "weatherbit") {
                 packageVersion = "github:sparkfun/pxt-weather-bit#v0.0.10";
             }
-            else if (scr.name == "neopixel") {
-                packageVersion = "github:microsoft/pxt-neopixel#v0.6.7";
-            }
             addDepIfNoConflict(scr, packageVersion)
