@@ -1,21 +1,25 @@
 //% weight=100 color=#ff5950 icon="\uf001"
 
 namespace sensors {
+
     /**
-     * função teste
-     * @param frase descreva o parâmetro aqui, eg: "CERTI"
+     * Set the brightness of a NeoPixel strip from 0 (off) to 50 (full bright).
+     * @param brightness a measure of LED brightness in 0-50. eg: 50
+     * @param strip a NeoPixel strip.
      */
-    //% block
-    //% weight=100 color=#ff5950 icon="\uf001"
-    export function CERTI(frase: string): void {
-        basic.showString(frase);
-        basic.showIcon(IconNames.Heart);
-        }
+    //% blockId="set_neopixel_brightness" block="%x=variables_get|set brightness %brightness" blockGap=8
+    //% brightness.max=50, brightness.min=0
+    //% weight=59
+    //% advanced=true
+    export function setBrightness(strip: neopixel.Strip, brightness: number): void {
+        strip.setBrightness(brightness);
+    }
+
     /**
      * Create block that receives a direction value (1 for clockwise and -1 counter-clockwise) and a speed value from 0 to 100%
      * @param direction turning direction, eg:1
      * @param value speed value from 0 to 100%, eg:100
-     */    
+     */
     //% blockId=servoWritePinContinuos block="servo continuos in pin P0| turn to %direction| with speed %value %"
     //% value.min=0 value.max=100
     //% direction.min=-1 direction.max=1
@@ -27,7 +31,7 @@ namespace sensors {
             value = 0;
         }
         if(direction != 0 && value != 0){
-            direction=direction/Math.abs(direction);  
+            direction=direction/Math.abs(direction);
             value = ((value * 90) / 100);
             value = 90 + (value * direction);
             pins.servoWritePin(AnalogPin.P0, value);
@@ -35,7 +39,5 @@ namespace sensors {
             pins.digitalReadPin(DigitalPin.P0);
             pins.pulseIn(DigitalPin.P0, PulseValue.Low);
         }
-        
     }
-
 }
