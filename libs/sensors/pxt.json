@@ -12,7 +12,10 @@
         "main.ts",
         "_locales/pt-BR/sensors-strings.json",
         "_locales/es-ES/sensors-strings.json",
-        "_locales/en/sensors-strings.json"
+        "_locales/en/sensors-strings.json",
+        "_locales/pt-BR/sensors-jsdoc-strings.json",
+        "_locales/es-ES/sensors-jsdoc-strings.json",
+        "_locales/en/sensors-jsdoc-strings.json"
     ],
     "testFiles": [
         "test.ts"

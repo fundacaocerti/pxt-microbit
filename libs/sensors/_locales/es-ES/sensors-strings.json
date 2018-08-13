@@ -1,2 +1,5 @@
 {
+  "sensors.setBrightness|block": "%x=variables_get|set brightness %brightness",
+  "sensors|block": "sensors",
+  "{id:category}Sensors": "Sensors"
 }
