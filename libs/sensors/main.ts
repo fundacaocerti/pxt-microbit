@@ -106,6 +106,7 @@ namespace sensors {
             case 1: return DigitalPin.P1;
             case 2: return DigitalPin.P2;
             case 3: return DigitalPin.P3;
+            default: return DigitalPin.P1;
         }
     }
 }
