@@ -34,6 +34,8 @@ mkdir -p $DEPLOY
 cp -r $BUILT/packaged $PACKAGED
 mkdir -p $PACKAGED_COMPILE
 
+cp $BUILT_HEX_CACHE/* $PACKAGED_COMPILE
+
 #iterate over the sha's and save it in deploy
 declare -a arr=($SHA_BLOCKSPRJ $SHA_TSPRJ)
 for sha in "${arr[@]}"

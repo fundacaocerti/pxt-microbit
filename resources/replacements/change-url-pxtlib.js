@@ -57,7 +57,13 @@
                     }
                     if (options.url.indexOf("pxt.azureedge.net/compile/") > -1 || options.url.indexOf("makecode.com/compile/") > -1) {
                         var sha = options.url.split("compile/")[1];
-                        options.url = url + "/api/compile/" + sha;
+                        if (sha == "5d5e2e22ca1bce1f846610591cf03b087e1ce616b8bd6f5dba5156cba034594c.hex" ||
+                          sha == "44014c3b01f47412f8566e9f3b0806800b8529b2cbdf8e3a00300027cf8be6d7.hex" ||
+                          sha == "49b00e145698c1b11a27ebbf2d32a20cf020cc73d84c89b0688ad093baffb9b2.hex" ||
+                          sha == "57b704532f5f2dbccc176e23b00775540223bbfca61ea052a8fc8e101c651de4.hex" ||
+                          sha == "95007735e7d19a32b8634ec3ded0acf4329382362e8d02c7bbb8fb1f5b6ad94f.hex") {
+                            options.url = url + "/api/compile/" + sha;
+                        }
                     }
 
                     // Share project url
