@@ -16,11 +16,17 @@ namespace sensors {
     //% brightness.max=50, brightness.min=0
     //% weight=59
     export function setBrightness(strip: neopixel.Strip, brightness: number): void {
-        strip.setBrightness(brightness);
+        if (brightness > 50) {
+            strip.setBrightness(50);
+        } else if (brightness < 0) {
+            strip.setBrightness(0);
+        } else {
+            strip.setBrightness(brightness);
+        }
     }
 
     /**
-     * "Get the brightness of a NeoPixel strip from 0 (off) to 50 (full bright)."
+     * Get the brightness of a NeoPixel strip from 0 (off) to 50 (full bright).
      * @param strip a NeoPixel strip.
      */
     //% blockId="get_neopixel_brightness" block="%x=variables_get|get brightness" blockGap=8
@@ -38,13 +44,13 @@ namespace sensors {
     //% value.min=0 value.max=100
     //% direction.min=-1 direction.max=1
     export function servoWritePinContinuos(direction: number, value: number): void {
-        if (value > 100){
+        if (value > 100) {
             value = 100;
         }
-        if (value < 0){
+        if (value < 0) {
             value = 0;
         }
-        if (direction != 0 && value != 0){
+        if (direction != 0 && value != 0) {
             direction=direction/Math.abs(direction);
             value = ((value * 90) / 100);
             value = 90 + (value * direction);
