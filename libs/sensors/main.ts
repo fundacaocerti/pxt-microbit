@@ -85,17 +85,18 @@ namespace sensors {
     }
 
     /**
-     * Read button
+     * Returns the state of a button, true for pressed and false for unpressed.
      * @param pin pin to read from, eg: DigitalPin.P1
      */
     //% blockId="read_button" block="Read button %pin" blockGap=8
     //% weight=59
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=2
     //% pin.fieldOptions.tooltips="false"pin.fieldOptions.width="300"
-    export function readButton(pin: DigitalPins): void {
+    export function readButton(pin: DigitalPins): boolean {
         const digitalPin = pinConverter(pin);
-        pins.digitalReadPin(digitalPin);
+        const readPin = pins.digitalReadPin(digitalPin);
         pins.setPull(digitalPin, PinPullMode.PullNone);
+        return readPin == 1 ? true : false;
     }
 
     /**
