@@ -99,6 +99,9 @@ sed -i -e '/addDepIfNoConflict(scr, "\*")/r./resources\/replacements\/change-ext
 #add code to change the urls to redirect to local files or to the correct external file
 sed -i '/var headers = pxtc.Util.clone(options.headers) || {};/r./resources\/replacements\/change-url-pxtlib.js' $PACKAGED/pxtlib.js
 
+#add the missing ports to the servomotor (this has already been implemented in pxt-microbit/sim/dalboard.ts in makecode.microbit.org version: 0.14.45) 
+sed -i -e '/\"P2\": 9 \/\* MICROBIT_ID_IO_P2 \*\//r./resources\/replacements\/add-servo-ports-sim.js' -e 's/\"P3\": 10 \/\* MICROBIT_ID_IO_P3 \*\///' $PACKAGED/sim.js
+
 #add code to change url to the correct external files path
 sed -i -e "/window.open(url, 'docs');/r./resources\/replacements\/change-url-main.js" -e "s/window.open(url, 'docs');//" $PACKAGED/main.js
 

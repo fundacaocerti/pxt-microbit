@@ -28,6 +28,12 @@ enum BuzzerPins {
     P20 = 20
 }
 
+enum ServoContinuosPins {
+    P13 = 13,
+    P14 = 14,
+    P15 = 15
+}
+
 enum PotentiometerPins {
     P0 = 0,
     P1 = 1,
@@ -74,27 +80,38 @@ namespace sensors {
 
     /**
      * Create block that receives a direction value (1 for clockwise and -1 counter-clockwise) and a speed value from 0 to 100%
-     * @param direction turning direction, eg:1
+     * @param port analog port that the continuous servomotor will connect, eg: ServoContinuosPins.P13
+     * @param direction turning direction, eg:Direction.Right
      * @param value speed value from 0 to 100%, eg:100
-     */
-    //% blockId=servoWritePinContinuos block="servo continuos in pin P0| turn to %direction| with speed %value %"
+     */    
+    //% blockId=servoWritePinContinuos block="servo continuos in|port %port| turn to %direction| with speed %value %"
     //% value.min=0 value.max=100
-    //% direction.min=-1 direction.max=1
-    export function servoWritePinContinuos(direction: number, value: number): void {
+    //% port.fieldEditor="gridpicker" port.fieldOptions.columns=3
+    //% port.fieldOptions.tooltips="false"
+    export function servoWritePinContinuos(port: ServoContinuosPins, direction: Direction, value: number): void {
         if (value > 100) {
             value = 100;
         }
         if (value < 0) {
             value = 0;
         }
-        if (direction != 0 && value != 0) {
-            direction=direction/Math.abs(direction);
-            value = ((value * 90) / 100);
-            value = 90 + (value * direction);
-            pins.servoWritePin(AnalogPin.P0, value);
+        if (direction == Direction.Right) {
+            direction = 1;
         } else {
-            pins.digitalReadPin(DigitalPin.P0);
-            pins.pulseIn(DigitalPin.P0, PulseValue.Low);
+            direction = -1;
+        }
+        const analogPin = pinConverterAnalog(port);
+        const digitalPin = pinConverterDigital(port);
+        let range = speedRanges(value);
+        if (value != 0) {
+            direction = direction / Math.abs(direction);
+            value = ((range * 90) / 100);
+            value = 90 + (value * direction);
+            pins.servoWritePin(analogPin, value);
+        } else {
+            pins.servoWritePin(analogPin, 90);
+            pins.digitalReadPin(digitalPin);
+            pins.pulseIn(digitalPin, PulseValue.Low);
         }
     }
 
@@ -171,6 +188,7 @@ namespace sensors {
 
     function pinConverterDigital(pin: number): DigitalPin {
         switch(pin) {
+            case 0: return DigitalPin.P0;
             case 1: return DigitalPin.P1;
             case 2: return DigitalPin.P2;
             case 3: return DigitalPin.P3;
@@ -195,6 +213,7 @@ namespace sensors {
 
     function pinConverterAnalog(pin: number): AnalogPin {
         switch(pin) {
+            case 0: return AnalogPin.P0;
             case 1: return AnalogPin.P1;
             case 2: return AnalogPin.P2;
             case 3: return AnalogPin.P3;
@@ -215,5 +234,14 @@ namespace sensors {
             case 20: return AnalogPin.P20;
             default: return AnalogPin.P16; // port 16 is not in use on the shield
         }
+    }
+
+    function speedRanges(pin: number): number {
+        if (pin < 15) return 1;
+        if (pin >= 15 && pin < 30) return 3;
+        if (pin >= 30 && pin < 45) return 5;
+        if (pin >= 45 && pin < 60) return 10;
+        if (pin >= 60 && pin < 80) return 20;
+        return 100;
     }
 }
