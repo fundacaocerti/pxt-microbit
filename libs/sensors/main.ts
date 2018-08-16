@@ -3,15 +3,6 @@ enum LedStatus {
     off = 0
 }
 
-/**
- * Available PINS
- */
-enum DigitalPins {
-    P1 = 1,
-    P2 = 2,
-    P3 = 3
-}
-
 //% weight=100 color=#ff5950 icon="\uf001"
 namespace sensors {
 
@@ -92,22 +83,9 @@ namespace sensors {
     //% weight=59
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=2
     //% pin.fieldOptions.tooltips="false"pin.fieldOptions.width="300"
-    export function readButton(pin: DigitalPins): boolean {
-        const digitalPin = pinConverter(pin);
-        const readPin = pins.digitalReadPin(digitalPin);
-        pins.setPull(digitalPin, PinPullMode.PullNone);
+    export function readButton(pin: DigitalPin): boolean {
+        const readPin = pins.digitalReadPin(pin);
+        pins.setPull(pin, PinPullMode.PullNone);
         return readPin == 1 ? true : false;
-    }
-
-    /**
-    * Convets DigitalPins into DigitalPin
-    */
-    function pinConverter(pin: DigitalPins): DigitalPin {
-        switch(pin) {
-            case 1: return DigitalPin.P1;
-            case 2: return DigitalPin.P2;
-            case 3: return DigitalPin.P3;
-            default: return DigitalPin.P1;
-        }
     }
 }
