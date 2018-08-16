@@ -86,6 +86,6 @@ namespace sensors {
     export function readButton(pin: DigitalPin): boolean {
         const readPin = pins.digitalReadPin(pin);
         pins.setPull(pin, PinPullMode.PullNone);
-        return readPin == 1 ? true : false;
+        return readPin == 1 ? false : true;
     }
 }
