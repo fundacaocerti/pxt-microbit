@@ -1,3 +1,8 @@
+enum LedStatus {
+    on = 1,
+    off = 0
+}
+
 //% weight=100 color=#ff5950 icon="\uf001"
 
 namespace sensors {
@@ -48,5 +53,20 @@ namespace sensors {
             pins.digitalReadPin(DigitalPin.P0);
             pins.pulseIn(DigitalPin.P0, PulseValue.Low);
         }
+    }
+
+    /**
+     * Set a LED status to either on or off.
+     * @param pin pin to read and write on, eg: DigitalPin.P1
+     * @param status status of the Led, eg: LedStatus.on
+     */
+    //% blockId="digital_write_led" block="Led %pin| turn %status"
+    //% weight=59
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=2
+    //% pin.fieldOptions.tooltips="false"pin.fieldOptions.width="300"
+    export function digitalWriteLed(pin: DigitalPin, status: LedStatus): void {
+        pins.digitalReadPin(pin);
+        pins.setPull(pin, PinPullMode.PullUp)
+        pins.digitalWritePin(pin, status);
     }
 }
