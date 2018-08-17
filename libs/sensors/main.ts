@@ -28,6 +28,19 @@ enum BuzzerPins {
     P20 = 20
 }
 
+enum PotentiometerPins {
+    P0 = 0,
+    P1 = 1,
+    P2 = 2
+}
+
+enum PotentiometerReturnType {
+    //% block=angle
+    angle,
+    //% block=number
+    number
+}
+
 //% weight=100 color=#ff5950 icon="\uf001"
 namespace sensors {
 
@@ -115,10 +128,10 @@ namespace sensors {
     }
 
     /**
-     * Turn on/off the buzzer 
+     * Turn on/off the buzzer
      * @param status received value on or off, eg: OperationStatus.on
      * @param port received port, eg: BuzzerPins.P8
-     */    
+     */
     //% blockId=buzzerVariablePort block="Buzzer|in %port| status %status"
     //% port.fieldEditor="gridpicker" port.fieldOptions.columns=4
     //% port.fieldOptions.tooltips="false"
@@ -132,7 +145,28 @@ namespace sensors {
             music.beginMelody(music.builtInMelody(Melodies.PowerDown), MelodyOptions.OnceInBackground);
             pins.digitalReadPin(digitalPin);
             pins.setPull(digitalPin, PinPullMode.PullDown);
-        } 
+        }
+    }
+
+    /**
+     * Read number or angle using potentiometer
+     * @param p the pin available for potentiometer, availables ports are P0, P1, P2
+     * @param t the type that should read, the options are angle or number
+     */
+    //% blockId="read_potentiometer_sensors" block="read potentiometer on pin %p| in %t"
+    export function readPotentiometer(p: PotentiometerPins, t: PotentiometerReturnType): number {
+        const analogPin = pinConverterAnalog(p);
+        if (t === PotentiometerReturnType.angle) {
+            return pins.map(
+                pins.analogReadPin(analogPin),
+                0,
+                1023,
+                0,
+                300
+                )
+        } else {
+           return pins.analogReadPin(analogPin);
+        }
     }
 
     function pinConverterDigital(pin: number): DigitalPin {
