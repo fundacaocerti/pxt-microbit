@@ -4,7 +4,6 @@
         "core": "file:../core",
         "radio": "file:../radio",
 		"weatherbit": "file:../weatherbit",
-        "Grove": "file:../grove",
         "sensors": "file:../sensors"
 
     },

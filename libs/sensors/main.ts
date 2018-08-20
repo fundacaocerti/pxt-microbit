@@ -210,7 +210,7 @@ namespace sensors {
     //% block="read potentiometer on pin %pin| in %t"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
     //% pin.fieldOptions.width="100"
-    //% weight=27 blockGap=8
+    //% weight=27 blockGap=25
     export function readPotentiometer(pin: InitialPins, t: PotentiometerReturnType): number {
         const analogPin = pinConverterAnalog(pin);
         if (t === PotentiometerReturnType.angle) {
@@ -224,6 +224,21 @@ namespace sensors {
         } else {
            return pins.analogReadPin(analogPin);
         }
+    }
+
+    //Grove blocks
+
+    /**
+     * Create a new driver of Grove - Ultrasonic Sensor to measure distances in cm
+     * @param pin signal pin of ultrasonic ranger module
+     */
+    //% blockId="sensors_ultrasonic_centimeters"
+    //% block="Ultrasonic Sensor (in cm) at|%pin"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
+    //% pin.fieldOptions.width="400"
+    //% weight=10 blockGap=8
+    export function measureInCentimeters(pin: DigitalPin): number {
+        return grove.measureInCentimeters(pin);
     }
 
     /**
