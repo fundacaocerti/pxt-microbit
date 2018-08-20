@@ -242,6 +242,18 @@ namespace sensors {
     }
 
     /**
+     * Do something when a gesture is detected by Sensors - Gesture
+     * @param gesture type of gesture to detect
+     * @param handler code to run
+     */
+    //% blockId="sensors_gesture_create_event"
+    //% block="on Gesture|%gesture"
+    //% weight=9 blockGap=8
+    export function onGesture(gesture: GroveGesture, handler: Action) {
+        grove.onGesture(gesture, handler);
+    }
+
+    /**
      * Converts number to DigitalPin
      */
     function pinConverterDigital(pin: number): DigitalPin {
