@@ -1,11 +1,4 @@
-enum OperationStatus{
-    //% block="on"
-    on = 1,
-    //% block="off"
-    off = 0
-}
-
-enum BuzzerPins {
+enum AllPins {
     P0 = 0,
     P1 = 1,
     P2 = 2,
@@ -14,7 +7,6 @@ enum BuzzerPins {
     P5 = 5,
     P6 = 6,
     P7 = 7,
-    //%block="internal buzzer"
     P8 = 8,
     P9 = 9,
     P10 = 10,
@@ -28,36 +20,69 @@ enum BuzzerPins {
     P20 = 20
 }
 
-enum ServoContinuosPins {
+enum BuzzerPins {
+    P0 = 0,
+    P1 = 1,
+    P2 = 2,
+    P3 = 3,
+    P4 = 4,
+    P5 = 5,
+    P6 = 6,
+    P7 = 7,
+    //% block="internal buzzer"
+    P8 = 8,
+    P9 = 9,
+    P10 = 10,
+    P11 = 11,
+    P12 = 12,
     P13 = 13,
     P14 = 14,
-    P15 = 15
+    P15 = 15,
+    P16 = 16,
+    P19 = 19,
+    P20 = 20
 }
 
-enum PotentiometerPins {
+enum InitialPins {
     P0 = 0,
     P1 = 1,
     P2 = 2
 }
 
+enum ServoPins {
+    P13 = 13,
+    P14 = 14,
+    P15 = 15
+}
+
+enum OperationStatus{
+    //% block="on"
+    on = 1,
+    //% block="off"
+    off = 0
+}
+
 enum PotentiometerReturnType {
-    //% block=angle
+    //% block="angle"
     angle,
-    //% block=number
+    //% block="number"
     number
 }
 
-//% weight=100 color=#ff5950 icon="\uf001"
+//% color=#f19f03 icon="\uf1e6"
 namespace sensors {
+
+    //Neopixel blocks
 
     /**
      * Set the brightness of a NeoPixel strip from 0 (off) to 50 (full bright).
      * @param brightness a measure of LED brightness in 0-50. eg: 50
      * @param strip a NeoPixel strip.
      */
-    //% blockId="set_neopixel_brightness" block="%x=variables_get|set brightness %brightness" blockGap=8
+    //% blockId="sensors_set_neopixel_brightness"
+    //% block="%x=variables_get|set brightness %brightness"
     //% brightness.max=50, brightness.min=0
-    //% weight=59
+    //% weight=50 blockGap=8
     export function setBrightness(strip: neopixel.Strip, brightness: number): void {
         if (brightness > 50) {
             strip.setBrightness(50);
@@ -72,23 +97,28 @@ namespace sensors {
      * Get the brightness of a NeoPixel strip from 0 (off) to 50 (full bright).
      * @param strip a NeoPixel strip.
      */
-    //% blockId="get_neopixel_brightness" block="%x=variables_get|get brightness" blockGap=8
-    //% weight=59
+    //% blockId="sensors_get_neopixel_brightness"
+    //% block="%x=variables_get|get brightness"
+    //% weight=49 blockGap=25
     export function getBrightness(strip: neopixel.Strip): number {
         return strip.brightness;
     }
 
+    //Servo blocks
+
     /**
      * Create block that receives a direction value (1 for clockwise and -1 counter-clockwise) and a speed value from 0 to 100%
-     * @param port analog port that the continuous servomotor will connect, eg: ServoContinuosPins.P13
-     * @param direction turning direction, eg:Direction.Right
-     * @param value speed value from 0 to 100%, eg:100
-     */    
-    //% blockId=servoWritePinContinuos block="servo continuos in|port %port| turn to %direction| with speed %value %"
+     * @param pin analog pin that the continuous servomotor will connect, eg: ServoPins.P13
+     * @param direction turning direction, eg: Direction.Right
+     * @param value speed value from 0 to 100%, eg: 100
+     */
+    //% blockId="sensors_continuous_servo_write_pin"
+    //% block="servo continuos in|pin %pin| turn to %direction| with speed %value %"
     //% value.min=0 value.max=100
-    //% port.fieldEditor="gridpicker" port.fieldOptions.columns=3
-    //% port.fieldOptions.tooltips="false"
-    export function servoWritePinContinuos(port: ServoContinuosPins, direction: Direction, value: number): void {
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
+    //% pin.fieldOptions.width="100"
+    //% weight=40 blockGap=25
+    export function continuousServoWritePin(pin: ServoPins, direction: Direction, value: number): void {
         if (value > 100) {
             value = 100;
         }
@@ -100,8 +130,8 @@ namespace sensors {
         } else {
             direction = -1;
         }
-        const analogPin = pinConverterAnalog(port);
-        const digitalPin = pinConverterDigital(port);
+        const analogPin = pinConverterAnalog(pin);
+        const digitalPin = pinConverterDigital(pin);
         let range = speedRanges(value);
         if (value != 0) {
             direction = direction / Math.abs(direction);
@@ -115,46 +145,37 @@ namespace sensors {
         }
     }
 
+    //Other blocks
+
     /**
      * Set a LED status to either on or off.
      * @param pin pin to read and write on, eg: DigitalPin.P1
      * @param status status of the Led, eg: OperationStatus.on
      */
-    //% blockId="digital_write_led" block="Led %pin| turn %status"
-    //% weight=59
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=2
-    //% pin.fieldOptions.tooltips="false"pin.fieldOptions.width="300"
-    export function digitalWriteLed(pin: DigitalPin, status: OperationStatus): void {
+    //% blockId="sensors_turn_on_off_led"
+    //% block="led %pin| turn %status"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
+    //% pin.fieldOptions.width="400"
+    //% weight=30 blockGap=8
+    export function turnOnOffLed(pin: DigitalPin, status: OperationStatus): void {
         pins.digitalReadPin(pin);
         pins.setPull(pin, PinPullMode.PullUp)
         pins.digitalWritePin(pin, status);
     }
 
     /**
-     * Returns the state of a button, true for pressed and false for unpressed.
-     * @param pin pin to read from, eg: DigitalPin.P1
-     */
-    //% blockId="read_button" block="Read button %pin" blockGap=8
-    //% weight=59
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=2
-    //% pin.fieldOptions.tooltips="false"pin.fieldOptions.width="300"
-    export function readButton(pin: DigitalPin): boolean {
-        const readPin = pins.digitalReadPin(pin);
-        pins.setPull(pin, PinPullMode.PullNone);
-        return readPin == 1 ? false : true;
-    }
-
-    /**
      * Turn on/off the buzzer
      * @param status received value on or off, eg: OperationStatus.on
-     * @param port received port, eg: BuzzerPins.P8
+     * @param pin received pin, eg: BuzzerPins.P8
      */
-    //% blockId=buzzerVariablePort block="Buzzer|in %port| status %status"
-    //% port.fieldEditor="gridpicker" port.fieldOptions.columns=4
-    //% port.fieldOptions.tooltips="false"
-    export function buzzerVariablePort(port: BuzzerPins, status: OperationStatus): void {
-        const analogPin = pinConverterAnalog(port);
-        const digitalPin = pinConverterDigital(port);
+    //% blockId="sensors_turn_on_off_buzzer"
+    //% block="buzzer|in %pin| status %status"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
+    //% pin.fieldOptions.width="400"
+    //% weight=29 blockGap=8
+    export function turnOnOffBuzzer(pin: BuzzerPins, status: OperationStatus): void {
+        const analogPin = pinConverterAnalog(pin);
+        const digitalPin = pinConverterDigital(pin);
         if (status == 1) {
             pins.analogSetPitchPin(analogPin);
         }
@@ -166,13 +187,32 @@ namespace sensors {
     }
 
     /**
+     * Returns the state of a button, true for pressed and false for unpressed.
+     * @param pin pin to read from, eg: DigitalPin.P1
+     */
+    //% blockId="sensors_is_button_pressed"
+    //% block="read button %pin"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
+    //% pin.fieldOptions.width="400"
+    //% weight=28 blockGap=8
+    export function isButtonPressed(pin: DigitalPin): boolean {
+        const readPin = pins.digitalReadPin(pin);
+        pins.setPull(pin, PinPullMode.PullNone);
+        return readPin == 1 ? false : true;
+    }
+
+    /**
      * Read number or angle using potentiometer
-     * @param p the pin available for potentiometer, availables ports are P0, P1, P2
+     * @param pin the pin available for potentiometer, availables ports are P0, P1, P2
      * @param t the type that should read, the options are angle or number
      */
-    //% blockId="read_potentiometer_sensors" block="read potentiometer on pin %p| in %t"
-    export function readPotentiometer(p: PotentiometerPins, t: PotentiometerReturnType): number {
-        const analogPin = pinConverterAnalog(p);
+    //% blockId="sensors_read_potentiometer"
+    //% block="read potentiometer on pin %pin| in %t"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
+    //% pin.fieldOptions.width="100"
+    //% weight=27 blockGap=8
+    export function readPotentiometer(pin: InitialPins, t: PotentiometerReturnType): number {
+        const analogPin = pinConverterAnalog(pin);
         if (t === PotentiometerReturnType.angle) {
             return pins.map(
                 pins.analogReadPin(analogPin),
@@ -186,6 +226,9 @@ namespace sensors {
         }
     }
 
+    /**
+     * Converts number to DigitalPin
+     */
     function pinConverterDigital(pin: number): DigitalPin {
         switch(pin) {
             case 0: return DigitalPin.P0;
@@ -207,10 +250,13 @@ namespace sensors {
             case 16: return DigitalPin.P16;
             case 19: return DigitalPin.P19;
             case 20: return DigitalPin.P20;
-            default: return DigitalPin.P16; // port 16 is not in use on the shield
+            default: return DigitalPin.P16; // pin 16 is not in use on the shield
         }
     }
 
+    /**
+     * Converts number to AnalogPin
+     */
     function pinConverterAnalog(pin: number): AnalogPin {
         switch(pin) {
             case 0: return AnalogPin.P0;
@@ -232,10 +278,13 @@ namespace sensors {
             case 16: return AnalogPin.P16;
             case 19: return AnalogPin.P19;
             case 20: return AnalogPin.P20;
-            default: return AnalogPin.P16; // port 16 is not in use on the shield
+            default: return AnalogPin.P16; // pin 16 is not in use on the shield
         }
     }
 
+    /**
+     * Converts number from 0-100 to speed ranges
+     */
     function speedRanges(pin: number): number {
         if (pin < 15) return 1;
         if (pin >= 15 && pin < 30) return 3;
