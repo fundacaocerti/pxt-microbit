@@ -88,7 +88,7 @@ sed -i 's/\"weatherbit\": \"\*\"/\"weatherbit\": \"github:sparkfun\/pxt-weather-
 sed -i 's/\\"neopixel\\": \\"\*\\"/\\"neopixel\\": \\"github:microsoft\/pxt-neopixel#v0.4.1\\"/g' $PACKAGED/target.js
 
 #set grove version
-sed -i 's/\"Grove\": \"\*\"/\"Grove\": \"github:seeed-studio\/pxt-grove#v0.1.0\"/g' $PACKAGED/target.js
+sed -i 's/\\"Grove\\": \\"\*\\"/\\"Grove\\": \\"github:seeed-studio\/pxt-grove#v0.1.0\\"/g' $PACKAGED/target.js
 
 #change "Add package.../?" to redirect to the correct url
 sed -i 's/helpUrl: \"\/packages\"/helpUrl: \"https:\/\/makecode.microbit.org\/packages\"/g' $PACKAGED/main.js
