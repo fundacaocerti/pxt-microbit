@@ -69,6 +69,19 @@ enum PotentiometerReturnType {
     number
 }
 
+enum LightSensorRange {
+    //% block="very clear"
+    veryClear,
+    //% block="clear"
+    clear,
+    //% block="shadow"
+    shadow,
+    //% block="dark"
+    dark,
+    //% block="very dark"
+    veryDark
+}
+
 //% color=#f19f03 icon="\uf1e6"
 namespace sensors {
 
@@ -215,6 +228,33 @@ namespace sensors {
         return isOnOffSensorsReadPin(pin);
     }
 
+    //Grove blocks
+
+    /**
+     * Create a new driver of Grove - Ultrasonic Sensor to measure distances in cm
+     * @param pin signal pin of ultrasonic ranger module
+     */
+    //% blockId="sensors_ultrasonic_centimeters"
+    //% block="Ultrasonic Sensor (in cm) at|%pin"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
+    //% pin.fieldOptions.width="400"
+    //% weight=26 blockGap=8
+    export function measureInCentimeters(pin: DigitalPin): number {
+        return grove.measureInCentimeters(pin);
+    }
+
+    /**
+     * Do something when a gesture is detected by Sensors - Gesture
+     * @param gesture type of gesture to detect
+     * @param handler code to run
+     */
+    //% blockId="sensors_gesture_create_event"
+    //% block="on Gesture|%gesture"
+    //% weight=25 blockGap=25
+    export function onGesture(gesture: GroveGesture, handler: Action) {
+        grove.onGesture(gesture, handler);
+    }
+
     //Other blocks
 
     /**
@@ -226,7 +266,7 @@ namespace sensors {
     //% block="buzzer|in %pin| status %status"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.width="400"
-    //% weight=26 blockGap=8
+    //% weight=24 blockGap=8
     export function turnOnOffBuzzer(pin: BuzzerPins, status: OperationStatus): void {
         const analogPin = pinConverterAnalog(pin);
         const digitalPin = pinConverterDigital(pin);
@@ -249,7 +289,7 @@ namespace sensors {
     //% block="read potentiometer on pin %pin| in %t"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
     //% pin.fieldOptions.width="100"
-    //% weight=25 blockGap=25
+    //% weight=23 blockGap=8
     export function readPotentiometer(pin: InitialPins, t: PotentiometerReturnType): number {
         const analogPin = pinConverterAnalog(pin);
         if (t === PotentiometerReturnType.angle) {
@@ -265,31 +305,19 @@ namespace sensors {
         }
     }
 
-    //Grove blocks
-
     /**
-     * Create a new driver of Grove - Ultrasonic Sensor to measure distances in cm
-     * @param pin signal pin of ultrasonic ranger module
+     * Read value of light sensor and return if it is in the range selected by the user
+     * @param pin the pin available for light sensor, availables ports are P0, P1, P2
+     * @param range the range available for light sensor
      */
-    //% blockId="sensors_ultrasonic_centimeters"
-    //% block="Ultrasonic Sensor (in cm) at|%pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
-    //% pin.fieldOptions.width="400"
-    //% weight=10 blockGap=8
-    export function measureInCentimeters(pin: DigitalPin): number {
-        return grove.measureInCentimeters(pin);
-    }
-
-    /**
-     * Do something when a gesture is detected by Sensors - Gesture
-     * @param gesture type of gesture to detect
-     * @param handler code to run
-     */
-    //% blockId="sensors_gesture_create_event"
-    //% block="on Gesture|%gesture"
-    //% weight=9 blockGap=8
-    export function onGesture(gesture: GroveGesture, handler: Action) {
-        grove.onGesture(gesture, handler);
+    //% blockId="sensors_light_sensor_range"
+    //% block="light on pin %pin| is %range |?"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
+    //% pin.fieldOptions.width="100"
+    //% weight=22 blockGap=8
+    export function lightSensorRange(pin: InitialPins, range:LightSensorRange): boolean {
+        const analogPin = pinConverterAnalog(pin);
+        return lightValueToRange(pins.analogReadPin(analogPin)) == range;
     }
 
     /**
@@ -367,5 +395,17 @@ namespace sensors {
         const readPin = pins.digitalReadPin(pin);
         pins.setPull(pin, PinPullMode.PullNone);
         return readPin == 0 ? false : true;
+    }
+
+     /**
+     * Converts number from 0-1023 to light sensor range
+     */
+    function lightValueToRange(value: number): LightSensorRange {
+        if (value >= 0 && value <= 102) return LightSensorRange.veryClear;
+        if (value > 102 && value <= 409) return LightSensorRange.clear;
+        if (value > 409 && value <= 613) return LightSensorRange.shadow;
+        if (value > 613 && value <= 920) return LightSensorRange.dark;
+        if (value > 920 && value <= 1023) return LightSensorRange.veryDark;
+        return null;
     }
 }
