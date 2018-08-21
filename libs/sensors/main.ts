@@ -145,7 +145,7 @@ namespace sensors {
         }
     }
 
-    //Other blocks
+    //Turn on/off blocks
 
     /**
      * Set a LED status to either on or off.
@@ -164,6 +164,60 @@ namespace sensors {
     }
 
     /**
+     * Returns the state of a button, true for pressed and false for unpressed.
+     * @param pin pin to read from
+     */
+    //% blockId="sensors_is_button_pressed"
+    //% block="read button on pin %pin"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
+    //% pin.fieldOptions.width="400"
+    //% weight=29 blockGap=8
+    export function isButtonPressed(pin: DigitalPin): boolean {
+        return !isOnOffSensorsReadPin(pin);
+    }
+
+    /**
+     * Returns the state of touch sensor, true for on and false for off.
+     * @param pin pin to read from
+     */
+    //% blockId="sensors_is_touch_sensor_on"
+    //% block="read touch sensor on pin %pin"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
+    //% pin.fieldOptions.width="400"
+    //% weight=28 blockGap=8
+    export function isTouchSensorOn(pin: DigitalPin): boolean {
+        return isOnOffSensorsReadPin(pin);
+    }
+
+    /**
+     * Returns the state of motion sensor, true for on and false for off.
+     * @param pin pin to read from
+     */
+    //% blockId="sensors_is_motion_sensor_on"
+    //% block="read motion sensor on pin %pin"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
+    //% pin.fieldOptions.width="400"
+    //% weight=27 blockGap=8
+    export function isMotionSensorOn(pin: DigitalPin): boolean {
+        return isOnOffSensorsReadPin(pin);
+    }
+
+    /**
+     * Returns the state of line follower, true for on and false for off.
+     * @param pin pin to read from
+     */
+    //% blockId="sensors_is_line_follower_on"
+    //% block="read line follower on pin %pin"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
+    //% pin.fieldOptions.width="400"
+    //% weight=27 blockGap=25
+    export function isLineFollowerOn(pin: DigitalPin): boolean {
+        return isOnOffSensorsReadPin(pin);
+    }
+
+    //Other blocks
+
+    /**
      * Turn on/off the buzzer
      * @param status received value on or off, eg: OperationStatus.on
      * @param pin received pin, eg: BuzzerPins.P8
@@ -172,7 +226,7 @@ namespace sensors {
     //% block="buzzer|in %pin| status %status"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.width="400"
-    //% weight=29 blockGap=8
+    //% weight=26 blockGap=8
     export function turnOnOffBuzzer(pin: BuzzerPins, status: OperationStatus): void {
         const analogPin = pinConverterAnalog(pin);
         const digitalPin = pinConverterDigital(pin);
@@ -187,21 +241,6 @@ namespace sensors {
     }
 
     /**
-     * Returns the state of a button, true for pressed and false for unpressed.
-     * @param pin pin to read from, eg: DigitalPin.P1
-     */
-    //% blockId="sensors_is_button_pressed"
-    //% block="read button %pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
-    //% pin.fieldOptions.width="400"
-    //% weight=28 blockGap=8
-    export function isButtonPressed(pin: DigitalPin): boolean {
-        const readPin = pins.digitalReadPin(pin);
-        pins.setPull(pin, PinPullMode.PullNone);
-        return readPin == 1 ? false : true;
-    }
-
-    /**
      * Read number or angle using potentiometer
      * @param pin the pin available for potentiometer, availables ports are P0, P1, P2
      * @param t the type that should read, the options are angle or number
@@ -210,7 +249,7 @@ namespace sensors {
     //% block="read potentiometer on pin %pin| in %t"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
     //% pin.fieldOptions.width="100"
-    //% weight=27 blockGap=25
+    //% weight=25 blockGap=25
     export function readPotentiometer(pin: InitialPins, t: PotentiometerReturnType): number {
         const analogPin = pinConverterAnalog(pin);
         if (t === PotentiometerReturnType.angle) {
@@ -319,5 +358,14 @@ namespace sensors {
         if (pin >= 45 && pin < 60) return 10;
         if (pin >= 60 && pin < 80) return 20;
         return 100;
+    }
+
+    /**
+     * Return if is on/off
+     */
+    function isOnOffSensorsReadPin(pin: DigitalPin): boolean {
+        const readPin = pins.digitalReadPin(pin);
+        pins.setPull(pin, PinPullMode.PullNone);
+        return readPin == 0 ? false : true;
     }
 }
