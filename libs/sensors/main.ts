@@ -55,7 +55,7 @@ enum ServoPins {
     P15 = 15
 }
 
-enum OperationStatus{
+enum OperationStatus {
     //% block="on"
     on = 1,
     //% block="off"
@@ -80,6 +80,15 @@ enum LightSensorRange {
     dark,
     //% block="very dark"
     veryDark
+}
+
+enum MoistureSensorRange {
+    //% block="dry"
+    dry,
+    //% block="wet"
+    wet,
+    //% block="saturated"
+    saturated
 }
 
 //% color=#f19f03 icon="\uf1e6"
@@ -223,7 +232,7 @@ namespace sensors {
     //% block="read line follower on pin %pin"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.width="400"
-    //% weight=27 blockGap=25
+    //% weight=26 blockGap=25
     export function isLineFollowerOn(pin: DigitalPin): boolean {
         return isOnOffSensorsReadPin(pin);
     }
@@ -238,7 +247,7 @@ namespace sensors {
     //% block="Ultrasonic Sensor (in cm) at|%pin"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.width="400"
-    //% weight=26 blockGap=8
+    //% weight=25 blockGap=8
     export function measureInCentimeters(pin: DigitalPin): number {
         return grove.measureInCentimeters(pin);
     }
@@ -250,7 +259,7 @@ namespace sensors {
      */
     //% blockId="sensors_gesture_create_event"
     //% block="on Gesture|%gesture"
-    //% weight=25 blockGap=25
+    //% weight=24 blockGap=25
     export function onGesture(gesture: GroveGesture, handler: Action) {
         grove.onGesture(gesture, handler);
     }
@@ -266,7 +275,7 @@ namespace sensors {
     //% block="buzzer|in %pin| status %status"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.width="400"
-    //% weight=24 blockGap=8
+    //% weight=23 blockGap=8
     export function turnOnOffBuzzer(pin: BuzzerPins, status: OperationStatus): void {
         const analogPin = pinConverterAnalog(pin);
         const digitalPin = pinConverterDigital(pin);
@@ -289,7 +298,7 @@ namespace sensors {
     //% block="read potentiometer on pin %pin| in %t"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
     //% pin.fieldOptions.width="100"
-    //% weight=23 blockGap=8
+    //% weight=22 blockGap=8
     export function readPotentiometer(pin: InitialPins, t: PotentiometerReturnType): number {
         const analogPin = pinConverterAnalog(pin);
         if (t === PotentiometerReturnType.angle) {
@@ -306,6 +315,21 @@ namespace sensors {
     }
 
     /**
+     * Read value of moisture sensor and return if it is in range selected by user
+     * @param pin the pin available for Moisture Sensor, availables ports are P0, P1, P2
+     * @param range the range available for moisture sensor
+     */
+    //% blockId="sensors_moisture_sensor"
+    //% block="moisture on pin %pin| is %range |?"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
+    //% pin.fieldOptions.width="100"
+    //% weight=21 blockGap=8
+    export function moistureSensor(pin: InitialPins, range: MoistureSensorRange): boolean {
+        const analogPin = pinConverterAnalog(pin);
+        return moistureValueToRange(pins.analogReadPin(analogPin)) == range;
+    }
+
+    /**
      * Read value of light sensor and return if it is in the range selected by the user
      * @param pin the pin available for light sensor, availables ports are P0, P1, P2
      * @param range the range available for light sensor
@@ -314,7 +338,7 @@ namespace sensors {
     //% block="light on pin %pin| is %range |?"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
     //% pin.fieldOptions.width="100"
-    //% weight=22 blockGap=8
+    //% weight=20 blockGap=25
     export function lightSensorRange(pin: InitialPins, range:LightSensorRange): boolean {
         const analogPin = pinConverterAnalog(pin);
         return lightValueToRange(pins.analogReadPin(analogPin)) == range;
@@ -386,6 +410,16 @@ namespace sensors {
         if (pin >= 45 && pin < 60) return 10;
         if (pin >= 60 && pin < 80) return 20;
         return 100;
+    }
+
+    /**
+    * Converts number from 0-950 to moisture sensor ranges
+    */
+    function moistureValueToRange(value: number): MoistureSensorRange {
+        if (value >= 0 && value <= 300) return MoistureSensorRange.dry;
+        if (value > 300 && value <= 700) return MoistureSensorRange.wet;
+        if (value > 700 && value <= 950) return MoistureSensorRange.saturated;
+        return null;
     }
 
     /**
