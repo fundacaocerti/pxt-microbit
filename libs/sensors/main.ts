@@ -162,7 +162,7 @@ namespace sensors {
 
     /**
      * Set a LED status to either on or off.
-     * @param pin pin to read and write on, eg: DigitalPin.P1
+     * @param pin pin to read and write on
      * @param status status of the Led, eg: OperationStatus.on
      */
     //% blockId="sensors_turn_on_off_led"
