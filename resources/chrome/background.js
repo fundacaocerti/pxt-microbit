@@ -1,5 +1,8 @@
+/*
+ * Copyright (C) 2018 Fundação CERTI
+ */
 chrome.browserAction.onClicked.addListener(
-	function openMakecode() {
+	function openMicrobitExtension() {
 		chrome.tabs.create({
 		     "url": "/index.html"
 		});

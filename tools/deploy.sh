@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Copyright (C) 2018 Fundação CERTI
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )" #absolute root dir
 
 DEPLOY=$DIR"/deploy"
