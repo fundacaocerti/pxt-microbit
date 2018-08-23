@@ -91,6 +91,27 @@ enum MoistureSensorRange {
     saturated
 }
 
+enum JoystickPosition {
+    //% block="none"
+    none,
+    //% block="up"
+    up,
+    //% block="down"
+    down,
+    //% block="right"
+    right,
+    //% block="left"
+    left,
+    //% block="up-right"
+    upRight,
+    //% block="down-right"
+    downRight,
+    //% block="up-left"
+    upLeft,
+    //% block="down-left"
+    downLeft
+}
+
 //% color=#f19f03 icon="\uf1e6"
 namespace sensors {
 
@@ -366,6 +387,53 @@ namespace sensors {
     export function lightSensorRange(pin: InitialPins, range: LightSensorRange): boolean {
         const analogPin = pinConverterAnalog(pin);
         return lightValueToRange(pins.analogReadPin(analogPin)) == range;
+    }
+
+    /**
+     * two-way joystick block that works similarly to the Cartesian coordinate system (where the first pin is the X axis and the second the Y axis)
+     * @param pinX pin regarding the X axis, eg: InitialPins.P0
+     * @param pinY pin regarding the Y axis, eg: InitialPins.P1
+     * @param direction position of joystick 
+     */
+    //% blockId="sensors_joystick"
+    //% block="joystick in pins %pinX| and %pinY| is %direction |?"
+    //% pinX.fieldEditor="gridpicker" pinX.fieldOptions.columns=1
+    //% pinY.fieldEditor="gridpicker" pinY.fieldOptions.columns=1
+    //% pinX.fieldOptions.width="100"
+    //% pinY.fieldOptions.width="100"
+    //% weight=22 blockGap=8
+    export function joystick(pinX: InitialPins, pinY: InitialPins, direction: JoystickPosition): boolean {
+        const analogPinX = pinConverterAnalog(pinX);
+        const analogPinY = pinConverterAnalog(pinY);
+        let x = pins.analogReadPin(analogPinX);
+        let y = pins.analogReadPin(analogPinY);
+
+        return convertJoystick(x, y) == direction;
+    }
+
+    /**
+     * Converts a number (between 0 and 1023) to a joystick direction coordinate
+     */
+    function convertJoystick(x: number, y: number): JoystickPosition{
+        if (y < 400 && x < 400) {
+            return JoystickPosition.downLeft;
+        } else if(y < 400 && x > 624) {
+            return JoystickPosition.downRight;
+        } else if(y > 624 && x < 400) {
+            return JoystickPosition.upLeft;
+        } else if(y > 624 && x > 624) {
+            return JoystickPosition.upRight;
+        } else if((y > 400 && y < 624) && x < 400) {
+            return JoystickPosition.left;
+        } else if((y >= 400 && y <= 624) && x > 624) {
+            return JoystickPosition.right;
+        } else if(y < 400 && (x >= 400 && x <= 624)) {
+            return JoystickPosition.down;
+        } else if(y > 624 && (x >= 400 && x <= 624)) {
+            return JoystickPosition.up;
+        } else {
+            return JoystickPosition.none;
+        }
     }
 
     /**
