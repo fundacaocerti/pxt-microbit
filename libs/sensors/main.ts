@@ -240,7 +240,8 @@ namespace sensors {
     //% pin.fieldOptions.width="400"
     //% weight=29 blockGap=8
     export function isButtonPressed(pin: DigitalPin): boolean {
-        return !isOnOffSensorsReadPin(pin);
+        let buttonPressed = isOnOffSensorsReadPin(pin);
+        return isOnOffButton(buttonPressed);
     }
 
     /**
@@ -523,7 +524,17 @@ namespace sensors {
         return readPin == 0 ? false : true;
     }
 
-     /**
+    /**
+     * The button is active-low (0 = pressed, 1 = unpressed), while on simulator it is active-high
+     * Micro:bit implementation is in sensors.cpp
+     */
+    //% shim=sensors::isOnOffButton
+    function isOnOffButton(value: boolean): boolean {
+        // Fake function for simulator
+        return value;
+    }
+
+    /**
      * Converts number from 0-1023 to light sensor range
      */
     function lightValueToRange(value: number): LightSensorRange {

@@ -9,4 +9,9 @@ namespace sensors {
     return (uint32_t) value;
   }
 
+  //%
+  bool isOnOffButton(bool value) {
+    // Invert the return of the button on micro:bit because it is active-low
+    return !value;
+  }
 }
