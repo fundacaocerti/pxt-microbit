@@ -112,6 +112,15 @@ enum JoystickPosition {
     downLeft
 }
 
+enum SoundSensorRange {
+    //% block="low"
+    low,
+    //% block="medium"
+    medium,
+    //% block="high"
+    high
+}
+
 //% color=#f19f03 icon="\uf1e6"
 namespace sensors {
 
@@ -296,6 +305,21 @@ namespace sensors {
     //% weight=25 blockGap=8
     export function measureInCentimeters(pin: DigitalPin): number {
         return grove.measureInCentimeters(pin);
+    }
+
+    /**
+     * Read value of sound sensor and return if it is in the range selected by the user
+     * @param pin the pin available for sound sensor, availables ports are P0, P1, P2
+     * @param range the range available for sound sensor
+     */
+    //% blockId="sensors_sound_sensor_range"
+    //% block="sound on pin %pin| is %range |?"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
+    //% pin.fieldOptions.width="100"
+    //% weight=25 blockGap=8
+    export function soundSensorRange(pin: InitialPins, range: SoundSensorRange): boolean {
+        const analogPin = pinConverterAnalog(pin);
+        return soundValueToRange(pins.analogReadPin(analogPin)) == range;
     }
 
     /**
@@ -543,6 +567,16 @@ namespace sensors {
         if (value > 409 && value <= 613) return LightSensorRange.shadow;
         if (value > 613 && value <= 920) return LightSensorRange.dark;
         if (value > 920 && value <= 1023) return LightSensorRange.veryDark;
+        return null;
+    }
+
+    /**
+     * Converts number from 0-1023 to sound sensor range
+     */
+    function soundValueToRange(value: number): SoundSensorRange {
+        if (value >= 0 && value <= 307) return SoundSensorRange.low;
+        else if (value <= 716) return SoundSensorRange.medium;
+        else if (value <= 1023) return SoundSensorRange.high;
         return null;
     }
     
