@@ -1,5 +1,5 @@
 {
-  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmAVG6ZKBN79gYDUYhfpDjuziMRlRuc8WaEcvssY6lzpypSK4yABOAQPl+6lNH5OscWs8CmxLdPzbgwbBfNpohaREVEObnuzZrdRHsq4EJ9yiSf+vJ19p2gQ7zu1KTKvM1+fvDur2a1H4fYS7aWckrYgmkrZvRKbNYyhvy8MtnLVmg0r+hPUzX7mJYfWTu/6kfZdSq/2SGHjJnrRIZwch/7StjcRnWKPUzYtlOrSHAN86oqmBDnQ0/WanzXZHD2MOYNtJV0FVkFI+T2Qx/KCe2CyFVO+C1yuT/pwM4mXp/GPwz8fimMfHSIe0rW8zzRUj9P/AkCuozmAnGjpPuJJ6WwIDAQAB",
+  "Key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmAVG6ZKBN79gYDUYhfpDjuziMRlRuc8WaEcvssY6lzpypSK4yABOAQPl+6lNH5OscWs8CmxLdPzbgwbBfNpohaREVEObnuzZrdRHsq4EJ9yiSf+vJ19p2gQ7zu1KTKvM1+fvDur2a1H4fYS7aWckrYgmkrZvRKbNYyhvy8MtnLVmg0r+hPUzX7mJYfWTu/6kfZdSq/2SGHjJnrRIZwch/7StjcRnWKPUzYtlOrSHAN86oqmBDnQ0/WanzXZHD2MOYNtJV0FVkFI+T2Qx/KCe2CyFVO+C1yuT/pwM4mXp/GPwz8fimMfHSIe0rW8zzRUj9P/AkCuozmAnGjpPuJJ6WwIDAQAB",
   "name": "micro:bit extension",
   "version": "1.0",
   "manifest_version": 2,
@@ -7,11 +7,6 @@
   "short_name": "micro:bit",
   "description": "micro:bit is a tiny programmable computer, designed to make learning and teaching easy and fun! It is possible to use the micro:bit extension offline",
   "content_security_policy": "script-src https://az416426.vo.msecnd.net/scripts/a/ai.0.js 'unsafe-eval' 'unsafe-inline' 'sha256-uvjMjd+dFwRQKJRcylnM80KWKNRObK03M9R0G/4Bw94=' 'sha256-4iclyh2nKQo2rNV90P7TOZJS9Yi7anrm/JY3YhN900o=' 'sha256-pHRe40ONveLJQ3jk9s1O/CTl+MXQ8PwXtVRTebqOGH8=' 'sha256-4iclyh2nKQo2rNV90P7TOZJS9Yi7anrm/JY3YhN900o=' 'sha256-uvjMjd+dFwRQKJRcylnM80KWKNRObK03M9R0G/4Bw94=' 'sha256-+MGxema5qx9jeIIjBS2+uXccnQSfP757Pk9A7jYhsHM=' 'sha256-SbM1nH4SMjlZNl2D+tGT0oTGuFuN3OHINEcPdOjkNXs=' 'sha256-8tS6btayJleRf9p0YB3754DHki782bwNJhSlxe2huG0=' 'sha256-RtE2pa7hFYela+TGImkbM58oRH6HH6RsJOx7LVaqSko='",
-  "app": {
-    "launch": {
-      "local_path": "index.html"
-    }
-  },
   "icons": {
       "48": "logos/logo48.png",
       "128": "logos/logo128.png",
@@ -29,5 +24,9 @@
   "background": {
       "page": "background.html",
       "persistent": true
+  },
+  "-ms-preload": {
+      "backgroundScript": "backgroundScriptsAPIBridge.js",
+      "contentScript": "contentScriptsAPIBridge.js"
   }
 }

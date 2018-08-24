@@ -4,7 +4,17 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )" #absolute root dir
 
-DEPLOY=$DIR"/deploy"
+if [ "$1" == "edge" ]; then
+    BROSWER="edge"
+    DEPLOY=$DIR"/deploy-edge"
+    RESOURCES_EXTENSION=$DIR"/resources/edge"
+else
+    BROSWER="chrome"
+    DEPLOY=$DIR"/deploy"
+    RESOURCES_EXTENSION=$DIR"/resources/chrome"
+fi
+echo "deploying for: " $BROSWER
+
 PACKAGED=$DEPLOY"/microbit"      #static html packaged abs path
 PACKAGED_API=$PACKAGED"/api"
 PACKAGED_COMPILE=$PACKAGED"/api/compile"
@@ -12,7 +22,7 @@ BUILT=$DIR"/built"
 BUILT_HEX_CACHE=$BUILT/hexcache
 RESOURCES=$DIR"/resources"
 RESOURCES_API=$DIR"/resources/api"
-RESOURCES_EXTENSION=$DIR"/resources/chrome"
+RESOURCES_LOGOS=$DIR"/resources/logos"
 PEMFILE=$RESOURCES_EXTENSION"/microbit.pem"    #pem file abs path
 SHA_BLOCKSPRJ=$( sed -n 's/.*"sha": "\(.*\)",/\1/p' libs/blocksprj/built/yt/buildcache.json )
 SHA_TSPRJ=$( sed -n 's/.*"sha": "\(.*\)",/\1/p' libs/tsprj/built/yt/buildcache.json )
@@ -37,8 +47,9 @@ do
     sed -i ':a;N;$!ba;s/\n/\\r\\n/g' $PACKAGED_COMPILE/$sha.json
 done
 
-#copy resources api folder to deploy
+#copy resources api and logos folders to deploy
 cp -r $RESOURCES_API $PACKAGED
+cp -r $RESOURCES_LOGOS $PACKAGED
 
 #copy aditional resources for offline compatibility
 cp $PACKAGED_API/clientconfig $PACKAGED/clientconfig.json
@@ -52,8 +63,12 @@ sed -i 's/\(\"availableLocales\": \[\)/"availableLocales": [\n\t\t\t"en",\n\t\t\
 #change isStatic to false to redirect the help urls correctly
 sed -i 's/\(\"isStatic\": true\)/"isStatic": false/g' $PACKAGED/embed.js
 
-#change popout to redirect to the correct url
-sed -i -e "/window.open(url, \"_blank\");/r./resources\/replacements\/change-docs-url-pxtrunner.js" -e "s/window.open(url, \"_blank\");//" $PACKAGED/pxtrunner.js
+#check if broswer is Chrome or Edge and change popout to redirect to the correct url.
+if [ "$BROSWER" == "edge" ]; then
+    sed -i -e "/window.open(url, \"_blank\");/r./resources\/replacements\/change-docs-url-pxtrunner-edge.js" -e "s/window.open(url, \"_blank\");//" $PACKAGED/pxtrunner.js
+else
+    sed -i -e "/window.open(url, \"_blank\");/r./resources\/replacements\/change-docs-url-pxtrunner-chrome.js" -e "s/window.open(url, \"_blank\");//" $PACKAGED/pxtrunner.js
+fi
 
 #change Download/help to redirect to the correct url
 sed -i 's/\"usbDocs\": \"\/device\/usb\"/\"usbDocs\": \"https:\/\/makecode.microbit.org\/device\/usb\"/g' $PACKAGED/target.js
@@ -87,6 +102,3 @@ sed -i -e "/window.open(url, 'docs');/r./resources\/replacements\/change-url-mai
 
 #add code to change url to the correct help files path on external packages
 sed -i "/+ m\[2\];/r./resources\/replacements\/change-help-url-main.js" $PACKAGED/main.js
-
-#pack deploy folder into .crx file
-chrome.exe --pack-extension=$PACKAGED --pack-extension-key=$PEMFILE
