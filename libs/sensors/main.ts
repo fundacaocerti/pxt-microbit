@@ -129,41 +129,65 @@ namespace sensors {
     //Servo blocks
 
     /**
-     * Create block that receives a direction value (1 for clockwise and -1 counter-clockwise) and a speed value from 0 to 100%
-     * @param pin analog pin that the continuous servomotor will connect, eg: ServoPins.P13
+     * Servomotor block of pin 13 that receives a direction value (right or left) and a speed value of 0 to 100%
      * @param direction turning direction, eg: Direction.Right
      * @param value speed value from 0 to 100%, eg: 100
      */
-    //% blockId="sensors_continuous_servo_write_pin"
-    //% block="servo continuos in|pin %pin| turn to %direction| with speed %value %"
+    //% blockId="sensors_continuous_servo_write_pin_13"
+    //% block="servo continuos in pin 13 turn|to %direction| with speed %value| %"
     //% value.min=0 value.max=100
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
     //% pin.fieldOptions.width="100"
-    //% weight=40 blockGap=25
-    export function continuousServoWritePin(pin: ServoPins, direction: Direction, value: number): void {
-        if (value > 100) {
-            value = 100;
-        }
-        if (value < 0) {
-            value = 0;
-        }
-        if (direction == Direction.Right) {
-            direction = 1;
-        } else {
-            direction = -1;
-        }
-        const analogPin = pinConverterAnalog(pin);
-        const digitalPin = pinConverterDigital(pin);
-        let range = speedRanges(value);
+    //% weight=40 blockGap=8
+    export function continuousServoWritePin13(direction: Direction, value: number): void {
         if (value != 0) {
-            direction = direction / Math.abs(direction);
-            value = ((range * 90) / 100);
-            value = 90 + (value * direction);
-            pins.servoWritePin(analogPin, value);
+            pins.servoWritePin(AnalogPin.P13, servoMotorController(value, direction));
         } else {
-            pins.servoWritePin(analogPin, 90);
-            pins.digitalReadPin(digitalPin);
-            pins.pulseIn(digitalPin, PulseValue.Low);
+            pins.servoWritePin(AnalogPin.P13, 90);
+            pins.digitalReadPin(DigitalPin.P13);
+            pins.pulseIn(DigitalPin.P13, PulseValue.Low);
+        }
+    }
+
+    /**
+     * Servomotor block of pin 14 that receives a direction value (right or left) and a speed value of 0 to 100%
+     * @param direction turning direction, eg: Direction.Right
+     * @param value speed value from 0 to 100%, eg: 100
+     */
+    //% blockId="sensors_continuous_servo_write_pin_14"
+    //% block="servo continuos in pin 14 turn|to %direction| with speed %value| %"
+    //% value.min=0 value.max=100
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
+    //% pin.fieldOptions.width="100"
+    //% weight=39 blockGap=8
+    export function continuousServoWritePin14(direction: Direction, value: number): void {
+        if (value != 0) {
+            pins.servoWritePin(AnalogPin.P14, servoMotorController(value, direction));
+        } else {
+            pins.servoWritePin(AnalogPin.P14, 90);
+            pins.digitalReadPin(DigitalPin.P14);
+            pins.pulseIn(DigitalPin.P14, PulseValue.Low);
+        }
+    }
+
+    /**
+     * Servomotor block of pin 15 that receives a direction value (right or left) and a speed value of 0 to 100%
+     * @param direction turning direction, eg: Direction.Right
+     * @param value speed value from 0 to 100%, eg: 100
+     */
+    //% blockId="sensors_continuous_servo_write_pin_15"
+    //% block="servo continuos in pin 15 turn|to %direction| with speed %value| %"
+    //% value.min=0 value.max=100
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
+    //% pin.fieldOptions.width="100"
+    //% weight=38 blockGap=25
+    export function continuousServoWritePin15(direction: Direction, value: number): void {
+        if (value != 0) {
+            pins.servoWritePin(AnalogPin.P15, servoMotorController(value, direction));
+        } else {
+            pins.servoWritePin(AnalogPin.P15, 90);
+            pins.digitalReadPin(DigitalPin.P15);
+            pins.pulseIn(DigitalPin.P15, PulseValue.Low);
         }
     }
 
@@ -339,7 +363,7 @@ namespace sensors {
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
     //% pin.fieldOptions.width="100"
     //% weight=20 blockGap=25
-    export function lightSensorRange(pin: InitialPins, range:LightSensorRange): boolean {
+    export function lightSensorRange(pin: InitialPins, range: LightSensorRange): boolean {
         const analogPin = pinConverterAnalog(pin);
         return lightValueToRange(pins.analogReadPin(analogPin)) == range;
     }
@@ -403,12 +427,12 @@ namespace sensors {
     /**
      * Converts number from 0-100 to speed ranges
      */
-    function speedRanges(pin: number): number {
-        if (pin < 15) return 1;
-        if (pin >= 15 && pin < 30) return 3;
-        if (pin >= 30 && pin < 45) return 5;
-        if (pin >= 45 && pin < 60) return 10;
-        if (pin >= 60 && pin < 80) return 20;
+    function speedRanges(value: number): number {
+        if (value < 15) return 3;
+        if (value >= 15 && value < 30) return 5;
+        if (value >= 30 && value < 45) return 10;
+        if (value >= 45 && value < 60) return 15;
+        if (value >= 60 && value < 80) return 20;
         return 100;
     }
 
@@ -441,5 +465,37 @@ namespace sensors {
         if (value > 613 && value <= 920) return LightSensorRange.dark;
         if (value > 920 && value <= 1023) return LightSensorRange.veryDark;
         return null;
+    }
+    
+    /**
+     * Function that converts the steering parameters (right / left) and speed (0 to 100) into a value in degrees that is understood by the continuous servo motor
+     */
+    function servoMotorController(value: number, direction: Direction): number {
+        if (value > 100) {
+            value = 100;
+        }
+        if (value < 0) {
+            value = 0;
+        }
+        if (direction == Direction.Right) {
+            direction = 1;
+        } else {
+            direction = -1;
+        }
+        let range = speedRanges(value);
+        value = ((range * 90) / 100);
+        value = 90 + (value * direction);
+        return speedServoMotor(value, direction);
+    }
+    
+    /**
+     * Function used for simulator servomotor continuos, actual implementation is in sensors.cpp
+     */
+    //% shim=sensors::speedServoMotor
+    function speedServoMotor(value: number, direction: number): number {
+        //"180 * direction" is the equivalent of the first complete rotation
+        //"360" is the value equivalent to one rotation
+        //"3"   is the equivalent of the number of turns
+        return ((180 * direction) + 360 * 3) * direction;
     }
 }

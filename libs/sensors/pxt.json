@@ -11,6 +11,7 @@
     "files": [
         "README.md",
         "main.ts",
+        "sensors.cpp",
         "_locales/pt-BR/sensors-strings.json",
         "_locales/es-ES/sensors-strings.json",
         "_locales/en/sensors-strings.json",
