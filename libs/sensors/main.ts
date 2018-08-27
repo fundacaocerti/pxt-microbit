@@ -323,6 +323,43 @@ namespace sensors {
     }
 
     /**
+     * Show a 4 digits number on display
+     * @param tm1637 a Grove driver
+     * @param dispData value of number
+     */
+    //% blockId="sensors_grove_tm1637_display_number"
+    //% block="%x=variables_get|show number|%dispData"
+    //% weight=25 blockGap=8
+    export function show(tm1637: grove.TM1637, dispData: number): void {
+        tm1637.show(dispData);
+    }
+
+    /**
+     * Set the brightness level of display at from 0 to 7
+     * @param tm1637 a Grove driver
+     * @param level value of brightness level
+     */
+    //% blockId="sensors_grove_tm1637_set_display_level"
+    //% block="%x=variables_get|brightness level to|%level"
+    //% level.min=0 level.max=7
+    //% weight=25 blockGap=8
+    export function set(tm1637: grove.TM1637, level: number): void {
+        tm1637.set(level);
+    }
+
+    /**
+     * Create a new driver Grove - 4-Digit Display
+     * @param clkPin value of clk pin number
+     * @param dataPin value of data pin number
+     */
+    //% blockId="sensors_grove_tm1637_create"
+    //% block="4-Digit Display at|%clkPin|and|%dataPin"
+    //% weight=25 blockGap=8
+    export function createDisplay(clkPin: DigitalPin, dataPin: DigitalPin): grove.TM1637 {
+        return grove.createDisplay(clkPin, dataPin);
+    }
+
+    /**
      * Do something when a gesture is detected by Sensors - Gesture
      * @param gesture type of gesture to detect
      * @param handler code to run
@@ -418,7 +455,7 @@ namespace sensors {
      * two-way joystick block that works similarly to the Cartesian coordinate system (where the first pin is the X axis and the second the Y axis)
      * @param pinX pin regarding the X axis, eg: InitialPins.P0
      * @param pinY pin regarding the Y axis, eg: InitialPins.P1
-     * @param direction position of joystick 
+     * @param direction position of joystick
      */
     //% blockId="sensors_joystick"
     //% block="joystick in pins %pinX| and %pinY| is %direction |?"
@@ -579,7 +616,7 @@ namespace sensors {
         else if (value <= 1023) return SoundSensorRange.high;
         return null;
     }
-    
+
     /**
      * Function that converts the steering parameters (right / left) and speed (0 to 100) into a value in degrees that is understood by the continuous servo motor
      */
@@ -600,7 +637,7 @@ namespace sensors {
         value = 90 + (value * direction);
         return speedServoMotor(value, direction);
     }
-    
+
     /**
      * Function used for simulator servomotor continuos, actual implementation is in sensors.cpp
      */
