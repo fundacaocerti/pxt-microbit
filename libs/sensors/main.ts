@@ -1,4 +1,4 @@
-enum AllPins {
+enum AudioOutputPins {
     P0 = 0,
     P1 = 1,
     P2 = 2,
@@ -7,6 +7,7 @@ enum AllPins {
     P5 = 5,
     P6 = 6,
     P7 = 7,
+    //% block="internal"
     P8 = 8,
     P9 = 9,
     P10 = 10,
@@ -20,27 +21,11 @@ enum AllPins {
     P20 = 20
 }
 
-enum BuzzerPins {
-    P0 = 0,
-    P1 = 1,
-    P2 = 2,
-    P3 = 3,
-    P4 = 4,
-    P5 = 5,
-    P6 = 6,
-    P7 = 7,
-    //% block="internal buzzer"
-    P8 = 8,
-    P9 = 9,
-    P10 = 10,
-    P11 = 11,
-    P12 = 12,
-    P13 = 13,
-    P14 = 14,
-    P15 = 15,
-    P16 = 16,
-    P19 = 19,
-    P20 = 20
+enum OperationStatus {
+    //% block="turn on"
+    turnOn,
+    //% block="turn off"
+    turnOff
 }
 
 enum InitialPins {
@@ -55,11 +40,11 @@ enum ServoPins {
     P15 = 15
 }
 
-enum OperationStatus {
-    //% block="on"
-    on = 1,
-    //% block="off"
-    off = 0
+enum ServoDirection {
+    //% block="clockwise"
+    clockwise,
+    //% block="counterclockwise"
+    counterclockwise
 }
 
 enum PotentiometerReturnType {
@@ -121,21 +106,44 @@ enum SoundSensorRange {
     high
 }
 
+enum SensorsGroveGesture {
+    //% block=none
+    None = 0,
+    //% block=right
+    Right = 1,
+    //% block=left
+    Left = 2,
+    //% block=up
+    Up = 3,
+    //% block=down
+    Down = 4,
+    //% block=forward
+    Forward = 5,
+    //% block=backward
+    Backward = 6,
+    //% block=clockwise
+    Clockwise = 7,
+    //% block=anticlockwise
+    Anticlockwise = 8,
+    //% block=wave
+    Wave = 9
+}
+
 //% color=#f19f03 icon="\uf1e6"
 namespace sensors {
 
     //Neopixel blocks
 
     /**
-     * Set the brightness of a NeoPixel strip from 0 (off) to 50 (full bright).
-     * @param brightness a measure of LED brightness in 0-50. eg: 50
-     * @param strip a NeoPixel strip.
+     * Set the brightness of the LEDs to a value between 0 and 50.
+     * @param brightness a measure of LED brightness (0-50), eg: 50
+     * @param strip a NeoPixel strip
      */
-    //% blockId="sensors_set_neopixel_brightness"
-    //% block="%x=variables_get|set brightness %brightness"
+    //% blockId="sensors_set_leds_brightness"
+    //% block="%x=variables_get|set brightness to %brightness"
     //% brightness.max=50, brightness.min=0
-    //% weight=50 blockGap=8
-    export function setBrightness(strip: neopixel.Strip, brightness: number): void {
+    //% weight=100 blockGap=8
+    export function setLedsBrightness(strip: neopixel.Strip, brightness: number): void {
         if (brightness > 50) {
             strip.setBrightness(50);
         } else if (brightness < 0) {
@@ -146,30 +154,98 @@ namespace sensors {
     }
 
     /**
-     * Get the brightness of a NeoPixel strip from 0 (off) to 50 (full bright).
-     * @param strip a NeoPixel strip.
+     * Gets the brightness value being used in the LEDs.
+     * @param strip a NeoPixel strip
      */
-    //% blockId="sensors_get_neopixel_brightness"
+    //% blockId="sensors_get_leds_brightness"
     //% block="%x=variables_get|get brightness"
-    //% weight=49 blockGap=25
-    export function getBrightness(strip: neopixel.Strip): number {
+    //% weight=99 blockGap=25
+    export function getLedsBrightness(strip: neopixel.Strip): number {
         return strip.brightness;
+    }
+
+    //Grove blocks
+
+    /**
+     * Contains the code that will be executed when a gesture is detected.
+     * @param gesture type of gesture to detect
+     * @param handler code to run
+     */
+    //% blockId="sensors_gesture_create_event"
+    //% block="on Gesture|%gesture"
+    //% weight=90 blockGap=8
+    export function onGesture(gesture: SensorsGroveGesture, handler: Action) {
+        grove.onGesture(convertSensorGesture(gesture), handler);
+    }
+
+    /**
+     * Measure distances in cm.
+     * @param pin signal pin of ultrasonic range module
+     */
+    //% blockId="sensors_ultrasonic_centimeters"
+    //% block="distance sensor on pin|%pin"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
+    //% pin.fieldOptions.width="400"
+    //% weight=89 blockGap=8
+    export function measureInCentimeters(pin: DigitalPin): number {
+        return grove.measureInCentimeters(pin);
+    }
+
+    /**
+     * Create Grove 4-Digit Display in the selected pins.
+     * @param clkPin value of CLK pin number, eg:DigitalPin.P0
+     * @param dataPin value of data pin number, eg:DigitalPin.P1
+     */
+    //% blockId="sensors_create_4d_display"
+    //% block="4-Digit Display on pins|%clkPin|and|%dataPin"
+    //% clkPin.fieldEditor="gridpicker" clkPin.fieldOptions.columns=1
+    //% dataPin.fieldEditor="gridpicker" dataPin.fieldOptions.columns=1
+    //% clkPin.fieldOptions.width="100"
+    //% dataPin.fieldOptions.width="100"
+    //% weight=88 blockGap=8
+    export function create4dDisplay(clkPin: DigitalPin, dataPin: DigitalPin): grove.TM1637 {
+        return grove.createDisplay(clkPin, dataPin);
+    }
+
+    /**
+     * Show a number in the 4-digit display.
+     * @param tm1637 a Grove driver
+     * @param dispData value of number
+     */
+    //% blockId="sensors_show_number_4d_display"
+    //% block="%x=variables_get|show number|%dispData"
+    //% weight=87 blockGap=8
+    export function showNumber4dDisplay(tm1637: grove.TM1637, dispData: number): void {
+        tm1637.show(dispData);
+    }
+
+    /**
+     * Sets the brightness of the 4-digit display to a value between 0 and 7.
+     * @param tm1637 a Grove driver
+     * @param level value of brightness level
+     */
+    //% blockId="sensors_set_brightness_4d_display"
+    //% block="%x=variables_get| set brightness level to|%level"
+    //% level.min=0 level.max=7
+    //% weight=86 blockGap=25
+    export function setBrightness4dDisplay(tm1637: grove.TM1637, level: number): void {
+        tm1637.set(level);
     }
 
     //Servo blocks
 
     /**
-     * Servomotor block of pin 13 that receives a direction value (right or left) and a speed value of 0 to 100%
-     * @param direction turning direction, eg: Direction.Right
+     * Triggers the servo motor in the selected direction and speed (0 to 100%).
+     * @param direction turning direction, eg: ServoDirection.clockwise
      * @param value speed value from 0 to 100%, eg: 100
      */
     //% blockId="sensors_continuous_servo_write_pin_13"
-    //% block="servo continuos in pin 13 turn|to %direction| with speed %value| %"
+    //% block="continuous servo motor on pin 13 rotate | %direction| with speed %value| %"
     //% value.min=0 value.max=100
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
     //% pin.fieldOptions.width="100"
-    //% weight=40 blockGap=8
-    export function continuousServoWritePin13(direction: Direction, value: number): void {
+    //% weight=80 blockGap=8
+    export function continuousServoWritePin13(direction: ServoDirection, value: number): void {
         if (value != 0) {
             pins.servoWritePin(AnalogPin.P13, servoMotorController(value, direction));
         } else {
@@ -180,17 +256,17 @@ namespace sensors {
     }
 
     /**
-     * Servomotor block of pin 14 that receives a direction value (right or left) and a speed value of 0 to 100%
-     * @param direction turning direction, eg: Direction.Right
+     * Triggers the servo motor in the selected direction and speed (0 to 100%).
+     * @param direction turning direction, eg: ServoDirection.clockwise
      * @param value speed value from 0 to 100%, eg: 100
      */
     //% blockId="sensors_continuous_servo_write_pin_14"
-    //% block="servo continuos in pin 14 turn|to %direction| with speed %value| %"
+    //% block="continuous servo motor on pin 14 rotate | %direction| with speed %value| %"
     //% value.min=0 value.max=100
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
     //% pin.fieldOptions.width="100"
-    //% weight=39 blockGap=8
-    export function continuousServoWritePin14(direction: Direction, value: number): void {
+    //% weight=79 blockGap=8
+    export function continuousServoWritePin14(direction: ServoDirection, value: number): void {
         if (value != 0) {
             pins.servoWritePin(AnalogPin.P14, servoMotorController(value, direction));
         } else {
@@ -201,17 +277,17 @@ namespace sensors {
     }
 
     /**
-     * Servomotor block of pin 15 that receives a direction value (right or left) and a speed value of 0 to 100%
-     * @param direction turning direction, eg: Direction.Right
+     * Triggers the servo motor in the selected direction and speed (0 to 100%).
+     * @param direction turning direction, eg: ServoDirection.clockwise
      * @param value speed value from 0 to 100%, eg: 100
      */
     //% blockId="sensors_continuous_servo_write_pin_15"
-    //% block="servo continuos in pin 15 turn|to %direction| with speed %value| %"
+    //% block="continuous servo motor on pin 15 rotate | %direction| with speed %value| %"
     //% value.min=0 value.max=100
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
     //% pin.fieldOptions.width="100"
-    //% weight=38 blockGap=25
-    export function continuousServoWritePin15(direction: Direction, value: number): void {
+    //% weight=78 blockGap=25
+    export function continuousServoWritePin15(direction: ServoDirection, value: number): void {
         if (value != 0) {
             pins.servoWritePin(AnalogPin.P15, servoMotorController(value, direction));
         } else {
@@ -224,59 +300,84 @@ namespace sensors {
     //Turn on/off blocks
 
     /**
-     * Set a LED status to either on or off.
+     * Turns a LED on/off.
      * @param pin pin to read and write on
-     * @param status status of the Led, eg: OperationStatus.on
+     * @param status status of the LED (turn on/turn off), eg: OperationStatus.turnOn
      */
     //% blockId="sensors_turn_on_off_led"
-    //% block="led %pin| turn %status"
+    //% block="%status| LED on pin %pin"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.width="400"
-    //% weight=30 blockGap=8
-    export function turnOnOffLed(pin: DigitalPin, status: OperationStatus): void {
+    //% weight=70 blockGap=8
+    export function turnOnOffLed(status: OperationStatus, pin: DigitalPin): void {
         pins.digitalReadPin(pin);
         pins.setPull(pin, PinPullMode.PullUp)
         pins.digitalWritePin(pin, status);
     }
 
     /**
-     * Returns the state of a button, true for pressed and false for unpressed.
+     * Turn on/off the audio output.
+     * @param status received value (turn on/turn off), eg: OperationStatus.turnOn
+     * @param pin pin to read from, eg: AudioOutputPins.P8
+     */
+    //% blockId="sensors_turn_on_off_audio_output"
+    //% block="%status| audio output on pin %pin"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
+    //% pin.fieldOptions.width="400"
+    //% weight=69 blockGap=8
+    export function turnOnOffAudioOutput(status: OperationStatus, pin: AudioOutputPins): void {
+        const analogPin = pinConverterAnalog(pin);
+        const digitalPin = pinConverterDigital(pin);
+        if (status == 1) {
+            pins.analogSetPitchPin(analogPin);
+        }
+        if (status == 0) {
+            music.beginMelody(music.builtInMelody(Melodies.PowerDown), MelodyOptions.OnceInBackground);
+            pins.digitalReadPin(digitalPin);
+            pins.setPull(digitalPin, PinPullMode.PullDown);
+        }
+    }
+
+    //Is sensor on/off blocks
+
+    /**
+     * Returns the state of the button, true for pressed and false for not pressed.
      * @param pin pin to read from
      */
     //% blockId="sensors_is_button_pressed"
-    //% block="read button on pin %pin"
+    //% block="button on pin %pin| is pressed"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.width="400"
-    //% weight=29 blockGap=8
+    //% weight=68 blockGap=8
     export function isButtonPressed(pin: DigitalPin): boolean {
-        let buttonPressed = isOnOffSensorsReadPin(pin);
+        let buttonPressed = isSensorOn(pin);
         return isOnOffButton(buttonPressed);
     }
 
     /**
-     * Returns the state of touch sensor, true for on and false for off.
+     * Returns true if the sensor is triggered.
      * @param pin pin to read from
      */
     //% blockId="sensors_is_touch_sensor_on"
-    //% block="read touch sensor on pin %pin"
+    //% block="touch sensor on pin %pin"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.width="400"
-    //% weight=28 blockGap=8
+    //% weight=67 blockGap=8
     export function isTouchSensorOn(pin: DigitalPin): boolean {
-        return isOnOffSensorsReadPin(pin);
+        return isSensorOn(pin);
     }
 
     /**
-     * Returns the state of motion sensor, true for on and false for off.
+     * Returns true if the sensor is triggered.
      * @param pin pin to read from
      */
     //% blockId="sensors_is_motion_sensor_on"
-    //% block="read motion sensor on pin %pin"
+    //% block="motion sensor on pin %pin"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.width="400"
-    //% weight=27 blockGap=8
+    //% weight=66 blockGap=8
     export function isMotionSensorOn(pin: DigitalPin): boolean {
-        return isOnOffSensorsReadPin(pin);
+        return isSensorOn(pin);
     }
 
     /**
@@ -284,39 +385,56 @@ namespace sensors {
      * @param pin pin to read from
      */
     //% blockId="sensors_is_line_follower_on"
-    //% block="read line follower on pin %pin"
+    //% block="line follower on pin %pin"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.width="400"
-    //% weight=26 blockGap=25
+    //% weight=65 blockGap=25
     export function isLineFollowerOn(pin: DigitalPin): boolean {
-        return isOnOffSensorsReadPin(pin);
+        return isSensorOn(pin);
     }
 
-    //Grove blocks
+    //Other blocks
 
     /**
-     * Create a new driver of Grove - Ultrasonic Sensor to measure distances in cm
-     * @param pin signal pin of ultrasonic ranger module
+     * Gets the soil moisture value and returns true if it is in the range selected by the user.
+     * @param pin pin to read from (P0/P1/P2)
+     * @param range the selected range (dry/saturated/wet)
      */
-    //% blockId="sensors_ultrasonic_centimeters"
-    //% block="Ultrasonic Sensor (in cm) at|%pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
-    //% pin.fieldOptions.width="400"
-    //% weight=25 blockGap=8
-    export function measureInCentimeters(pin: DigitalPin): number {
-        return grove.measureInCentimeters(pin);
+    //% blockId="sensors_get_moisture_value"
+    //% block="moisture on pin %pin| is %range |?"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
+    //% pin.fieldOptions.width="100"
+    //% weight=60 blockGap=8
+    export function getMoistureValue(pin: InitialPins, range: MoistureSensorRange): boolean {
+        const analogPin = pinConverterAnalog(pin);
+        return moistureValueToRange(pins.analogReadPin(analogPin)) == range;
     }
 
     /**
-     * Read value of sound sensor and return if it is in the range selected by the user
-     * @param pin the pin available for sound sensor, availables ports are P0, P1, P2
-     * @param range the range available for sound sensor
+     * Gets the light level on the sensor and returns true if it is in the range selected by the user.
+     * @param pin pin to read from (P0/P1/P2)
+     * @param range the selected range (very clear/clear/shadow/dark/very dark)
+     */
+    //% blockId="sensors_get_light_value"
+    //% block="light level on pin %pin| is %range |?"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
+    //% pin.fieldOptions.width="100"
+    //% weight=59 blockGap=8
+    export function getLightValue(pin: InitialPins, range: LightSensorRange): boolean {
+        const analogPin = pinConverterAnalog(pin);
+        return lightValueToRange(pins.analogReadPin(analogPin)) == range;
+    }
+
+    /**
+     * Read value of sound sensor and return if it is in the range selected by the user.
+     * @param pin pin to read from (P0/P1/P2)
+     * @param range the selected range (low/medium/high)
      */
     //% blockId="sensors_sound_sensor_range"
     //% block="sound on pin %pin| is %range |?"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
     //% pin.fieldOptions.width="100"
-    //% weight=25 blockGap=8
+    //% weight=58 blockGap=8
     export function soundSensorRange(pin: InitialPins, range: SoundSensorRange): boolean {
         const analogPin = pinConverterAnalog(pin);
         let highestValue = pins.analogReadPin(analogPin);
@@ -332,92 +450,18 @@ namespace sensors {
     }
 
     /**
-     * Show a 4 digits number on display
-     * @param tm1637 a Grove driver
-     * @param dispData value of number
+     * Gets the potentiometer value in angle (between 0 and 300) or number (between 0 and 1023).
+     * @param pin pin to read from (P0/P1/P2)
+     * @param type the type that should read (angle/number)
      */
-    //% blockId="sensors_grove_tm1637_display_number"
-    //% block="%x=variables_get|show number|%dispData"
-    //% weight=25 blockGap=8
-    export function show(tm1637: grove.TM1637, dispData: number): void {
-        tm1637.show(dispData);
-    }
-
-    /**
-     * Set the brightness level of display at from 0 to 7
-     * @param tm1637 a Grove driver
-     * @param level value of brightness level
-     */
-    //% blockId="sensors_grove_tm1637_set_display_level"
-    //% block="%x=variables_get|brightness level to|%level"
-    //% level.min=0 level.max=7
-    //% weight=25 blockGap=8
-    export function set(tm1637: grove.TM1637, level: number): void {
-        tm1637.set(level);
-    }
-
-    /**
-     * Create a new driver Grove - 4-Digit Display
-     * @param clkPin value of clk pin number
-     * @param dataPin value of data pin number
-     */
-    //% blockId="sensors_grove_tm1637_create"
-    //% block="4-Digit Display at|%clkPin|and|%dataPin"
-    //% weight=25 blockGap=8
-    export function createDisplay(clkPin: DigitalPin, dataPin: DigitalPin): grove.TM1637 {
-        return grove.createDisplay(clkPin, dataPin);
-    }
-
-    /**
-     * Do something when a gesture is detected by Sensors - Gesture
-     * @param gesture type of gesture to detect
-     * @param handler code to run
-     */
-    //% blockId="sensors_gesture_create_event"
-    //% block="on Gesture|%gesture"
-    //% weight=24 blockGap=25
-    export function onGesture(gesture: GroveGesture, handler: Action) {
-        grove.onGesture(gesture, handler);
-    }
-
-    //Other blocks
-
-    /**
-     * Turn on/off the buzzer
-     * @param status received value on or off, eg: OperationStatus.on
-     * @param pin received pin, eg: BuzzerPins.P8
-     */
-    //% blockId="sensors_turn_on_off_buzzer"
-    //% block="buzzer|in %pin| status %status"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
-    //% pin.fieldOptions.width="400"
-    //% weight=23 blockGap=8
-    export function turnOnOffBuzzer(pin: BuzzerPins, status: OperationStatus): void {
-        const analogPin = pinConverterAnalog(pin);
-        const digitalPin = pinConverterDigital(pin);
-        if (status == 1) {
-            pins.analogSetPitchPin(analogPin);
-        }
-        if (status == 0) {
-            music.beginMelody(music.builtInMelody(Melodies.PowerDown), MelodyOptions.OnceInBackground);
-            pins.digitalReadPin(digitalPin);
-            pins.setPull(digitalPin, PinPullMode.PullDown);
-        }
-    }
-
-    /**
-     * Read number or angle using potentiometer
-     * @param pin the pin available for potentiometer, availables ports are P0, P1, P2
-     * @param t the type that should read, the options are angle or number
-     */
-    //% blockId="sensors_read_potentiometer"
-    //% block="read potentiometer on pin %pin| in %t"
+    //% blockId="sensors_get_potentiometer_value"
+    //% block="potentiometer on pin %pin| in %type"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
     //% pin.fieldOptions.width="100"
-    //% weight=22 blockGap=8
-    export function readPotentiometer(pin: InitialPins, t: PotentiometerReturnType): number {
+    //% weight=57 blockGap=8
+    export function getPotentiometerValue(pin: InitialPins, type: PotentiometerReturnType): number {
         const analogPin = pinConverterAnalog(pin);
-        if (t === PotentiometerReturnType.angle) {
+        if (type === PotentiometerReturnType.angle) {
             return pins.map(
                 pins.analogReadPin(analogPin),
                 0,
@@ -430,42 +474,12 @@ namespace sensors {
         }
     }
 
-    /**
-     * Read value of moisture sensor and return if it is in range selected by user
-     * @param pin the pin available for Moisture Sensor, availables ports are P0, P1, P2
-     * @param range the range available for moisture sensor
-     */
-    //% blockId="sensors_moisture_sensor"
-    //% block="moisture on pin %pin| is %range |?"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
-    //% pin.fieldOptions.width="100"
-    //% weight=21 blockGap=8
-    export function moistureSensor(pin: InitialPins, range: MoistureSensorRange): boolean {
-        const analogPin = pinConverterAnalog(pin);
-        return moistureValueToRange(pins.analogReadPin(analogPin)) == range;
-    }
-
-    /**
-     * Read value of light sensor and return if it is in the range selected by the user
-     * @param pin the pin available for light sensor, availables ports are P0, P1, P2
-     * @param range the range available for light sensor
-     */
-    //% blockId="sensors_light_sensor_range"
-    //% block="light on pin %pin| is %range |?"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
-    //% pin.fieldOptions.width="100"
-    //% weight=20 blockGap=25
-    export function lightSensorRange(pin: InitialPins, range: LightSensorRange): boolean {
-        const analogPin = pinConverterAnalog(pin);
-        return lightValueToRange(pins.analogReadPin(analogPin)) == range;
-    }
-
     const directionEventId = 2998;
     /**
     * Contains the code that will be executed when a joystick position is detected.
     * @param pinX pin regarding the X axis, eg: InitialPins.P0
     * @param pinY pin regarding the Y axis, eg: InitialPins.P1
-    * @param direction type of direction to detect
+    * @param direction position of joystick
     * @param handler code to run
     */
     //% blockId="sensors_joystick_direction"
@@ -474,7 +488,7 @@ namespace sensors {
     //% pinY.fieldEditor="gridpicker" pinY.fieldOptions.columns=1
     //% pinX.fieldOptions.width="100"
     //% pinY.fieldOptions.width="100"
-    //% weight=19 blockGap=8
+    //% weight=56 blockGap=8
     export function joystickDirection(pinX: InitialPins, pinY: InitialPins, direction: JoystickPosition, handler: Action) {
         control.onEvent(directionEventId, direction, handler);
         const analogPinX = pinConverterAnalog(pinX);
@@ -573,6 +587,25 @@ namespace sensors {
     }
 
     /**
+     * Converts SensorsGroveGesture to GroveGesture
+     */
+    function convertSensorGesture(sensorsGesture: number): GroveGesture {
+        switch(sensorsGesture) {
+            case 0: return GroveGesture.None;
+            case 1: return GroveGesture.Right;
+            case 2: return GroveGesture.Left;
+            case 3: return GroveGesture.Up;
+            case 4: return GroveGesture.Down;
+            case 5: return GroveGesture.Forward;
+            case 6: return GroveGesture.Backward;
+            case 7: return GroveGesture.Clockwise;
+            case 8: return GroveGesture.Anticlockwise;
+            case 9: return GroveGesture.Wave;
+            default: return GroveGesture.None;
+        }
+    }
+
+    /**
      * Converts number from 0-100 to speed ranges
      */
     function speedRanges(value: number): number {
@@ -595,9 +628,9 @@ namespace sensors {
     }
 
     /**
-     * Return if is on/off
+     * Return if sensor is on
      */
-    function isOnOffSensorsReadPin(pin: DigitalPin): boolean {
+    function isSensorOn(pin: DigitalPin): boolean {
         const readPin = pins.digitalReadPin(pin);
         pins.setPull(pin, PinPullMode.PullNone);
         return readPin == 0 ? false : true;
@@ -638,14 +671,14 @@ namespace sensors {
     /**
      * Function that converts the steering parameters (right / left) and speed (0 to 100) into a value in degrees that is understood by the continuous servo motor
      */
-    function servoMotorController(value: number, direction: Direction): number {
+    function servoMotorController(value: number, direction: ServoDirection): number {
         if (value > 100) {
             value = 100;
         }
         if (value < 0) {
             value = 0;
         }
-        if (direction == Direction.Right) {
+        if (direction == ServoDirection.clockwise) {
             direction = 1;
         } else {
             direction = -1;
