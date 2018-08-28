@@ -44,6 +44,7 @@
   "sensors.getLightValue|block": "nível de luz no pino %pin| é %range |?",
   "sensors.getMoistureValue|block": "umidade no pino %pin| é %range |?",
   "sensors.getPotentiometerValue|block": "potenciômetro no pino %pin| em %type",
+  "sensors.getTemperatureC|block": "temperatura no pino %pin| com ajuste de %offset",
   "sensors.isButtonPressed|block": "botão no pino %pin| está pressionado",
   "sensors.isCrashSensorPressed|block": "sensor de fim de curso no pino %pin| está pressionado",
   "sensors.isLineFollowerOn|block": "seguidor de linha no pino %pin",

@@ -61,8 +61,13 @@
                           sha == "44014c3b01f47412f8566e9f3b0806800b8529b2cbdf8e3a00300027cf8be6d7.hex" ||
                           sha == "49b00e145698c1b11a27ebbf2d32a20cf020cc73d84c89b0688ad093baffb9b2.hex" ||
                           sha == "57b704532f5f2dbccc176e23b00775540223bbfca61ea052a8fc8e101c651de4.hex" ||
-                          sha == "bec8a7a1af39231699d7635cc057b6059915f4cef55cf4c13ad301027ff3b0c9.hex" ||
-                          sha == "ecf5c6631c7f58cf45ca62199c964db78a92b364ef270ce29e395f78a79d3b78.hex" ||
+                          sha == "9de0b9d6edbde57717c63ec8c3c97f591464a41dbeddf167d916f1def38694fe.hex" ||
+                          sha == "a981a1dfdf24ab05635d2895674e57cd437b5612c95e743a65853fa17a08de53.hex" ||
+                          sha == "7fe7504afbb61271efd7e9a2367b5d6e281a3c8670b6fbaf0aed5b2d70c154b5.hex" ||
+                          sha == "63a345fc910d1ab9d1e77bdd8765ab2588489eb80328239233b5489e45fa32f1.hex" ||
+                          sha == "d0eafb9ada4e4c2759253cc0e93abe16b7915edc24449a5b2a832cd67e4c6979.hex" ||
+                          sha == "f40baa30b7d7778cfdda9fc2df790834a072e8bbe52ad6689b1c5f11f980c802.hex" ||
+                          sha == "6ae9791a36ed347d3f49c1ea7e6c88aa3026fa060156fb5760c41715feee1aba.hex" ||
                           sha == "39a081d162c851e63b9c6519a4731b7d304f73756cfbaa8690aaf1f377386098.hex") {
                             options.url = url + "/api/compile/" + sha;
                         }

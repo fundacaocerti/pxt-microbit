@@ -44,6 +44,7 @@
   "sensors.getLightValue|block": "light level on pin %pin| is %range |?",
   "sensors.getMoistureValue|block": "moisture on pin %pin| is %range |?",
   "sensors.getPotentiometerValue|block": "potentiometer on pin %pin| in %type",
+  "sensors.getTemperatureC|block": "temperature on pin %pin| with offset %offset",
   "sensors.isButtonPressed|block": "button on pin %pin| is pressed",
   "sensors.isCrashSensorPressed|block": "crash sensor on pin %pin| is pressed",
   "sensors.isLineFollowerOn|block": "line follower on pin %pin",

@@ -550,6 +550,22 @@ namespace sensors {
         }
     }
 
+    /**
+     * Gets the temperature in the sensor in degrees Celsius.
+     * @param pin pin to read from (P0/P1/P2)
+     * @param offset the offset in degrees Celsius to adjust the sensor
+     */
+    //% blockId="sensors_get_temperature"
+    //% block="temperature on pin %pin| with offset %offset"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
+    //% pin.fieldOptions.width="100"
+    //% weight=56 blockGap=8
+    //% advanced=true
+    export function getTemperatureC(pin: InitialPins, offset: number): number {
+        const analogPin = pinConverterAnalog(pin);
+        return getTempInDegreesCelsius(pins.analogReadPin(analogPin), offset);
+    }
+
     const directionEventId = 2998;
     /**
     * Contains the code that will be executed when a joystick position is detected.
@@ -564,7 +580,7 @@ namespace sensors {
     //% pinY.fieldEditor="gridpicker" pinY.fieldOptions.columns=1
     //% pinX.fieldOptions.width="100"
     //% pinY.fieldOptions.width="100"
-    //% weight=56 blockGap=8
+    //% weight=55 blockGap=8
     //% advanced=true
     export function joystickDirection(pinX: InitialPins, pinY: InitialPins, direction: JoystickPosition, handler: Action) {
         control.onEvent(directionEventId, direction, handler);
@@ -719,6 +735,15 @@ namespace sensors {
      */
     //% shim=sensors::isOnOffCrashSensor
     function isOnOffCrashSensor(value: boolean): boolean {
+        // Fake function for simulator
+        return value;
+    }
+
+    /**
+     * Function used for simulator get temperature in degrees Celsius, actual implementation is in sensors.cpp
+     */
+    //% shim=sensors::getTempInDegreesCelsius
+    function getTempInDegreesCelsius(value: number, offset: number): number {
         // Fake function for simulator
         return value;
     }

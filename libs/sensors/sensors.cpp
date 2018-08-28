@@ -9,6 +9,11 @@ using namespace pxt;
 namespace sensors {
 
   //%
+  uint32_t getTempInDegreesCelsius(int value, int offset){
+    return (((value * 3200 / 1023) - 500) / 10) + offset;
+  }
+
+  //%
   uint32_t speedServoMotor(int value, int direction) {
     return (uint32_t) value;
   }
