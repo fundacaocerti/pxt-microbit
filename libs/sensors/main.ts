@@ -460,26 +460,35 @@ namespace sensors {
         return lightValueToRange(pins.analogReadPin(analogPin)) == range;
     }
 
+    const directionEventId = 2998;
     /**
-     * two-way joystick block that works similarly to the Cartesian coordinate system (where the first pin is the X axis and the second the Y axis)
-     * @param pinX pin regarding the X axis, eg: InitialPins.P0
-     * @param pinY pin regarding the Y axis, eg: InitialPins.P1
-     * @param direction position of joystick
-     */
-    //% blockId="sensors_joystick"
-    //% block="joystick in pins %pinX| and %pinY| is %direction |?"
+    * Contains the code that will be executed when a joystick position is detected.
+    * @param pinX pin regarding the X axis, eg: InitialPins.P0
+    * @param pinY pin regarding the Y axis, eg: InitialPins.P1
+    * @param direction type of direction to detect
+    * @param handler code to run
+    */
+    //% blockId="sensors_joystick_direction"
+    //% block="when joystick in pins %pinX| and %pinY| is %direction"
     //% pinX.fieldEditor="gridpicker" pinX.fieldOptions.columns=1
     //% pinY.fieldEditor="gridpicker" pinY.fieldOptions.columns=1
     //% pinX.fieldOptions.width="100"
     //% pinY.fieldOptions.width="100"
-    //% weight=22 blockGap=8
-    export function joystick(pinX: InitialPins, pinY: InitialPins, direction: JoystickPosition): boolean {
+    //% weight=19 blockGap=8
+    export function joystickDirection(pinX: InitialPins, pinY: InitialPins, direction: JoystickPosition, handler: Action) {
+        control.onEvent(directionEventId, direction, handler);
         const analogPinX = pinConverterAnalog(pinX);
         const analogPinY = pinConverterAnalog(pinY);
-        let x = pins.analogReadPin(analogPinX);
-        let y = pins.analogReadPin(analogPinY);
-
-        return convertJoystick(x, y) == direction;
+        control.inBackground(() => {
+            while(true) {
+                let x = pins.analogReadPin(analogPinX);
+                let y = pins.analogReadPin(analogPinY);
+                const direction = convertJoystick(x, y);
+                control.raiseEvent(directionEventId, direction);
+                basic.pause(175);
+                control.waitMicros(15000);
+            }
+        })
     }
 
     /**
