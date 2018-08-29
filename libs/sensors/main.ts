@@ -319,7 +319,16 @@ namespace sensors {
     //% weight=25 blockGap=8
     export function soundSensorRange(pin: InitialPins, range: SoundSensorRange): boolean {
         const analogPin = pinConverterAnalog(pin);
-        return soundValueToRange(pins.analogReadPin(analogPin)) == range;
+        let highestValue = pins.analogReadPin(analogPin);
+        let i = 100;
+        while(i >= 0) {
+            let value = pins.analogReadPin(analogPin);
+            if(highestValue < value) {
+                highestValue = value;
+            }
+            i--;
+        }
+        return soundValueToRange(highestValue) == range;
     }
 
     /**
@@ -611,8 +620,8 @@ namespace sensors {
      * Converts number from 0-1023 to sound sensor range
      */
     function soundValueToRange(value: number): SoundSensorRange {
-        if (value >= 0 && value <= 307) return SoundSensorRange.low;
-        else if (value <= 716) return SoundSensorRange.medium;
+        if (value >= 0 && value <= 114) return SoundSensorRange.low;
+        else if (value <= 265) return SoundSensorRange.medium;
         else if (value <= 1023) return SoundSensorRange.high;
         return null;
     }
