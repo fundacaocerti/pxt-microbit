@@ -201,10 +201,10 @@ namespace sensors {
      */
     //% blockId="sensors_create_4d_display"
     //% block="4-Digit Display on pins|%clkPin|and|%dataPin"
-    //% clkPin.fieldEditor="gridpicker" clkPin.fieldOptions.columns=1
-    //% dataPin.fieldEditor="gridpicker" dataPin.fieldOptions.columns=1
-    //% clkPin.fieldOptions.width="100"
-    //% dataPin.fieldOptions.width="100"
+    //% clkPin.fieldEditor="gridpicker" clkPin.fieldOptions.columns=4
+    //% dataPin.fieldEditor="gridpicker" dataPin.fieldOptions.columns=4
+    //% clkPin.fieldOptions.width="400"
+    //% dataPin.fieldOptions.width="400"
     //% weight=88 blockGap=8
     export function create4dDisplay(clkPin: DigitalPin, dataPin: DigitalPin): grove.TM1637 {
         return grove.createDisplay(clkPin, dataPin);
