@@ -10,7 +10,7 @@
     },
     "files": [
         "README.md",
-        "main.ts",
+        "sensors.ts",
         "sensors.cpp",
         "_locales/pt-BR/sensors-strings.json",
         "_locales/es-ES/sensors-strings.json",
