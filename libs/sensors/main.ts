@@ -23,9 +23,9 @@ enum AudioOutputPins {
 
 enum OperationStatus {
     //% block="turn on"
-    turnOn,
+    turnOn = 1,
     //% block="turn off"
-    turnOff
+    turnOff = 0
 }
 
 enum InitialPins {
