@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2018 Fundação CERTI
+ */
+
 #include "pxt.h"
 
 using namespace pxt;

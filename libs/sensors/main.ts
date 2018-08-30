@@ -1,3 +1,6 @@
+/*
+ * Copyright (C) 2018 Fundação CERTI
+ */
 enum AudioOutputPins {
     P0 = 0,
     P1 = 1,
