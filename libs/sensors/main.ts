@@ -229,6 +229,12 @@ namespace sensors {
     //% level.min=0 level.max=7
     //% weight=86 blockGap=25
     export function setBrightness4dDisplay(tm1637: grove.TM1637, level: number): void {
+        if (level >= 7) {
+            level = 7;
+        }
+        if (level <= 0) {
+            level = 0;
+        }
         tm1637.set(level);
     }
 
