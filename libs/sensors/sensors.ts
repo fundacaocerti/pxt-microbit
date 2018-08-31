@@ -318,6 +318,7 @@ namespace sensors {
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.width="400"
     //% weight=70 blockGap=8
+    //% advanced=true
     export function turnOnOffLed(status: OperationStatus, pin: DigitalPin): void {
         pins.digitalReadPin(pin);
         pins.setPull(pin, PinPullMode.PullUp)
@@ -334,6 +335,7 @@ namespace sensors {
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.width="400"
     //% weight=69 blockGap=8
+    //% advanced=true
     export function turnOnOffAudioOutput(status: OperationStatus, pin: AudioOutputPins): void {
         const analogPin = pinConverterAnalog(pin);
         const digitalPin = pinConverterDigital(pin);
@@ -358,6 +360,7 @@ namespace sensors {
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.width="400"
     //% weight=68 blockGap=8
+    //% advanced=true
     export function isButtonPressed(pin: DigitalPin): boolean {
         let buttonPressed = isSensorOn(pin);
         return isOnOffButton(buttonPressed);
@@ -372,6 +375,7 @@ namespace sensors {
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.width="400"
     //% weight=67 blockGap=8
+    //% advanced=true
     export function isTouchSensorOn(pin: DigitalPin): boolean {
         return isSensorOn(pin);
     }
@@ -385,6 +389,7 @@ namespace sensors {
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.width="400"
     //% weight=66 blockGap=8
+    //% advanced=true
     export function isMotionSensorOn(pin: DigitalPin): boolean {
         return isSensorOn(pin);
     }
@@ -398,6 +403,7 @@ namespace sensors {
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.width="400"
     //% weight=65 blockGap=25
+    //% advanced=true
     export function isLineFollowerOn(pin: DigitalPin): boolean {
         //Invert the logic because the sensor is on when it is outside the line
         return !isSensorOn(pin);
@@ -415,6 +421,7 @@ namespace sensors {
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
     //% pin.fieldOptions.width="100"
     //% weight=60 blockGap=8
+    //% advanced=true
     export function getMoistureValue(pin: InitialPins, range: MoistureSensorRange): boolean {
         const analogPin = pinConverterAnalog(pin);
         return moistureValueToRange(pins.analogReadPin(analogPin)) == range;
@@ -430,6 +437,7 @@ namespace sensors {
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
     //% pin.fieldOptions.width="100"
     //% weight=59 blockGap=8
+    //% advanced=true
     export function getLightValue(pin: InitialPins, range: LightSensorRange): boolean {
         const analogPin = pinConverterAnalog(pin);
         return lightValueToRange(pins.analogReadPin(analogPin)) == range;
@@ -445,6 +453,7 @@ namespace sensors {
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
     //% pin.fieldOptions.width="100"
     //% weight=58 blockGap=8
+    //% advanced=true
     export function soundSensorRange(pin: InitialPins, range: SoundSensorRange): boolean {
         const analogPin = pinConverterAnalog(pin);
         let highestValue = pins.analogReadPin(analogPin);
@@ -469,6 +478,7 @@ namespace sensors {
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
     //% pin.fieldOptions.width="100"
     //% weight=57 blockGap=8
+    //% advanced=true
     export function getPotentiometerValue(pin: InitialPins, type: PotentiometerReturnType): number {
         const analogPin = pinConverterAnalog(pin);
         if (type === PotentiometerReturnType.angle) {
@@ -499,6 +509,7 @@ namespace sensors {
     //% pinX.fieldOptions.width="100"
     //% pinY.fieldOptions.width="100"
     //% weight=56 blockGap=8
+    //% advanced=true
     export function joystickDirection(pinX: InitialPins, pinY: InitialPins, direction: JoystickPosition, handler: Action) {
         control.onEvent(directionEventId, direction, handler);
         const analogPinX = pinConverterAnalog(pinX);
