@@ -24,7 +24,7 @@
   "sensors.getPotentiometerValue|param|type": "the type that should read (angle/number)",
   "sensors.isButtonPressed": "Returns the state of the button, true for pressed and false for not pressed.",
   "sensors.isButtonPressed|param|pin": "pin to read from",
-  "sensors.isLineFollowerOn": "Returns the state of line follower, true for on and false for off.",
+  "sensors.isLineFollowerOn": "Returns the state of line follower, true for inside the line and false for outside.",
   "sensors.isLineFollowerOn|param|pin": "pin to read from",
   "sensors.isMotionSensorOn": "Returns true if the sensor is triggered.",
   "sensors.isMotionSensorOn|param|pin": "pin to read from",

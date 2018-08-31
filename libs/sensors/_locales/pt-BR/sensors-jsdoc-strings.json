@@ -24,7 +24,7 @@
   "sensors.getPotentiometerValue|param|type": "o tipo a ser lido (ângulo/número)",
   "sensors.isButtonPressed": "Retorna o estado do botão, verdadeiro para pressionado e falso para não pressionado.",
   "sensors.isButtonPressed|param|pin": "pino a ser lido",
-  "sensors.isLineFollowerOn": "Retorna o estado do seguidor de linha, verdadeiro para dentro e falso para fora.",
+  "sensors.isLineFollowerOn": "Retorna o estado do seguidor de linha, verdadeiro para dentro da linha e falso para fora.",
   "sensors.isLineFollowerOn|param|pin": "pino a ser lido",
   "sensors.isMotionSensorOn": "Retorna verdadeiro se o sensor for acionado.",
   "sensors.isMotionSensorOn|param|pin": "pino a ser lido",

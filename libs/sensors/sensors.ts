@@ -390,7 +390,7 @@ namespace sensors {
     }
 
     /**
-     * Returns the state of line follower, true for on and false for off.
+     * Returns the state of line follower, true for inside the line and false for outside.
      * @param pin pin to read from
      */
     //% blockId="sensors_is_line_follower_on"
@@ -399,7 +399,8 @@ namespace sensors {
     //% pin.fieldOptions.width="400"
     //% weight=65 blockGap=25
     export function isLineFollowerOn(pin: DigitalPin): boolean {
-        return isSensorOn(pin);
+        //Invert the logic because the sensor is on when it is outside the line
+        return !isSensorOn(pin);
     }
 
     //Other blocks
