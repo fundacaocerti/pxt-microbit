@@ -138,12 +138,12 @@ namespace sensors {
     //Neopixel blocks
 
     /**
-     * Set the brightness of the LEDs to a value between 0 and 50.
+     * Set the brightness of the Neopixel LED strip to a value between 0 and 50.
      * @param brightness a measure of LED brightness (0-50), eg: 50
      * @param strip a NeoPixel strip
      */
     //% blockId="sensors_set_leds_brightness"
-    //% block="%x=variables_get|set brightness to %brightness"
+    //% block="%x=variables_get|set LED strip brightness to %brightness"
     //% brightness.max=50, brightness.min=0
     //% weight=100 blockGap=8
     export function setLedsBrightness(strip: neopixel.Strip, brightness: number): void {
@@ -157,11 +157,11 @@ namespace sensors {
     }
 
     /**
-     * Gets the brightness value being used in the LEDs.
+     * Gets the brightness value being used in the Neopixel LED strip.
      * @param strip a NeoPixel strip
      */
     //% blockId="sensors_get_leds_brightness"
-    //% block="%x=variables_get|get brightness"
+    //% block="%x=variables_get|get LED strip brightness"
     //% weight=99 blockGap=25
     export function getLedsBrightness(strip: neopixel.Strip): number {
         return strip.brightness;
@@ -216,7 +216,7 @@ namespace sensors {
      * @param dispData value of number
      */
     //% blockId="sensors_show_number_4d_display"
-    //% block="%x=variables_get|show number|%dispData"
+    //% block="%x=variables_get|show number on display %dispData"
     //% weight=87 blockGap=8
     export function showNumber4dDisplay(tm1637: grove.TM1637, dispData: number): void {
         tm1637.show(dispData);
@@ -228,7 +228,7 @@ namespace sensors {
      * @param level value of brightness level
      */
     //% blockId="sensors_set_brightness_4d_display"
-    //% block="%x=variables_get| set brightness level to|%level"
+    //% block="%x=variables_get| set display brightness to %level"
     //% level.min=0 level.max=7
     //% weight=86 blockGap=25
     export function setBrightness4dDisplay(tm1637: grove.TM1637, level: number): void {
