@@ -62,7 +62,7 @@
                           sha == "49b00e145698c1b11a27ebbf2d32a20cf020cc73d84c89b0688ad093baffb9b2.hex" ||
                           sha == "57b704532f5f2dbccc176e23b00775540223bbfca61ea052a8fc8e101c651de4.hex" ||
                           sha == "8feade7bc0cfe17f1eae68cbe2fc1ccf855cb280ee27b23f6989824450307d04.hex" ||
-                          sha == "6ae9791a36ed347d3f49c1ea7e6c88aa3026fa060156fb5760c41715feee1aba.hex") {
+                          sha == "f85e6de3c35027428b4de53ea7da0f31ae830e2b8133f9f3bb5a095ea10a570f.hex") {
                             options.url = url + "/api/compile/" + sha;
                         }
                     }
