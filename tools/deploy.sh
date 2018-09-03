@@ -84,6 +84,9 @@ sed -i 's/if (e.statusCode == 0) {/if(options.url.indexOf(\"\/api\/scripts\") > 
 #set weatherbit version
 sed -i 's/\"weatherbit\": \"\*\"/\"weatherbit\": \"github:sparkfun\/pxt-weather-bit#v0.0.10\"/g' $PACKAGED/target.js
 
+#set sensors version
+sed -i 's/\"sensors\": \"\*\"/\"sensors\": \"github:fundacaocerti\/pxt-sensors\"/g' $PACKAGED/target.js
+
 #set neopixel version
 sed -i 's/\\"neopixel\\": \\"\*\\"/\\"neopixel\\": \\"github:microsoft\/pxt-neopixel#v0.4.1\\"/g' $PACKAGED/target.js
 
@@ -94,7 +97,7 @@ sed -i 's/\\"Grove\\": \\"\*\\"/\\"Grove\\": \\"github:seeed-studio\/pxt-grove#v
 sed -i 's/helpUrl: \"\/packages\"/helpUrl: \"https:\/\/makecode.microbit.org\/packages\"/g' $PACKAGED/main.js
 
 #change neopixel, grove and weatherbit versions when they are added by 'Add package' button
-sed -i -e '/addDepIfNoConflict(scr, "\*")/r./resources\/replacements\/change-external-packages-versions.js' -e 's/addDepIfNoConflict(scr, "\*")//' $PACKAGED/main.js
+sed -i -e '/addDepIfNoConflict(scr, "\*")/r./resources\/replacements\/change-external-packages-versions-main.js' -e 's/addDepIfNoConflict(scr, "\*")//' $PACKAGED/main.js
 
 #add code to change the urls to redirect to local files or to the correct external file
 sed -i '/var headers = pxtc.Util.clone(options.headers) || {};/r./resources\/replacements\/change-url-pxtlib.js' $PACKAGED/pxtlib.js
