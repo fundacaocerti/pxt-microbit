@@ -67,6 +67,14 @@
                         }
                     }
 
+                    if(options.url.indexOf("https://www.pxt.io/api/gh/microsoft/pxt-neopixel/v0.4.1/text") > -1 ) {
+                        options.url = url + "/api/neopixel.json";
+                    }
+
+                    if(options.url.indexOf("https://www.pxt.io/api/gh/seeed-studio/pxt-grove/v0.1.0/text") > -1 ) {
+                        options.url = url + "/api/grove.json";
+                    }
+
                     // Share project url
                     if(options.url == "/./scripts"){
                         options.url =  "https://makecode.microbit.org/api/scripts";
