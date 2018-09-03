@@ -2,6 +2,8 @@
  * Copyright (C) 2018 Fundação CERTI
  */
 enum AudioOutputPins {
+    //% block="internal"
+    P8 = 8,
     P0 = 0,
     P1 = 1,
     P2 = 2,
@@ -10,8 +12,6 @@ enum AudioOutputPins {
     P5 = 5,
     P6 = 6,
     P7 = 7,
-    //% block="internal"
-    P8 = 8,
     P9 = 9,
     P10 = 10,
     P11 = 11,
@@ -196,7 +196,7 @@ namespace sensors {
 
     /**
      * Create Grove 4-Digit Display in the selected pins.
-     * @param clkPin value of CLK pin number, eg:DigitalPin.P0
+     * @param clkPin value of CLK pin number
      * @param dataPin value of data pin number, eg:DigitalPin.P1
      */
     //% blockId="sensors_create_4d_display"
@@ -245,7 +245,7 @@ namespace sensors {
 
     /**
      * Triggers the servo motor in the selected direction and speed (0 to 100%).
-     * @param direction turning direction, eg: ServoDirection.clockwise
+     * @param direction turning direction
      * @param value speed value from 0 to 100%, eg: 100
      */
     //% blockId="sensors_continuous_servo_write_pin_13"
@@ -266,7 +266,7 @@ namespace sensors {
 
     /**
      * Triggers the servo motor in the selected direction and speed (0 to 100%).
-     * @param direction turning direction, eg: ServoDirection.clockwise
+     * @param direction turning direction
      * @param value speed value from 0 to 100%, eg: 100
      */
     //% blockId="sensors_continuous_servo_write_pin_14"
@@ -287,7 +287,7 @@ namespace sensors {
 
     /**
      * Triggers the servo motor in the selected direction and speed (0 to 100%).
-     * @param direction turning direction, eg: ServoDirection.clockwise
+     * @param direction turning direction
      * @param value speed value from 0 to 100%, eg: 100
      */
     //% blockId="sensors_continuous_servo_write_pin_15"
@@ -311,7 +311,7 @@ namespace sensors {
     /**
      * Turns a LED on/off.
      * @param pin pin to read and write on
-     * @param status status of the LED (turn on/turn off), eg: OperationStatus.turnOn
+     * @param status status of the LED (turn on/turn off)
      */
     //% blockId="sensors_turn_on_off_led"
     //% block="%status| LED on pin %pin"
@@ -327,8 +327,8 @@ namespace sensors {
 
     /**
      * Turn on/off the audio output.
-     * @param status received value (turn on/turn off), eg: OperationStatus.turnOn
-     * @param pin pin to read from, eg: AudioOutputPins.P8
+     * @param status received value (turn on/turn off)
+     * @param pin pin to read from
      */
     //% blockId="sensors_turn_on_off_audio_output"
     //% block="%status| audio output on pin %pin"
@@ -497,7 +497,7 @@ namespace sensors {
     const directionEventId = 2998;
     /**
     * Contains the code that will be executed when a joystick position is detected.
-    * @param pinX pin regarding the X axis, eg: InitialPins.P0
+    * @param pinX pin regarding the X axis
     * @param pinY pin regarding the Y axis, eg: InitialPins.P1
     * @param direction position of joystick
     * @param handler code to run
