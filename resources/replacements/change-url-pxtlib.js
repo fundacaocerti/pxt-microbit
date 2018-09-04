@@ -67,12 +67,20 @@
                         }
                     }
 
-                    if(options.url.indexOf("https://www.pxt.io/api/gh/microsoft/pxt-neopixel/v0.4.1/text") > -1 ) {
-                        options.url = url + "/api/neopixel.json";
+                    if(options.url == "https://www.pxt.io/api/gh/microsoft/pxt-neopixel/v0.4.1/text") {
+                        options.url = url + "/api/pxt-neopixel-text.json";
                     }
 
-                    if(options.url.indexOf("https://www.pxt.io/api/gh/seeed-studio/pxt-grove/v0.1.0/text") > -1 ) {
-                        options.url = url + "/api/grove.json";
+                    if(options.url == "https://www.pxt.io/api/gh/microsoft/pxt-neopixel") {
+                        options.url = url + "/api/pxt-neopixel.json";
+                    }
+
+                    if(options.url == "https://www.pxt.io/api/gh/seeed-studio/pxt-grove/v0.1.0/text") {
+                        options.url = url + "/api/pxt-grove-text.json";
+                    }
+
+                    if(options.url == "https://www.pxt.io/api/gh/seeed-studio/pxt-grove") {
+                        options.url = url + "/api/pxt-grove.json";
                     }
 
                     // Share project url
