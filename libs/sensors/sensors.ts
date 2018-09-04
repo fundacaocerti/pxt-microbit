@@ -700,9 +700,9 @@ namespace sensors {
             value = 0;
         }
         if (direction == ServoDirection.clockwise) {
-            direction = 1;
-        } else {
             direction = -1;
+        } else {
+            direction = 1;
         }
         let range = speedRanges(value);
         value = ((range * 90) / 100);
