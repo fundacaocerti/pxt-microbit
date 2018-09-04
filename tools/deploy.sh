@@ -16,6 +16,7 @@ fi
 echo "deploying for: " $BROSWER
 
 PACKAGED=$DEPLOY"/microbit"      #static html packaged abs path
+PACKAGED_DOCS=$PACKAGED"/docs"
 PACKAGED_API=$PACKAGED"/api"
 PACKAGED_COMPILE=$PACKAGED"/api/compile"
 BUILT=$DIR"/built"
@@ -33,6 +34,9 @@ pxt staticpkg
 mkdir -p $DEPLOY
 cp -r $BUILT/packaged $PACKAGED
 mkdir -p $PACKAGED_COMPILE
+
+#remove docs folder not used in the extension
+rm -rf $PACKAGED_DOCS
 
 cp $BUILT_HEX_CACHE/* $PACKAGED_COMPILE
 
