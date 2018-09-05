@@ -27,6 +27,7 @@ RESOURCES_LOGOS=$DIR"/resources/logos"
 PEMFILE=$RESOURCES_EXTENSION"/microbit.pem"    #pem file abs path
 SHA_BLOCKSPRJ=$( sed -n 's/.*"sha": "\(.*\)",/\1/p' libs/blocksprj/built/yt/buildcache.json )
 SHA_TSPRJ=$( sed -n 's/.*"sha": "\(.*\)",/\1/p' libs/tsprj/built/yt/buildcache.json )
+EXTENSION_VERSION=$DIR"/.extensionversion"
 
 rm -rf $DEPLOY
 rm -rf $BUILT
@@ -53,7 +54,8 @@ do
     sed -i ':a;N;$!ba;s/\n/\\r\\n/g' $PACKAGED_COMPILE/$sha.json
 done
 
-#copy resources api and logos folders to deploy
+#copy extension version file and resources api and logos folders to deploy
+cp -r $EXTENSION_VERSION $PACKAGED
 cp -r $RESOURCES_API $PACKAGED
 cp -r $RESOURCES_LOGOS $PACKAGED
 
