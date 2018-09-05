@@ -57,6 +57,7 @@
   "Call the user-defined function.": "Chama a função definida pelo usuário.",
   "Cancel": "Cancelar",
   "Cannot add {0} package": "Não é possível adicionar o pacote {0}",
+  "Cannot access {0} while offline": "Não é possível acessar {0} enquanto estiver sem conexão",
   "Cannot load image": "Não foi possível carregar a imagem",
   "Cannot load package: {0}": "Não foi possível carregar o pacote: {0}",
   "Changes the value of item by 1": "Adiciona 1 ao valor do item",
