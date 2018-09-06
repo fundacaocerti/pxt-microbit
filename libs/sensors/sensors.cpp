@@ -14,8 +14,8 @@ namespace sensors {
   }
 
   //%
-  bool isOnOffButton(bool value) {
-    // Invert the return of the button on micro:bit because it is active-low
+  bool isOnOffCrashSensor(bool value) {
+    // Invert the return of the crash sensor on micro:bit because it is active-low
     return !value;
   }
 }

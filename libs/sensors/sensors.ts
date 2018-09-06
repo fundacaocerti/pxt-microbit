@@ -352,6 +352,21 @@ namespace sensors {
     //Is sensor on/off blocks
 
     /**
+     * Returns the state of the crash sensor, true for pressed and false for not pressed.
+     * @param pin pin to read from
+     */
+    //% blockId="sensors_is_crash_sensor_pressed"
+    //% block="crash sensor on pin %pin| is pressed"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
+    //% pin.fieldOptions.width="400"
+    //% weight=68 blockGap=8
+    //% advanced=true
+    export function isCrashSensorPressed(pin: DigitalPin): boolean {
+        let crashSensor = isSensorOn(pin);
+        return isOnOffCrashSensor(crashSensor);
+    }
+
+    /**
      * Returns the state of the button, true for pressed and false for not pressed.
      * @param pin pin to read from
      */
@@ -362,8 +377,7 @@ namespace sensors {
     //% weight=68 blockGap=8
     //% advanced=true
     export function isButtonPressed(pin: DigitalPin): boolean {
-        let buttonPressed = isSensorOn(pin);
-        return isOnOffButton(buttonPressed);
+        return isSensorOn(pin);
     }
 
     /**
@@ -658,11 +672,11 @@ namespace sensors {
     }
 
     /**
-     * The button is active-low (0 = pressed, 1 = unpressed), while on simulator it is active-high
+     * The crash sensor is active-low (0 = pressed, 1 = not pressed), while on simulator it is active-high
      * Micro:bit implementation is in sensors.cpp
      */
-    //% shim=sensors::isOnOffButton
-    function isOnOffButton(value: boolean): boolean {
+    //% shim=sensors::isOnOffCrashSensor
+    function isOnOffCrashSensor(value: boolean): boolean {
         // Fake function for simulator
         return value;
     }
