@@ -116,3 +116,6 @@ sed -i -e "/window.open(url, 'docs');/r./resources\/replacements\/change-url-mai
 
 #add code to change url to the correct help files path on external packages
 sed -i "/+ m\[2\];/r./resources\/replacements\/change-help-url-main.js" $PACKAGED/main.js
+
+#add code to change the cookie banner url to redirect to local file
+sed -i '/function httpGetAsync(url, cb) {/r./resources\/replacements\/change-url-cookie-banner-pxtweb.js' $PACKAGED/pxtweb.js
