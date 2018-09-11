@@ -699,8 +699,8 @@ namespace sensors {
     */
     function moistureValueToRange(value: number): MoistureSensorRange {
         if (value >= 0 && value <= 300) return MoistureSensorRange.dry;
-        if (value > 300 && value <= 700) return MoistureSensorRange.wet;
-        if (value > 700 && value <= 950) return MoistureSensorRange.saturated;
+        if (value > 300 && value <= 600) return MoistureSensorRange.wet;
+        if (value > 600 && value <= 1023) return MoistureSensorRange.saturated;
         return null;
     }
 
