@@ -37,12 +37,6 @@ enum InitialPins {
     P2 = 2
 }
 
-enum ServoPins {
-    P13 = 13,
-    P14 = 14,
-    P15 = 15
-}
-
 enum ServoDirection {
     //% block="clockwise"
     clockwise,
@@ -251,8 +245,6 @@ namespace sensors {
     //% blockId="sensors_continuous_servo_write_pin_13"
     //% block="continuous servo motor on pin 13 rotate | %direction| with speed %value| %"
     //% value.min=0 value.max=100
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
-    //% pin.fieldOptions.width="100"
     //% weight=80 blockGap=8
     export function continuousServoWritePin13(direction: ServoDirection, value: number): void {
         if (value != 0) {
@@ -272,8 +264,6 @@ namespace sensors {
     //% blockId="sensors_continuous_servo_write_pin_14"
     //% block="continuous servo motor on pin 14 rotate | %direction| with speed %value| %"
     //% value.min=0 value.max=100
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
-    //% pin.fieldOptions.width="100"
     //% weight=79 blockGap=8
     export function continuousServoWritePin14(direction: ServoDirection, value: number): void {
         if (value != 0) {
@@ -293,9 +283,7 @@ namespace sensors {
     //% blockId="sensors_continuous_servo_write_pin_15"
     //% block="continuous servo motor on pin 15 rotate | %direction| with speed %value| %"
     //% value.min=0 value.max=100
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=1
-    //% pin.fieldOptions.width="100"
-    //% weight=78 blockGap=25
+    //% weight=78 blockGap=8
     export function continuousServoWritePin15(direction: ServoDirection, value: number): void {
         if (value != 0) {
             pins.servoWritePin(AnalogPin.P15, servoMotorController(value, direction));
@@ -304,6 +292,60 @@ namespace sensors {
             pins.digitalReadPin(DigitalPin.P15);
             pins.pulseIn(DigitalPin.P15, PulseValue.Low);
         }
+    }
+
+    /**
+     * Rotates the servo motor to the selected angle (between 0 and 180).
+     * @param angle angle value
+     */
+    //% blockId="sensors_servo_write_pin_13"
+    //% block="rotate servo motor on pin 13 in angle %angle"
+    //% angle.min=0 angle.max=180
+    //% weight=77 blockGap=8
+    export function servoWritePin13(angle: number): void {
+        if (angle <= 0) {
+            angle = 0;
+        }
+        if (angle > 180) {
+            angle = 180;
+        }
+        pins.servoWritePin(AnalogPin.P13, angle);
+    }
+
+    /**
+     * Rotates the servo motor to the selected angle (between 0 and 180).
+     * @param angle angle value
+     */
+    //% blockId="sensors_servo_write_pin_14"
+    //% block="rotate servo motor on pin 14 in angle %angle"
+    //% angle.min=0 angle.max=180
+    //% weight=76 blockGap=8
+    export function servoWritePin14(angle: number): void {
+        if (angle <= 0) {
+            angle = 0;
+        }
+        if (angle > 180) {
+            angle = 180;
+        }
+        pins.servoWritePin(AnalogPin.P14, angle);
+    }
+
+    /**
+     * Rotates the servo motor to the selected angle (between 0 and 180).
+     * @param angle angle value
+     */
+    //% blockId="sensors_servo_write_pin_15"
+    //% block="rotate servo motor on pin 15 in angle %angle"
+    //% angle.min=0 angle.max=180
+    //% weight=75 blockGap=25
+    export function servoWritePin15(angle: number): void {
+        if (angle <= 0) {
+            angle = 0;
+        }
+        if (angle > 180) {
+            angle = 180;
+        }
+        pins.servoWritePin(AnalogPin.P15, angle);
     }
 
     //Turn on/off blocks
