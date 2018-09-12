@@ -1,3 +1,3 @@
-        if(chrome.cookies !== undefined){
+        if (chrome.cookies !== undefined) {
             localStorage.setItem("lang", chrome.cookies);
         }
