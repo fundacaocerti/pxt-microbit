@@ -119,3 +119,14 @@ sed -i "/+ m\[2\];/r./resources\/replacements\/change-help-url-main.js" $PACKAGE
 
 #add code to change the cookie banner url to redirect to local file
 sed -i '/function httpGetAsync(url, cb) {/r./resources\/replacements\/change-url-cookie-banner-pxtweb.js' $PACKAGED/pxtweb.js
+
+if [ "$BROSWER" == "edge" ]; then
+    #add method get language of cache in Microsoft Edge
+    sed -i '/function getCookieLang() {/r./resources\/replacements\/get-language-cache.js' $PACKAGED/main.js
+
+    #add method set language of cache in Microsoft Edge
+    sed -i '/document.cookie = pxtLangCookieId + \"=\" + langId + \"; expires=\" + expiration.toUTCString();/r./resources\/replacements\/set-language-cache.js' $PACKAGED/main.js
+
+    #change document.cookie to chrome.cookies in Microsoft Edge
+    sed -i 's/document.cookie/chrome.cookies/g' $PACKAGED/main.js
+fi
