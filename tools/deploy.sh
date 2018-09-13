@@ -5,15 +5,15 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )" #absolute root dir
 
 if [ "$1" == "edge" ]; then
-    BROSWER="edge"
+    BROWSER="edge"
     DEPLOY=$DIR"/deploy-edge"
     RESOURCES_EXTENSION=$DIR"/resources/edge"
 else
-    BROSWER="chrome"
+    BROWSER="chrome"
     DEPLOY=$DIR"/deploy"
     RESOURCES_EXTENSION=$DIR"/resources/chrome"
 fi
-echo "deploying for: " $BROSWER
+echo "deploying for: " $BROWSER
 
 PACKAGED=$DEPLOY"/microbit"      #static html packaged abs path
 PACKAGED_DOCS=$PACKAGED"/docs"
@@ -71,8 +71,8 @@ sed -i 's/\(\"availableLocales\": \[\)/"availableLocales": [\n\t\t\t"en",\n\t\t\
 #change isStatic to false to redirect the help urls correctly
 sed -i 's/\(\"isStatic\": true\)/"isStatic": false/g' $PACKAGED/embed.js
 
-#check if broswer is Chrome or Edge and change popout to redirect to the correct url.
-if [ "$BROSWER" == "edge" ]; then
+#check if browser is Chrome or Edge and change popout to redirect to the correct url.
+if [ "$BROWSER" == "edge" ]; then
     sed -i -e "/window.open(url, \"_blank\");/r./resources\/replacements\/change-docs-url-pxtrunner-edge.js" -e "s/window.open(url, \"_blank\");//" $PACKAGED/pxtrunner.js
 else
     sed -i -e "/window.open(url, \"_blank\");/r./resources\/replacements\/change-docs-url-pxtrunner-chrome.js" -e "s/window.open(url, \"_blank\");//" $PACKAGED/pxtrunner.js
@@ -120,7 +120,7 @@ sed -i "/+ m\[2\];/r./resources\/replacements\/change-help-url-main.js" $PACKAGE
 #add code to change the cookie banner url to redirect to local file
 sed -i '/function httpGetAsync(url, cb) {/r./resources\/replacements\/change-url-cookie-banner-pxtweb.js' $PACKAGED/pxtweb.js
 
-if [ "$BROSWER" == "edge" ]; then
+if [ "$BROWSER" == "edge" ]; then
     #add method get language of cache in Microsoft Edge
     sed -i '/function getCookieLang() {/r./resources\/replacements\/get-language-cache-main.js' $PACKAGED/main.js
 
