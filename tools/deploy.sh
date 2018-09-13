@@ -130,3 +130,7 @@ if [ "$BROWSER" == "edge" ]; then
     #change document.cookie to chrome.cookies in Microsoft Edge
     sed -i 's/document.cookie/chrome.cookies/g' $PACKAGED/main.js
 fi
+
+#Add control to check if 'appInsights.queue' is not undefined before use it
+sed -i 's/window.appInsights=appInsights;/window.appInsights=appInsights;\n\t\tif(appInsights.queue !== undefined){/g' $PACKAGED/index.html
+sed -i 's/appInsights.trackPageView/}\n\t\tappInsights.trackPageView/g' $PACKAGED/index.html
