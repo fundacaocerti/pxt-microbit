@@ -66,7 +66,6 @@
                           sha == "57b704532f5f2dbccc176e23b00775540223bbfca61ea052a8fc8e101c651de4.hex" ||
                           sha == "622bbf72b6cba388ff39d61870333a8065a16481a05d1ecc90e88edc475cd141.hex" ||
                           sha == "2346ac59b9f57fd973d9af21f1a76f26549cf8498227943cde53cc769b99b02f.hex" ||
-                          sha == "44014c3b01f47412f8566e9f3b0806800b8529b2cbdf8e3a00300027cf8be6d7.hex" ||
                           sha == "15241636e0fdd0a063d3e2acf96add498ab09d38097791c231e1609a447b266b.hex" ||
                           sha == "95007735e7d19a32b8634ec3ded0acf4329382362e8d02c7bbb8fb1f5b6ad94f.hex" ||
                           sha == "a981a1dfdf24ab05635d2895674e57cd437b5612c95e743a65853fa17a08de53.hex" ||
