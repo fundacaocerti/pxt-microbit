@@ -13,10 +13,10 @@
         "sensors.ts",
         "sensors.cpp",
         "_locales/pt-br/sensors-strings.json",
-        "_locales/es-es/sensors-strings.json",
+        "_locales/es/sensors-strings.json",
         "_locales/en/sensors-strings.json",
         "_locales/pt-br/sensors-jsdoc-strings.json",
-        "_locales/es-es/sensors-jsdoc-strings.json",
+        "_locales/es/sensors-jsdoc-strings.json",
         "_locales/en/sensors-jsdoc-strings.json"
     ],
     "testFiles": [

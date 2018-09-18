@@ -65,8 +65,8 @@ cp $PACKAGED_API/clientconfig $PACKAGED/clientconfig.json
 #copy extension required files
 cp -r $RESOURCES_EXTENSION/* $PACKAGED
 
-#change availableLocales in target.js to just use 3 languages: en, es-ES, pt-BR
-sed -i 's/\(\"availableLocales\": \[\)/"availableLocales": [\n\t\t\t"en",\n\t\t\t"es-ES",\n\t\t\t"pt-BR"\n\t\t],\n\t\t"allAvailableLocales": [/g' $PACKAGED/target.js
+#change availableLocales in target.js to just use 3 languages: en, es, pt-BR
+sed -i 's/\(\"availableLocales\": \[\)/"availableLocales": [\n\t\t\t"en",\n\t\t\t"es",\n\t\t\t"pt-BR"\n\t\t],\n\t\t"allAvailableLocales": [/g' $PACKAGED/target.js
 
 #change isStatic to false to redirect the help urls correctly
 sed -i 's/\(\"isStatic\": true\)/"isStatic": false/g' $PACKAGED/embed.js
