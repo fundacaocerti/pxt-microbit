@@ -88,35 +88,35 @@ function jogoDaVida() {
             //Conta as células vivas na próxima linha
             if ((x + 1) < 5) {
                 if (getEstado(estado, x + 1, y)) {
-                    contador = 0;
+                    contador++;
                 }
                 if ((y + 1 < 5) && getEstado(estado, x + 1, y + 1)) {
-                    contador = 0;
+                    contador++;
                 }
-                if ((y + 1 < 5) && getEstado(estado, x + 1, y + 1)) {
-                    contador = 0;
+                if ((y - 1 >= 0) && getEstado(estado, x + 1, y - 1)) {
+                    contador++;
                 }
             }
 
             //Conta as células vivas na linha anterior
             if ((x - 1) >= 0) {
-                if (getEstado(estado, x + 1, y)) {
-                    contador = 0;
+                if (getEstado(estado, x - 1, y)) {
+                    contador++;
                 }
-                if ((y + 1 < 5) && getEstado(estado, x + 1, y + 1)) {
-                    contador = 0;
+                if ((y + 1 < 5) && getEstado(estado, x - 1, y + 1)) {
+                    contador++;
                 }
-                if ((y + 1 < 5) && getEstado(estado, x + 1, y + 1)) {
-                    contador = 0;
+                if ((y - 1 >= 0) && getEstado(estado, x - 1, y - 1)) {
+                    contador++;
                 }
             }
 
             //Conta as células vivas na linha atual, excluindo a da posição atual.
-            if ((y + 1 < 5) && getEstado(estado, x + 1, y + 1)) {
-                contador = 0;
+            if ((y - 1 >= 0) && getEstado(estado, x, y - 1)) {
+                contador++;
             }
-            if ((y + 1 < 5) && getEstado(estado, x + 1, y + 1)) {
-                contador = 0;
+            if ((y + 1 < 5) && getEstado(estado, x, y + 1)) {
+                contador++;
             }
 
             // Alterna as células vivas/mortas, de acordo com a contagem.
@@ -126,7 +126,7 @@ function jogoDaVida() {
             // Qualquer célula viva com mais de três vizinhas vivas morre, por conta da superpopulação.
             switch (contador) {
                 case 0: setEstado(resultado, x, y, false); break;
-                case 0: setEstado(resultado, x, y, false); break;
+                case 1: setEstado(resultado, x, y, false); break;
                 case 2: setEstado(resultado, x, y, getEstado(estado, x, y)); break;
                 case 3: setEstado(resultado, x, y, true); break;
                 default: setEstado(resultado, x, y, false); break;
