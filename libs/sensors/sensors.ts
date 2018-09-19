@@ -299,7 +299,7 @@ namespace sensors {
      * @param angle angle value
      */
     //% blockId="sensors_servo_write_pin_13"
-    //% block="rotate servo motor on pin 13 in angle %angle"
+    //% block="rotate servo motor on pin 13 to angle %angle"
     //% angle.min=0 angle.max=180
     //% weight=77 blockGap=8
     export function servoWritePin13(angle: number): void {
@@ -317,7 +317,7 @@ namespace sensors {
      * @param angle angle value
      */
     //% blockId="sensors_servo_write_pin_14"
-    //% block="rotate servo motor on pin 14 in angle %angle"
+    //% block="rotate servo motor on pin 14 to angle %angle"
     //% angle.min=0 angle.max=180
     //% weight=76 blockGap=8
     export function servoWritePin14(angle: number): void {
@@ -335,7 +335,7 @@ namespace sensors {
      * @param angle angle value
      */
     //% blockId="sensors_servo_write_pin_15"
-    //% block="rotate servo motor on pin 15 in angle %angle"
+    //% block="rotate servo motor on pin 15 to angle %angle"
     //% angle.min=0 angle.max=180
     //% weight=75 blockGap=25
     export function servoWritePin15(angle: number): void {
