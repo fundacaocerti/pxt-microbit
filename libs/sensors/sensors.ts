@@ -551,7 +551,7 @@ namespace sensors {
     }
 
     /**
-     * Gets the temperature in the sensor in degrees Celsius.
+     * Gets the temperature in the sensor in degrees Celsius, with optional adjustment to increase accuracy.
      * @param pin pin to read from (P0/P1/P2)
      * @param offset the offset in degrees Celsius to adjust the sensor
      */

@@ -22,7 +22,7 @@
   "sensors.getPotentiometerValue": "Obtém o valor do potenciômetro em ângulo (entre 0 e 300) ou número (entre 0 e 1023).",
   "sensors.getPotentiometerValue|param|pin": "pino a ser lido (P0/P1/P2)",
   "sensors.getPotentiometerValue|param|type": "o tipo a ser lido (ângulo/número)",
-  "sensors.getTemperatureC": "Obtém a temperatura no sensor em graus célsius.",
+  "sensors.getTemperatureC": "Obtém a temperatura no sensor em graus célsius, com ajuste opcional para aumentar a precisão.",
   "sensors.getTemperatureC|param|offset": "valor em graus célsius para ajustar o sensor",
   "sensors.getTemperatureC|param|pin": "pino a ser lido (P0/P1/P2)",
   "sensors.isButtonPressed": "Retorna o estado do botão, verdadeiro para pressionado e falso para não pressionado.",
