@@ -15,7 +15,7 @@ Dependiendo de la distribución de las células vivas al iniciar el juego, algun
 
 ## Simulación del Juego de la Vida en los LEDs
 
-Una simulación de la vida en la matriz de LEDs. Utiliza el botón `A` para la próxima repetición del juego de la vida y utiliza el botón `B` para reiniciar.
+Una simulación de la vida en la matriz de LEDs. Utiliza el botón ``A`` para la próxima repetición del juego de la vida y utiliza el botón ``B`` para reiniciar.
 
 ```blocks
 //https://es.wikipedia.org/wiki/Juego_de_la_vida

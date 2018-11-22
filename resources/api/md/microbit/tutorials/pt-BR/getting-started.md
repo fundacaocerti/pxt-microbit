@@ -53,7 +53,7 @@ no espaço ``||input:quando agitar||`` para criar um dado.
 
 ###   
 
-Quando a @boardname@ for agitada, um número aleatório entre ``0`` and ``6`` aparecerá
+Quando a @boardname@ for agitada, um número aleatório entre ``0`` e ``6`` aparecerá
 no display.
 
 ```block

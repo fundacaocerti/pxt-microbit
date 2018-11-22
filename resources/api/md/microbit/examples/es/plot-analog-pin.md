@@ -1,6 +1,6 @@
 # Gráfico Puerta analógica
 
-Utiliza este programa para trazar un gráfico del valor analógico de la puerta `P0`, `P1` o `P2`. Presiona `A` para rodar el valor en el display.
+Utiliza este programa para trazar un gráfico del valor analógico de la puerta ``P0``, ``P1`` o ``P2``. Presiona ``A`` para rodar el valor en el display.
 
 ```blocks
 let reading = 0

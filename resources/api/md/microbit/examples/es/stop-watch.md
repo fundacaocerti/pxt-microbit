@@ -1,6 +1,6 @@
 # Cronómetro
 
-Presiona `A` para iniciar el cronómetro. Presiona `A` otra vez para parar y mostrar el tiempo transcurrido.
+Presiona ``A`` para iniciar el cronómetro. Presiona ``A`` otra vez para parar y mostrar el tiempo transcurrido.
 
 ```blocks
 let ms = 0

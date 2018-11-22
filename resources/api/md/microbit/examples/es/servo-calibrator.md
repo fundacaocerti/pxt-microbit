@@ -1,7 +1,7 @@
 # Servo-calibrador
 
 Utiliza este programa para calibrar los ángulos de un servomotor.
-Presiona `A` para reducir el ángulo en 5 grados y `B` para
+Presiona ``A`` para reducir el ángulo en 5 grados y ``B`` para
 aumentarlo en 5.
 
 El ángulo actual es presentado en el display
