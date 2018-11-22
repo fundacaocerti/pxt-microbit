@@ -1,39 +1,39 @@
-# Game of Life
+# Juego de la vida
 
-The [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) simulates life in a grid world (a two-dimensional block of cells). The cells in the grid have a state of "alive" or "dead". The game starts with a population of cells placed in a certain pattern on the grid. A simulation is run, and based on some simple rules for life and death, cells continue to live, die off, or reproduce.
+El [Juego de la vida](https://es.wikipedia.org/wiki/Juego_de_la_vida) simula la vida en un mundo-tablero (bidimensional). Cada célula en el tablero puede estar en estado "viva" o "muerta". El juego comienza con una población de células distribuídas en un determinado patrón del tablero. Se ejecuta una simulación y, según algunas reglas simples de vida y de muerte, las células continúan viviendo, mueren o se reproducen.
 
-## Rules for Life
+## Reglas de la vida
 
-The rules for life in the grid are:
+Las reglas de la vida en el tablero son:
 
-1. A living cell with less than two live cells next to it will die. This is underpopulation, no social support.
-2. A living cell with two or three live cells next to it continues to live. This is a healthy population.
-3. A living cell with more than three live cells next to it will die. This is over overpopulation, scarce resources.
-4. A dead cell with three live cells next to it turns into a living cell. This is reproduction.
+1. Una célula viva con menos de dos células vivas vecinas a ella morirá. Se trata de subpoblación, sin soporte social.
+2. Una célula viva con dos o tres células vivas vecinas a ella continúa viviendo. Es una población saludable.
+3. Una célula viva con más de tres células vivas vecinas a ella morirá. Se trata de sobrepoblación, recursos escasos.
+4. Una célula muerta con tres células vivas vecinas a ella se transforma en una célula viva. Se trata de reproducción.
 
-Depending on the pattern of living cells at the start of the game, some population simulations may survive longer than others.
+Dependiendo de la distribución de las células vivas al iniciar el juego, algunas simulaciones de poblaciones pueden sobrevivir más tiempo que otras.
 
-## Game of Life simulation in LEDs
+## Simulación del Juego de la Vida en los LEDs
 
-A simulation of life in the LED matrix. Use button ``A`` for the next stage of life and button ``B`` to reset.
+Una simulación de la vida en la matriz de LEDs. Utiliza el botón `A` para la próxima repetición del juego de la vida y utiliza el botón `B` para reiniciar.
 
 ```blocks
-//https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
-let lifeChart: Image = null
+//https://es.wikipedia.org/wiki/Juego_de_la_vida
+let graficoDeLaVida: Image = null
 
-//Use button A for the next iteration of game of life
+//Utiliza el botón A para la próxima repetición del juego de la vida
 input.onButtonPressed(Button.A, () => {
-    gameOfLife();
-    show();
+    juegoDeLaVida();
+    exhibir();
 })
 
-//Use button B for reseting to random initial seed state
+//Utiliza el botón B para reiniciar en un estado inicial aleatorio
 input.onButtonPressed(Button.B, () => {
-    reset();
-    show();
+    reiniciar();
+    exhibir();
 })
 
-lifeChart = images.createImage(`
+graficoDeLaVida = images.createImage(`
     . . . . .
     . . . . .
     . . . . .
@@ -41,102 +41,102 @@ lifeChart = images.createImage(`
     . . . . .
     `)
 
-//State holds the information about pixel is live or dead
-//false means dead, true means live.
-let state = [false, false, false, false, false,
+//Estado mantiene la información sobre el píxel, si está vivo o muerto
+//false significa muerto, true significa vivo.
+let estado = [false, false, false, false, false,
     false, false, false, false, false,
     false, false, false, false, false,
     false, false, false, false, false,
     false, false, false, false, false]
 
-//get & set on any array
-function getState(arr: boolean[], x: number, y: number): boolean {
+//get & set en un array
+function getEstado(arr: boolean[], x: number, y: number): boolean {
     return arr[x * 5 + y];
 }
-function setState(arr: boolean[], x: number, y: number, value: boolean): void {
+function setEstado(arr: boolean[], x: number, y: number, value: boolean): void {
     arr[x * 5 + y] = value;
 }
 
-//Generate random initial state.
-function reset() {
+//Genera un estado inicial aleatorio.
+function reiniciar() {
     for (let x = 0; x < 5; x++) {
         for (let y = 0; y < 5; y++) {
-            setState(state, x, y, Math.randomBoolean());
+            setEstado(estado, x, y, Math.randomBoolean());
         }
     }
 }
 
-//Show the lifeChart based on the state
-function show() {
+//Exhibe el gráfico de la Vida según el estado
+function exhibir() {
     for (let x = 0; x < 5; x++) {
         for (let y = 0; y < 5; y++) {
-            lifeChart.setPixel(x, y, getState(state, x, y));
+            graficoDeLaVida.setPixel(x, y, getEstado(estado, x, y));
         }
     }
-    lifeChart.plotImage(0);
+    graficoDeLaVida.plotImage(0);
 }
 
-//Core function
-function gameOfLife() {
-    let result: boolean[] = [];
-    let count = 0;
+//Función principal
+function juegoDeLaVida() {
+    let resultado: boolean[] = [];
+    let contador = 0;
 
     for (let x = 0; x < 5; x++) {
         for (let y = 0; y < 5; y++) {
-            count = 0;
+            contador = 0;
 
-            //Count the live cells in the next row
+            //Cuenta las células vivas en la próxima línea
             if ((x + 1) < 5) {
-                if (getState(state, x + 1, y)) {
-                    count++;
+                if (getEstado(estado, x + 1, y)) {
+                    contador++;
                 }
-                if ((y + 1 < 5) && getState(state, x + 1, y + 1)) {
-                    count++;
+                if ((y + 1 < 5) && getEstado(estado, x + 1, y + 1)) {
+                    contador++;
                 }
-                if ((y - 1 >= 0) && getState(state, x + 1, y - 1)) {
-                    count++;
+                if ((y - 1 >= 0) && getEstado(estado, x + 1, y - 1)) {
+                    contador++;
                 }
             }
 
-            //Count the live cells in the previous row
+            //Cuenta las células vivas en la línea anterior
             if ((x - 1) >= 0) {
-                if (getState(state, x - 1, y)) {
-                    count++;
+                if (getEstado(estado, x - 1, y)) {
+                    contador++;
                 }
-                if ((y + 1 < 5) && getState(state, x - 1, y + 1)) {
-                    count++;
+                if ((y + 1 < 5) && getEstado(estado, x - 1, y + 1)) {
+                    contador++;
                 }
-                if ((y - 1 >= 0) && getState(state, x - 1, y - 1)) {
-                    count++;
+                if ((y - 1 >= 0) && getEstado(estado, x - 1, y - 1)) {
+                    contador++;
                 }
             }
 
-            //Count the live cells in the current row exlcuding the current position.
-            if ((y - 1 >= 0) && getState(state, x, y - 1)) {
-                count++;
+            //Cuenta las células vivas en la línea actual, excluyendo la de la posición actual.
+            if ((y - 1 >= 0) && getEstado(estado, x, y - 1)) {
+                contador++;
             }
-            if ((y + 1 < 5) && getState(state, x, y + 1)) {
-                count++;
+            if ((y + 1 < 5) && getEstado(estado, x, y + 1)) {
+                contador++;
             }
 
-            // Toggle live\dead cells based on the count.
-            // Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
-            // Any live cell with two or three live neighbours lives on to the next generation.
-            // Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction            
-            // Any live cell with more than three live neighbours dies, as if by overpopulation.
-            switch (count) {
-                case 0: setState(result, x, y, false); break;
-                case 1: setState(result, x, y, false); break;
-                case 2: setState(result, x, y, getState(state, x, y)); break;
-                case 3: setState(result, x, y, true); break;
-                default: setState(result, x, y, false); break;
+            // Alterna las células vivas/muertas, según el conteo.
+            // Cualquier célula viva con menos de dos vecinas vivas muere, por la subpoblación.
+            // Cualquier célula con dos o tres vecinas vivas vive hasta la próxima generación.
+            // Cualquier célula muerta con exactamente tres vecinas vivas se torna una célula viva, como si fuese por reproducción
+            // Cualquier célula viva con más de tres vecinas vivas muere, por sobrepoblación.
+            switch (contador) {
+                case 0: setEstado(resultado, x, y, false); break;
+                case 1: setEstado(resultado, x, y, false); break;
+                case 2: setEstado(resultado, x, y, getEstado(estado, x, y)); break;
+                case 3: setEstado(resultado, x, y, true); break;
+                default: setEstado(resultado, x, y, false); break;
             }
         }
     }
-    //Update the state
-    state = result;
+    //Actualiza el estado
+    estado = resultado;
 }
-//Initial reset & show
-reset();
-show();
+//Reinicia y exhibe
+reiniciar();
+exhibir();
 ```

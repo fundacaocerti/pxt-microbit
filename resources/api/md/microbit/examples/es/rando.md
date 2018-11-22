@@ -1,6 +1,6 @@
-# Rando
+# Aleatorio
 
-Generate a random coordinate and display it on the LED screen.
+Genera una coordenada aleatoria y preséntala en el display de LEDs.
 
 ```blocks
 basic.forever(() => {

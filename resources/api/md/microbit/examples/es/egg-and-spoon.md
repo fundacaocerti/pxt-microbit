@@ -1,8 +1,7 @@
-# Egg and Spoon race
+# Carrera del Huevo en la cuchara
 
-The [Egg and Spoon](https://en.wikipedia.org/wiki/Egg-and-spoon_race) race is a game where a player carries an object (like an egg) across some distance without it falling out of a holder. In the case of the Egg and Spoon, the player must carefully walk with an egg held in a spoon. The egg must remain in the spoon until the player crosses the finish line. The egg can easily roll out of the spoon so the player needs skill and patience to balance the egg until finishing the race.
-
-You can program your @boardname@ to be an egg and let your hand be the spoon. If you walk too fast or waver in holding the @boardname@, you might "drop the egg!". Try to keep the balance point in the center of the screen.
+La carrera del [Huevo en la cuchara](https://en.wikipedia.org/wiki/Egg-and-spoon_race) es un juego en el que el jugador carga un objeto (como un huevo) a lo largo de determinada distância, sin dejarlo caer del recipiente en el que está. En el caso del Huevo en la cuchara, el jugador debe andar cuidadosamente con un huevo en una cuchara. El huevo debe permanecer en la cuchara hasta que el jugador cruce la línea de llegada. El huevo puede desplazarse para afuera de la cuchara, por lo tanto, el jugador precisa tener habilidad y paciencia para equilibrar el huevo hasta finalizar la carrera.
+Es posible programar tu @boardname@ para que el huevo y tu mano la cuchara. Si te mueves muy rápido o tambaleando mientras sostienes la @boardname@, puedes "derrumbar el huevo!". Intenta mantener el punto de equilibrio en el centro del display.
 
 ```blocks
 let accY = 0
@@ -29,3 +28,4 @@ basic.forever(() => {
 x = 2
 y = 2
 ```
+

@@ -1,85 +1,85 @@
-# Radio Dashboard
+# Panel de control de la radio
 
 ```typescript
 /**
- * Radio monitoring dashboard
- * 
- * Each radio client is represented by a dot on the screen. 
- * Once a client is registered, it will stay at the same pixel location
- * forever.
- * 
- * Radio clients can simply send a number (between 0..255) on group 4.
- * They must transmit the serial number using ``radio.setTransmitSerialNumber(true)``
- * 
- * The received number is used to set the LED brightness for that client.
- * 
- * If the radio packet is not received for 10sec, the LED starts blinking.
+ * Panel de control de la radio
+ *
+ * Cada uno de los radio-clientes es representado por un punto en el display.
+ * Cuando un cliente se registra, quedará en el mismo píxel
+ * siempre.
+ *
+ * Los radio-clientes sólo pueden enviar un número (entre 0 y 255) en el grupo 4.
+ * Deben transmitir su número de serie utilizando ``radio.setTransmitSerialNumber(true)``
+ *
+ * El número recibido es utilizado para definir el brillo del LED de ese cliente.
+ *
+ * Si el paquete de una radio no fuese recibido cada 10 seg, su LED comenzará a parpadear.
  */
-const deadPing = 20000;
-const lostPing = 10000;
+const tiempoLimitePing = 20000;
+const pingPerdido = 10000;
 
-interface Client {
-    // client serial id
+interface Cliente {
+    // número de serie del cliente
     id: number;
-    // sprite on screen
+    // sprite en la pantalla
     sprite: game.LedSprite;
-    // last ping received
+    // último ping recibido
     ping: number;
 }
 
-const clients: Client[] = [];
+const clientes: Cliente[] = [];
 
-/* lazy allocate sprite */
-function getClient(id: number): Client {
-    // needs an id to track radio client identity
+/* asignación tardía de sprite */
+function getCliente(id: number): Cliente {
+    // es necesario un número para rastrear la identidad del radio-cliente
     if (!id)
         return undefined;
 
-    // look for cache clients
-    for (const client of clients)
-        if (client.id == id)
-            return client;
-    const n = clients.length;
-    if (n == 24) // out of pixels 
+    // busca clientes registrados
+    for (const cliente of clientes)
+        if (cliente.id == id)
+            return cliente;
+    const n = clientes.length;
+    if (n == 24) // sin espacio en el display 
         return undefined;
-    const client: Client = {
+    const cliente: Cliente = {    
         id: id,
         sprite: game.createSprite(n % 5, n / 5),
         ping: input.runningTime()
     }
-    clients.push(client);
-    return client;
+    clientes.push(cliente);
+    return cliente;
 }
 
-// store data received by clients
+// almacena datos recibidos de cada cliente
 radio.onDataPacketReceived(packet => {
-    const client = getClient(packet.serial);
-    if (!client)
+    const cliente = getCliente(packet.serial);
+    if (!cliente)
         return;
 
-    client.ping = input.runningTime()
-    client.sprite.setBrightness(Math.max(1, packet.receivedNumber & 0xff));
+    cliente.ping = input.runningTime()
+    cliente.sprite.setBrightness(Math.max(1, packet.receivedNumber & 0xff));
 })
 
-// monitor the sprites and start blinking when no packet is received
+// monitorea los sprites y comienza a parpadear cuando no recibe paquete
 basic.forever(() => {
-    const now = input.runningTime()
-    for (const client of clients) {
-        // lost signal starts blinking
-        const lastPing = now - client.ping;
-        if (lastPing > deadPing) {
-            client.sprite.setBlink(0)
-            client.sprite.setBrightness(0)
+    const ahora = input.runningTime()
+    for (const cliente of clientes) {
+        // comienza a parpadear cuando pierde la señal
+        const ultimoPing = ahora - cliente.ping;
+        if (ultimoPing > tiempoLimitePing) {
+            cliente.sprite.setBlink(0)
+            cliente.sprite.setBrightness(0)
         }
-        else if (lastPing > lostPing)
-            client.sprite.setBlink(500);
+        else if (ultimoPing > pingPerdido)
+            cliente.sprite.setBlink(500)
         else
-            client.sprite.setBlink(0);
+            cliente.sprite.setBlink(0)
     }
     basic.pause(500)
 })
 
-// setup the radio and start!
+// configura la radio e inicia!
 radio.setGroup(4)
 game.addScore(1)
 ```

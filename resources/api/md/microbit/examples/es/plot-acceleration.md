@@ -1,6 +1,6 @@
-# Plot Acceleration
+# Gráfico Aceleración
 
-Plot acceleration in the ``x`` dimension on the LEDs.
+Traza el gráfico de la aceleración sobre el eje `x` en los LEDs.
 
 ```blocks
 basic.forever(() => {

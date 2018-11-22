@@ -1,20 +1,20 @@
-# Getting started
+# Introducción
 
-## Step 1
+## Paso 1
 
-Welcome! Place the ``||basic:show string||`` block in the ``||basic:on start||`` slot. Replace the ``"Hello!"`` text with your name. Did you see it scroll?
+Bienvenidos! Encaja el bloque ``||basic:muestra string||`` (con tu nombre) en el espacio ``||basic:al iniciar||`` para ver tu nombre moviéndose en el display. Substituye el texto ``"Hello!"`` por tu nombre. Lo estás viendo moverse?
 
 ```blocks
 basic.showString("Micro!")
 ```
 
-## Step 2
+## Paso 2
 
-Connect a USB cable to the @boardname@ and click ``|Download|``. Save the program to the **@drivename@** drive. This transfers your code to the @boardname@!
+Conecta un cable USB a la @boardname@ y pincha en ``|Download|``. Salva el programa en tu unidad **@drivename@**. Así transferirás tu código para la @boardname@!
 
-## Step 3
+## Paso 3
 
-Well, the text stopped. Place the ``||basic:show string||`` block in the ``||input:on button pressed||`` slot to scroll your name when button **A** is pressed.
+Tu texto paró de correr en el display. Encaja el bloque ``||basic:muestra string||`` en el espacio ``||basic:cuando el botón sea presionado||`` para mostrar tu nombre cuando el botón **A** sea presionado.
 
 ```block
 input.onButtonPressed(Button.A, () => {
@@ -22,17 +22,17 @@ input.onButtonPressed(Button.A, () => {
 });
 ```
 
-## Step 4
+## Paso 4
 
-Click ``|Download|`` to save and transfer your code again, then press button **A** to scroll your text.
+Pincha en ``|Download|`` para salvar y transferir tu código de nuevo y, después, presiona el botón **A** para ver tu texto moviéndose en el display.
 
-## Step 5
+## Paso 5
 
-Place some blocks to display a smiley when button **B** is pressed.
+Ordena los bloques para exhibir una sonrisa cuando el botón **B** sea presionado.
 
 ###   
 
-Use the dropdown to find ``B``!
+Utiliza el menú en el espacio ``||cuando el botón sea presionado||`` para encontrar el ``B``!
 
 ```block
 input.onButtonPressed(Button.B, () => {
@@ -46,15 +46,15 @@ input.onButtonPressed(Button.B, () => {
 })
 ```
 
-## Step 6
+## Paso 6
 
-Place the ``||basic:show number||`` and ``||Math:pick random||`` blocks
-in an ``||input:on shake||`` slot to build a dice.
+Encaja los bloques ``||basic:muestra número||`` y ``||Math:número aleatorio||`` 
+en el espacio ``||input:cuando se agita||`` para crear un dato.
 
 ###   
 
-When the @boardname@ is shaken, a random number between ``0`` and ``6`` is displayed
-on the screen.
+Cuando se agite la @boardname@, aparecerá un número aleatorio entre ``0`` y ``6``
+en el display.
 
 ```block
 input.onGesture(Gesture.Shake, () => {
@@ -62,6 +62,7 @@ input.onGesture(Gesture.Shake, () => {
 })
 ```
 
-## Step 7
+## Paso 7
 
-Well done! You've completed your first Microsoft MakeCode activity.
+Muy bien! Completaste tu primer actividad en el Microsoft MakeCode.
+

@@ -1,9 +1,9 @@
-# Name Tag
+# Identificación
 
-Scroll your name across the screen.
+Haz rodar tu nombre en la pantalla.
 
 ```blocks
 basic.forever(() => {
-    basic.showString("JAMES")
+    basic.showString("PEDRO")
 })
 ```

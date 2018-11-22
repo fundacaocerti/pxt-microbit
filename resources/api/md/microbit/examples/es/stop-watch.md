@@ -1,29 +1,29 @@
-# Stop watch
+# Cronómetro
 
-Press ``A`` to start the counter. Press ``A`` again to stop and display the count. 
+Presiona `A` para iniciar el cronómetro. Presiona `A` otra vez para parar y mostrar el tiempo transcurrido.
 
 ```blocks
-let msec = 0
-let sec = 0
-let end = 0
+let ms = 0
+let segundos = 0
+let fin = 0
 let d = 0
-let start = 0
+let inicio = 0
 input.onButtonPressed(Button.A, () => {
-    if (!(start)) {
-        start = input.runningTime()
-        end = 0
+    if (!(inicio)) {
+        inicio = input.runningTime()
+        fin = 0
     } else {
-        d = input.runningTime() - start
-        start = 0
+        d = input.runningTime() - inicio
+        inicio = 0
         basic.clearScreen()
         basic.pause(1000)
-        sec = d / 1000
-        msec = d % 1000
-        basic.showString("" + sec + "." + msec)
+        segundos = d / 1000
+        ms = d % 1000
+        basic.showString("" + segundos + "." + ms)
     }
 })
 basic.forever(() => {
-    if (start) {
+    if (inicio) {
         led.toggle(Math.random(5), Math.random(5))
     }
 })

@@ -1,6 +1,6 @@
-# Blinky
+# Parpadea
 
-Flash a pattern on the LEDs.
+Parpadea una figura en los LEDs.
 
 ```blocks
 basic.forever(() => {

@@ -1,19 +1,19 @@
-# Turtle Spiral
+# Tortuga: espiral
 
-A turtle that spirals into the center of the display and back out again.
+La tortuga se mueve en espiral hasta el centro del display y retorna al inicio.
 
 ```blocks
-let index = 0
+let indice = 0
 turtle.setPosition(0, 0)
 turtle.turnRight()
 basic.forever(() => {
-    for (let index = 0; index <= 4; index++) {
-        turtle.forward(4 - index)
+    for (let indice = 0; indice <= 4; indice++) {
+        turtle.forward(4 - indice)
         turtle.turnRight()
     }
-    for (let index = 0; index <= 4; index++) {
+    for (let indice = 0; indice <= 4; indice++) {
         turtle.turnLeft()
-        turtle.back(index)
+        turtle.back(indice)
     }
 })
 ```

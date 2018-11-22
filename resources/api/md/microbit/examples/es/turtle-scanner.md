@@ -1,6 +1,6 @@
-# Turtle Scanner
+# Tortuga: paseo
 
-The turtle scans the display over and over again.
+La tortuga pasea por todo el display, repetidamente.
 
 ```blocks
 turtle.setPosition(0, 0)

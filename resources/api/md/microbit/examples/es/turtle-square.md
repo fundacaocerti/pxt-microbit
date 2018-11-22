@@ -1,6 +1,6 @@
-# Turtle Square
+# Tortuga: cuadrado
 
-A turtle that traces a square pattern.
+La tortuga camina formando un cuadrado.
 
 ```blocks
 turtle.setPosition(0, 0)
