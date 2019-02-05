@@ -49,7 +49,7 @@ input.onButtonPressed(Button.B, () => {
 ## Paso 6
 
 Encaja los bloques ``||basic:muestra número||`` y ``||Math:número aleatorio||`` 
-en el espacio ``||input:cuando se agita||`` para crear un dato.
+en el espacio ``||input:cuando agitar||`` para crear un dato.
 
 ###   
 
